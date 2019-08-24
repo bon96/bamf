@@ -1,6 +1,5 @@
 package org.bon.jvm.constantpool;
 
-import com.pushit.jvm.constantpool.constants.*;
 import org.bon.jvm.constantpool.constants.*;
 
 import java.nio.ByteBuffer;
@@ -9,23 +8,7 @@ import java.util.List;
 
 /**
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4
- *
- * All constant_pool table entries have the following general format:
- *
- * cp_info {
- *     u1 tag;
- *     u1 info[];
- * }
- *
- * Each entry in the constant_pool table must begin with a 1-byte tag
- * indicating the kind of constant denoted by the entry.
- * There are 17 kinds of constant, listed in Table 4.4-A with their corresponding tags,
- * and ordered by their section number in this chapter.
- * Each tag byte must be followed by two or more bytes giving information about the specific constant.
- * The format of the additional information depends on the tag byte,
- * that is, the content of the info array varies with the value of tag.
  */
-
 
 
 public class ConstPool {
