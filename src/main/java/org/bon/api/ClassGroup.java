@@ -19,6 +19,19 @@ public class ClassGroup {
 
     private List<ClassFile> classes = new ArrayList<>();
 
+    public static ClassGroup from(JarFile jarFile) throws IOException {
+        ClassGroup classGroup = new ClassGroup();
+        Enumeration<JarEntry> enr = jarFile.entries();
+
+        while (enr.hasMoreElements()) {
+            JarEntry entry = enr.nextElement();
+            if (entry.getName().endsWith(".class")) {
+                classGroup.add(new ClassFile(jarFile.getInputStream(entry).readAllBytes()));
+            }
+        }
+        return classGroup;
+    }
+
     public void add(ClassFile classFile) {
         classes.add(classFile);
     }
@@ -38,18 +51,5 @@ public class ClassGroup {
             }
         }
         return null;
-    }
-
-    public static ClassGroup from(JarFile jarFile) throws IOException {
-        ClassGroup classGroup = new ClassGroup();
-        Enumeration<JarEntry> enr = jarFile.entries();
-
-        while (enr.hasMoreElements()) {
-            JarEntry entry = enr.nextElement();
-            if (entry.getName().endsWith(".class")) {
-                classGroup.add(new ClassFile(jarFile.getInputStream(entry).readAllBytes()));
-            }
-        }
-        return classGroup;
     }
 }

@@ -39,10 +39,6 @@ public class StackMapFrame {
         return locals;
     }
 
-    public List<StackMapType> getStackItems() {
-        return stackItems;
-    }
-
         /*
             SAME_FRAME 0-63
             SAME_LOCALS_1_STACK_ITEM_FRAME 64-127
@@ -52,6 +48,10 @@ public class StackMapFrame {
             APPEND_FRAME 252-254
             FULL_FRAME 255
          */
+
+    public List<StackMapType> getStackItems() {
+        return stackItems;
+    }
 
     public static StackMapFrame from(ByteBuffer byteBuffer) {
         int b = byteBuffer.get() & 0xFF;

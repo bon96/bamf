@@ -18,7 +18,7 @@ public class SourceFileAttribute extends Attribute {
     }
 
     /**
-     *The string referenced by the sourcefile_index item will be interpreted
+     * The string referenced by the sourcefile_index item will be interpreted
      * as indicating the name of the source file from which this class file was compiled.
      * It will not be interpreted as indicating the name of a directory containing the file or an absolute path
      * name for the file; such platform-specific additional information must be supplied by the run-time

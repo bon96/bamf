@@ -7,7 +7,6 @@ import org.bon.jvm.constantpool.ConstPool;
 import java.nio.ByteBuffer;
 
 
-
 public abstract class Attribute implements Cast {
 
     ConstPool constPool;
@@ -78,7 +77,7 @@ public abstract class Attribute implements Cast {
 
             case "StackMapTable":
                 return new StackMapTableAttribute(byteBuffer, constPool);
-              //  return new SkipAttribute(byteBuffer, constPool);
+            //  return new SkipAttribute(byteBuffer, constPool);
 
             default:
                 return new SkipAttribute(byteBuffer, constPool);

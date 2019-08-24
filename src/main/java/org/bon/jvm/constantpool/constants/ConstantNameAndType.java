@@ -21,7 +21,7 @@ public class ConstantNameAndType extends Constant {
     }
 
     public String getName() {
-       return constPool.get(nameIndex).toString();
+        return constPool.get(nameIndex).toString();
     }
 
     public String getDescriptor() {

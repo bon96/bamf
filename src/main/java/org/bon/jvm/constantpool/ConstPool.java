@@ -14,16 +14,14 @@ import java.util.List;
 public class ConstPool {
 
 
-
     //TODO figure out what should we do about longs and doubles taking two spots in the list.
     //TODO Should there be null after longs and doubles or something else?
-
 
 
     private List<Constant> constants = new ArrayList<>();
 
     public ConstPool(ByteBuffer byteBuffer, int constPoolSize) {
-        for (int i = 0; i < constPoolSize-1; i++) {
+        for (int i = 0; i < constPoolSize - 1; i++) {
             int tag = byteBuffer.get();
             switch (tag) {
                 case Constant.FIELDREF:
@@ -97,13 +95,12 @@ public class ConstPool {
     }
 
     /**
-     *
      * @param index of constant in the constant pool
      * @return index-1 from the constant list which represents the constant pool.
      */
 
     public Constant get(int index) {
-        return getConstants().get(index-1);
+        return getConstants().get(index - 1);
     }
 
     public List<Constant> getConstants() {
