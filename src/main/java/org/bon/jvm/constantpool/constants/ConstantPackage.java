@@ -11,7 +11,7 @@ public class ConstantPackage extends Constant {
 
     public ConstantPackage(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.nameIndex = byteBuffer.getShort();
+        nameIndex = byteBuffer.getShort();
     }
 
     public String getName() {

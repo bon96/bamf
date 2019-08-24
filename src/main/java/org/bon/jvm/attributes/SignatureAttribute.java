@@ -14,7 +14,7 @@ public class SignatureAttribute extends Attribute {
 
     public SignatureAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
         super(byteBuffer, constPool);
-        this.signatureIndex = byteBuffer.getShort();
+        signatureIndex = byteBuffer.getShort();
     }
 
     public String getSignature() {

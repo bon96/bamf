@@ -16,8 +16,8 @@ public class ConstantDynamic extends Constant {
 
     public ConstantDynamic(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.bootstrapMethodAttrIndex = byteBuffer.getShort();
-        this.nameAndTypeIndex = byteBuffer.getShort();
+        bootstrapMethodAttrIndex = byteBuffer.getShort();
+        nameAndTypeIndex = byteBuffer.getShort();
     }
 
     //TODO finish bootstrapMethod array retrieval from constant pool

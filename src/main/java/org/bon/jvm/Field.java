@@ -19,9 +19,9 @@ public class Field {
 
     public Field(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.accessFlags = byteBuffer.getShort();
-        this.nameIndex = byteBuffer.getShort();
-        this.descriptorIndex = byteBuffer.getShort();
+        accessFlags = byteBuffer.getShort();
+        nameIndex = byteBuffer.getShort();
+        descriptorIndex = byteBuffer.getShort();
 
         int attributesCount = byteBuffer.getShort();
         for (int i = 0; i < attributesCount; i++) {

@@ -11,7 +11,7 @@ public class ConstantModule extends Constant {
 
     public ConstantModule(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.nameIndex = byteBuffer.getShort();
+        nameIndex = byteBuffer.getShort();
     }
 
     public String getName() {

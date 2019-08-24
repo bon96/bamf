@@ -15,8 +15,8 @@ public class EnclosingMethodAttribute extends Attribute {
     //TODO finish getters
     public EnclosingMethodAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
         super(byteBuffer, constPool);
-        this.classIndex = byteBuffer.getShort();
-        this.methodIndex = byteBuffer.getShort();
+        classIndex = byteBuffer.getShort();
+        methodIndex = byteBuffer.getShort();
     }
 
     public int getClassIndex() {

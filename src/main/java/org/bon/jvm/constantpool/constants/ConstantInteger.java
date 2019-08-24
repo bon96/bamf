@@ -11,7 +11,7 @@ public class ConstantInteger extends Constant {
     private int value;
 
     public ConstantInteger(ByteBuffer byteBuffer) {
-        this.value = byteBuffer.getInt();
+        value = byteBuffer.getInt();
     }
 
     public int getValue() {

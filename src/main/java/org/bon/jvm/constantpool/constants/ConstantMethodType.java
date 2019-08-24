@@ -15,7 +15,7 @@ public class ConstantMethodType extends Constant {
 
     public ConstantMethodType(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.descriptorIndex = byteBuffer.getShort();
+        descriptorIndex = byteBuffer.getShort();
     }
 
     public String getDescriptor() {

@@ -16,8 +16,8 @@ public class ConstantMethodRef extends Constant {
 
     public ConstantMethodRef(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.classIndex = byteBuffer.getShort();
-        this.nameAndTypeIndex = byteBuffer.getShort();
+        classIndex = byteBuffer.getShort();
+        nameAndTypeIndex = byteBuffer.getShort();
     }
 
     public ConstantClass getConstClass() {

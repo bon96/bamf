@@ -28,7 +28,7 @@ public class SourceDebugExtensionAttribute extends Attribute {
                 chars[i] = (char) (((b & 0xF) << 12) + ((byteBuffer.get() & 0x3F) << 6) + (byteBuffer.get() & 0x3F));
             }
         }
-        this.debugInfo = new String(chars, 0, chars.length);
+        debugInfo = new String(chars, 0, chars.length);
     }
 
     public String getDebugInfo() {

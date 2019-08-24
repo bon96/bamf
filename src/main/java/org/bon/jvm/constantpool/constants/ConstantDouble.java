@@ -12,7 +12,7 @@ public class ConstantDouble extends Constant {
     private double value;
 
     public ConstantDouble(ByteBuffer byteBuffer) {
-        this.value = byteBuffer.getDouble();
+        value = byteBuffer.getDouble();
     }
 
     public double getValue() {

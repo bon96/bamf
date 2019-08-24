@@ -33,10 +33,10 @@ public class InnerClassesAttribute extends Attribute {
         //TODO finish getters
         public InnerClass(ByteBuffer byteBuffer, ConstPool constPool) {
             this.constPool = constPool;
-            this.innerClassInfoIndex = byteBuffer.getShort();
-            this.outerClassInfoIndex = byteBuffer.getShort();
-            this.innerNameIndex = byteBuffer.getShort();
-            this.innerClassAccessFlags = byteBuffer.getShort();
+            innerClassInfoIndex = byteBuffer.getShort();
+            outerClassInfoIndex = byteBuffer.getShort();
+            innerNameIndex = byteBuffer.getShort();
+            innerClassAccessFlags = byteBuffer.getShort();
         }
 
         public int getInnerClassInfoIndex() {

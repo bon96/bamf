@@ -57,7 +57,7 @@ public class ConstantUtf8 extends Constant {
                     break;
             }
         }
-        this.string =  new String(chararr, 0, chararr_count);
+        string =  new String(chararr, 0, chararr_count);
     }
 
     @Override

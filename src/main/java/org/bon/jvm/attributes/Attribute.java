@@ -17,8 +17,8 @@ public abstract class Attribute implements Cast {
 
     public Attribute(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.attributeNameIndex = byteBuffer.getShort();
-        this.attributeLength = byteBuffer.getInt();
+        attributeNameIndex = byteBuffer.getShort();
+        attributeLength = byteBuffer.getInt();
     }
 
     public String getName() {

@@ -16,8 +16,8 @@ public class ConstantFieldRef extends Constant {
 
     public ConstantFieldRef(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.classIndex = byteBuffer.getShort();
-        this.nameAndTypeIndex = byteBuffer.getShort();
+        classIndex = byteBuffer.getShort();
+        nameAndTypeIndex = byteBuffer.getShort();
     }
 
     public ConstantClass getConstClass() {

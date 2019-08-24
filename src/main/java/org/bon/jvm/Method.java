@@ -20,9 +20,9 @@ public class Method {
 
     public Method(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.accessFlags = byteBuffer.getShort();
-        this.nameIndex = byteBuffer.getShort();
-        this.descriptorIndex = byteBuffer.getShort();
+        accessFlags = byteBuffer.getShort();
+        nameIndex = byteBuffer.getShort();
+        descriptorIndex = byteBuffer.getShort();
 
         int attributeCount = byteBuffer.getShort();
         for (int i = 0; i < attributeCount; i++) {

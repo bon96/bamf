@@ -23,16 +23,16 @@ public class CodeAttribute extends Attribute {
     public CodeAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
         super(byteBuffer, constPool);
 
-        this.maxStack = byteBuffer.getShort();
-        this.maxLocals = byteBuffer.getShort();
+        maxStack = byteBuffer.getShort();
+        maxLocals = byteBuffer.getShort();
 
-        int codeLength = byteBuffer.getInt();
-        for (int i = 0; i < codeLength; i++) {
+        int instructionCount = byteBuffer.getInt();
+        for (int i = 0; i < instructionCount; i++) {
             instructions.add(byteBuffer.get());
         }
 
-        int exceptionsLength = byteBuffer.getShort();
-        for (int i = 0; i < exceptionsLength; i++) {
+        int exceptionsCount = byteBuffer.getShort();
+        for (int i = 0; i < exceptionsCount; i++) {
             exceptions.add(new Exception(byteBuffer));
         }
 
@@ -70,10 +70,10 @@ public class CodeAttribute extends Attribute {
         private int catchType;
 
         public Exception(ByteBuffer byteBuffer) {
-            this.start = byteBuffer.getShort();
-            this.end = byteBuffer.getShort();
-            this.handler = byteBuffer.getShort();
-            this.catchType = byteBuffer.getShort();
+            start = byteBuffer.getShort();
+            end = byteBuffer.getShort();
+            handler = byteBuffer.getShort();
+            catchType = byteBuffer.getShort();
         }
 
         public int getStart() {

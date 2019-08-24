@@ -35,11 +35,11 @@ public class LocalVariableTypeTableAttribute extends Attribute {
         //TODO finish getters
         public LocalVariableType(ByteBuffer byteBuffer, ConstPool constPool) {
             this.constPool = constPool;
-            this.startPc = byteBuffer.getShort();
-            this.length = byteBuffer.getShort();
-            this.nameIndex = byteBuffer.getShort();
-            this.signatureIndex = byteBuffer.getShort();
-            this.index = byteBuffer.getShort();
+            startPc = byteBuffer.getShort();
+            length = byteBuffer.getShort();
+            nameIndex = byteBuffer.getShort();
+            signatureIndex = byteBuffer.getShort();
+            index = byteBuffer.getShort();
         }
 
         public int getStartPc() {

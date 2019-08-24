@@ -32,16 +32,16 @@ public class ClassFile {
     public ClassFile(byte[] classBytes) {
         ByteBuffer byteBuf = ByteBuffer.wrap(classBytes);
 
-        this.magic = byteBuf.getInt();
-        this.minorVersion = byteBuf.getShort();
-        this.majorVersion = byteBuf.getShort();
-        this.constPoolSize = byteBuf.getShort();
+        magic = byteBuf.getInt();
+        minorVersion = byteBuf.getShort();
+        majorVersion = byteBuf.getShort();
+        constPoolSize = byteBuf.getShort();
 
         ConstPool constPool = new ConstPool(byteBuf, constPoolSize);
 
-        this.accessFlags = byteBuf.getShort();
-        this.thisClassIndex = byteBuf.getShort();
-        this.superClassIndex = byteBuf.getShort();
+        accessFlags = byteBuf.getShort();
+        thisClassIndex = byteBuf.getShort();
+        superClassIndex = byteBuf.getShort();
 
         int interfacesCount = byteBuf.getShort();
         for (int i = 0; i < interfacesCount; i++) {

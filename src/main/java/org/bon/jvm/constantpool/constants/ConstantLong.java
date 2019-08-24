@@ -11,7 +11,7 @@ public class ConstantLong extends Constant {
     private long value;
 
     public ConstantLong(ByteBuffer byteBuffer) {
-        this.value = byteBuffer.getLong();
+        value = byteBuffer.getLong();
     }
 
     public long getValue() {

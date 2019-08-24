@@ -14,7 +14,7 @@ public class SourceFileAttribute extends Attribute {
 
     public SourceFileAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
         super(byteBuffer, constPool);
-        this.sourceFileIndex = byteBuffer.getShort();
+        sourceFileIndex = byteBuffer.getShort();
     }
 
     /**

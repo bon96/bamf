@@ -27,7 +27,7 @@ public class StackMapType {
     private int index;
 
     public StackMapType(ByteBuffer byteBuffer) {
-        this.type = byteBuffer.get();
+        type = byteBuffer.get();
 
         if (type == 7 || type == 8) {
             index = byteBuffer.getShort();

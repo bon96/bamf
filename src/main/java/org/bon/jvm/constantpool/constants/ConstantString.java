@@ -15,7 +15,7 @@ public class ConstantString extends Constant {
 
     public ConstantString(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.stringIndex = byteBuffer.getShort();
+        stringIndex = byteBuffer.getShort();
     }
 
     @Override

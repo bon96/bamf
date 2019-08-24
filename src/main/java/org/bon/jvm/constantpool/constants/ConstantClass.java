@@ -16,7 +16,7 @@ public class ConstantClass extends Constant {
 
     public ConstantClass(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.nameIndex = byteBuffer.getShort();
+        nameIndex = byteBuffer.getShort();
     }
 
     public String getName() {

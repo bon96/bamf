@@ -16,8 +16,8 @@ public class ConstantMethodHandle extends Constant {
 
     public ConstantMethodHandle(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.referenceKind = byteBuffer.get();
-        this.referenceIndex = byteBuffer.getShort();
+        referenceKind = byteBuffer.get();
+        referenceIndex = byteBuffer.getShort();
     }
 
     public int getReferenceKind() {

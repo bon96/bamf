@@ -15,7 +15,7 @@ public class ConstantValueAttribute extends Attribute {
 
     public ConstantValueAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
         super(byteBuffer, constPool);
-        this.constantValueIndex = byteBuffer.getShort();
+        constantValueIndex = byteBuffer.getShort();
     }
 
     public Constant getConst() {

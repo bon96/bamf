@@ -20,11 +20,11 @@ public class ClassGroup {
     private List<ClassFile> classes = new ArrayList<>();
 
     public void add(ClassFile classFile) {
-        this.classes.add(classFile);
+        classes.add(classFile);
     }
 
     public void remove(ClassFile classFile) {
-        this.classes.remove(classFile);
+        classes.remove(classFile);
     }
 
     public List<ClassFile> getClasses() {

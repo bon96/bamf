@@ -16,8 +16,8 @@ public class ConstantNameAndType extends Constant {
 
     public ConstantNameAndType(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
-        this.nameIndex = byteBuffer.getShort();
-        this.descriptorIndex = byteBuffer.getShort();
+        nameIndex = byteBuffer.getShort();
+        descriptorIndex = byteBuffer.getShort();
     }
 
     public String getName() {

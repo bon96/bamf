@@ -11,7 +11,7 @@ public class ConstantFloat extends Constant {
     private float value;
 
     public ConstantFloat(ByteBuffer byteBuffer) {
-        this.value = byteBuffer.getFloat();
+        value = byteBuffer.getFloat();
     }
 
     public float getValue() {

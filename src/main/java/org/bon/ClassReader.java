@@ -18,11 +18,11 @@ public class ClassReader {
     private ByteBuffer byteBuf;
 
     public ClassReader(byte[] bytes) {
-        this.byteBuf = ByteBuffer.wrap(bytes);
+        byteBuf = ByteBuffer.wrap(bytes);
     }
 
     public ClassReader(InputStream is) throws IOException {
-        this.byteBuf = ByteBuffer.wrap(is.readAllBytes());
+        byteBuf = ByteBuffer.wrap(is.readAllBytes());
     }
 
     public static void main(String[] args) throws Exception {
