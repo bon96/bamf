@@ -13,7 +13,7 @@ import java.util.List;
 
 public class RuntimeVisibleAnnotationsAttribute extends Attribute {
 
-    private List<AnnotationAttr> annotations = new ArrayList<>();
+    private List<Annotation> annotations = new ArrayList<>();
 
     public RuntimeVisibleAnnotationsAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
         super(byteBuffer, constPool);

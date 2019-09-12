@@ -21,36 +21,10 @@ public class StackMapFrame {
         this(tag, new ArrayList<>(), new ArrayList<>());
     }
 
-    public StackMapFrame(int tag, List<StackMapType> locals) {
-        this(tag, locals, new ArrayList<>());
-    }
-
     public StackMapFrame(int tag, List<StackMapType> locals, List<StackMapType> stackItems) {
         this.tag = tag;
         this.locals = locals;
         this.stackItems = stackItems;
-    }
-
-    public int getTag() {
-        return tag;
-    }
-
-    public List<StackMapType> getLocals() {
-        return locals;
-    }
-
-        /*
-            SAME_FRAME 0-63
-            SAME_LOCALS_1_STACK_ITEM_FRAME 64-127
-            SAME_LOCALS_1_STACK_ITEM_EXTENDED 247
-            CHOP_FRAME 248-250
-            SAME_FRAME_EXTENDED = 251
-            APPEND_FRAME 252-254
-            FULL_FRAME 255
-         */
-
-    public List<StackMapType> getStackItems() {
-        return stackItems;
     }
 
     public static StackMapFrame from(ByteBuffer byteBuffer) {
@@ -64,19 +38,19 @@ public class StackMapFrame {
         //SAME_LOCALS_1_STACK_ITEM_FRAME
         if (b <= 127) {
             int bcOffset = b - 127;
-            List<StackMapType> locals = new ArrayList<>();
-            locals.add(new StackMapType(byteBuffer));
+            List<StackMapType> stackItems = new ArrayList<>();
+            stackItems.add(new StackMapType(byteBuffer));
 
-            return new StackMapFrame(bcOffset, locals);
+            return new StackMapFrame(bcOffset, new ArrayList<>(), stackItems);
         }
 
         //SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED
         if (b == 247) {
             int bcOffset = byteBuffer.getShort();
-            List<StackMapType> locals = new ArrayList<>();
-            locals.add(new StackMapType(byteBuffer));
+            List<StackMapType> stackItems = new ArrayList<>();
+            stackItems.add(new StackMapType(byteBuffer));
 
-            return new StackMapFrame(bcOffset, locals);
+            return new StackMapFrame(bcOffset, new ArrayList<>(), stackItems);
         }
 
         //CHOP_FRAME
@@ -98,7 +72,7 @@ public class StackMapFrame {
                 locals.add(new StackMapType(byteBuffer));
             }
 
-            return new StackMapFrame(bcOffset, locals);
+            return new StackMapFrame(bcOffset, locals, new ArrayList<>());
         }
 
         //FULL_FRAME
@@ -122,5 +96,27 @@ public class StackMapFrame {
         }
 
         throw new RuntimeException("Unknown frame tag " + b);
+    }
+
+    public int getTag() {
+        return tag;
+    }
+
+        /*
+            SAME_FRAME 0-63
+            SAME_LOCALS_1_STACK_ITEM_FRAME 64-127
+            SAME_LOCALS_1_STACK_ITEM_EXTENDED 247
+            CHOP_FRAME 248-250
+            SAME_FRAME_EXTENDED = 251
+            APPEND_FRAME 252-254
+            FULL_FRAME 255
+         */
+
+    public List<StackMapType> getLocals() {
+        return locals;
+    }
+
+    public List<StackMapType> getStackItems() {
+        return stackItems;
     }
 }

@@ -1,6 +1,6 @@
 package org.bon.jvm.attributes.annotations;
 
-public class AnnotationAttr {
+public class Annotation {
 
 
 }
