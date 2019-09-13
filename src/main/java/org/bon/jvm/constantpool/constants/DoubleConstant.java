@@ -7,11 +7,11 @@ import java.nio.ByteBuffer;
  */
 
 
-public class ConstantDouble extends Constant {
+public class DoubleConstant extends Constant {
 
     private double value;
 
-    public ConstantDouble(ByteBuffer byteBuffer) {
+    public DoubleConstant(ByteBuffer byteBuffer) {
         value = byteBuffer.getDouble();
     }
 

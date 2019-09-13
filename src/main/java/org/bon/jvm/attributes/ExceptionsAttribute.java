@@ -1,7 +1,7 @@
 package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
-import org.bon.jvm.constantpool.constants.ConstantClass;
+import org.bon.jvm.constantpool.constants.ClassConstant;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ExceptionsAttribute extends Attribute {
 
-    private List<ConstantClass> exceptions = new ArrayList<>();
+    private List<ClassConstant> exceptions = new ArrayList<>();
 
     public ExceptionsAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
         super(byteBuffer, constPool);
@@ -24,7 +24,7 @@ public class ExceptionsAttribute extends Attribute {
         }
     }
 
-    public List<ConstantClass> getExceptions() {
+    public List<ClassConstant> getExceptions() {
         return exceptions;
     }
 }

@@ -24,68 +24,76 @@ public class ConstPool {
         for (int i = 0; i < constPoolSize - 1; i++) {
             int tag = byteBuffer.get();
             switch (tag) {
-                case Constant.FIELDREF:
-                    constants.add(new ConstantFieldRef(byteBuffer, this));
+                case Constant.FIELD_REF:
+                    constants.add(new FieldRefConstant(byteBuffer, this));
                     break;
 
-                case Constant.METHODREF:
-                    constants.add(new ConstantMethodRef(byteBuffer, this));
+                case Constant.METHOD_REF:
+                    constants.add(new MethodRefConstant(byteBuffer, this));
                     break;
 
                 case Constant.CLASS:
-                    constants.add(new ConstantClass(byteBuffer, this));
+                    constants.add(new ClassConstant(byteBuffer, this));
                     break;
 
-                case Constant.INTERFACEMETHODREF:
-                    constants.add(new ConstantInterfaceMethodRef(byteBuffer, this));
+                case Constant.INTERFACE_METHOD_REF:
+                    constants.add(new InterfaceMethodRefConstant(byteBuffer, this));
                     break;
 
                 case Constant.STRING:
-                    constants.add(new ConstantString(byteBuffer, this));
+                    constants.add(new StringConstant(byteBuffer, this));
                     break;
 
                 case Constant.UTF8:
-                    constants.add(new ConstantUtf8(byteBuffer));
+                    constants.add(new Utf8Constant(byteBuffer));
                     break;
 
                 case Constant.NAME_AND_TYPE:
-                    constants.add(new ConstantNameAndType(byteBuffer, this));
+                    constants.add(new NameAndTypeConstant(byteBuffer, this));
                     break;
 
                 case Constant.INTEGER:
-                    constants.add(new ConstantInteger(byteBuffer));
+                    constants.add(new IntegerConstant(byteBuffer));
                     break;
 
                 case Constant.FLOAT:
-                    constants.add(new ConstantFloat(byteBuffer));
+                    constants.add(new FloatConstant(byteBuffer));
                     break;
 
                 case Constant.DOUBLE:
-                    constants.add(new ConstantDouble(byteBuffer));
+                    constants.add(new DoubleConstant(byteBuffer));
                     constants.add(null);
                     i++;
                     break;
 
                 case Constant.LONG:
-                    constants.add(new ConstantLong(byteBuffer));
+                    constants.add(new LongConstant(byteBuffer));
                     constants.add(null);
                     i++;
                     break;
 
                 case Constant.METHOD_HANDLE:
-                    constants.add(new ConstantMethodHandle(byteBuffer, this));
+                    constants.add(new MethodHandleConstant(byteBuffer, this));
                     break;
 
                 case Constant.METHOD_TYPE:
-                    constants.add(new ConstantMethodType(byteBuffer, this));
+                    constants.add(new MethodTypeConstant(byteBuffer, this));
                     break;
 
                 case Constant.DYNAMIC:
-                    constants.add(new ConstantDynamic(byteBuffer, this));
+                    constants.add(new DynamicConstant(byteBuffer, this));
                     break;
 
                 case Constant.INVOKE_DYNAMIC:
-                    constants.add(new ConstantInvokeDynamic(byteBuffer, this));
+                    constants.add(new InvokeDynamicConstant(byteBuffer, this));
+                    break;
+
+                case Constant.MODULE:
+                    constants.add(new ModuleConstant(byteBuffer, this));
+                    break;
+
+                case Constant.PACKAGE:
+                    constants.add(new PackageConstant(byteBuffer, this));
                     break;
 
                 default:

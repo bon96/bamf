@@ -8,12 +8,12 @@ import java.nio.ByteBuffer;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.3
  */
 
-public class ConstantString extends Constant {
+public class StringConstant extends Constant {
 
     private ConstPool constPool;
     private int stringIndex;
 
-    public ConstantString(ByteBuffer byteBuffer, ConstPool constPool) {
+    public StringConstant(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
         stringIndex = byteBuffer.getShort();
     }

@@ -8,12 +8,13 @@ import java.nio.ByteBuffer;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.10
  */
 
-public class ConstantInvokeDynamic extends Constant {
+public class DynamicConstant extends Constant {
+
     private ConstPool constPool;
     private int bootstrapMethodAttrIndex;
     private int nameAndTypeIndex;
 
-    public ConstantInvokeDynamic(ByteBuffer byteBuffer, ConstPool constPool) {
+    public DynamicConstant(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
         bootstrapMethodAttrIndex = byteBuffer.getShort();
         nameAndTypeIndex = byteBuffer.getShort();
@@ -21,7 +22,7 @@ public class ConstantInvokeDynamic extends Constant {
 
     //TODO finish bootstrapMethod array retrieval from constant pool
 
-    public ConstantNameAndType getNameAndType() {
+    public NameAndTypeConstant getNameAndType() {
         return constPool.get(nameAndTypeIndex).cast();
     }
 

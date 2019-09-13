@@ -6,11 +6,11 @@ import java.nio.ByteBuffer;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.5
  */
 
-public class ConstantLong extends Constant {
+public class LongConstant extends Constant {
 
     private long value;
 
-    public ConstantLong(ByteBuffer byteBuffer) {
+    public LongConstant(ByteBuffer byteBuffer) {
         value = byteBuffer.getLong();
     }
 

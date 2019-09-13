@@ -8,23 +8,23 @@ import java.nio.ByteBuffer;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.2
  */
 
-public class ConstantMethodRef extends Constant {
+public class FieldRefConstant extends Constant {
 
     private ConstPool constPool;
     private int classIndex;
     private int nameAndTypeIndex;
 
-    public ConstantMethodRef(ByteBuffer byteBuffer, ConstPool constPool) {
+    public FieldRefConstant(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
         classIndex = byteBuffer.getShort();
         nameAndTypeIndex = byteBuffer.getShort();
     }
 
-    public ConstantClass getConstClass() {
+    public ClassConstant getConstClass() {
         return constPool.get(classIndex).cast();
     }
 
-    public ConstantNameAndType getNameAndType() {
+    public NameAndTypeConstant getNameAndType() {
         return constPool.get(nameAndTypeIndex).cast();
     }
 

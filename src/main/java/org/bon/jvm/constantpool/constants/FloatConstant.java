@@ -6,11 +6,11 @@ import java.nio.ByteBuffer;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.4
  */
 
-public class ConstantFloat extends Constant {
+public class FloatConstant extends Constant {
 
     private float value;
 
-    public ConstantFloat(ByteBuffer byteBuffer) {
+    public FloatConstant(ByteBuffer byteBuffer) {
         value = byteBuffer.getFloat();
     }
 

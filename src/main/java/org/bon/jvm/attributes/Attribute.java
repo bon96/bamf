@@ -6,6 +6,9 @@ import org.bon.jvm.constantpool.ConstPool;
 
 import java.nio.ByteBuffer;
 
+/**
+ * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.7
+ */
 
 public abstract class Attribute implements Cast {
 
@@ -65,6 +68,27 @@ public abstract class Attribute implements Cast {
 
             case "StackMapTable": //50 6
                 return new StackMapTableAttribute(byteBuffer, constPool);
+
+            case "BootstrapMethods": //51.0 7
+                return new BootstrapMethodsAttribute(byteBuffer, constPool);
+
+            case "MethodParameters": //52 8
+                return new MethodParametersAttribute(byteBuffer, constPool);
+
+                /* TODO
+                    RuntimeVisibleAnnotations	            49.0	5.0	§4.7.16
+                    RuntimeInvisibleAnnotations	            49.0	5.0	§4.7.17
+                    RuntimeVisibleParameterAnnotations	    49.0	5.0	§4.7.18
+                    RuntimeInvisibleParameterAnnotations	49.0	5.0	§4.7.19
+                    AnnotationDefault	                    49.0	5.0	§4.7.22
+                    RuntimeVisibleTypeAnnotations	        52.0	8	§4.7.20
+                    RuntimeInvisibleTypeAnnotations	        52.0	8	§4.7.21
+                    Module                                  53.0	9	§4.7.25
+                    ModulePackages                          53.0	9	§4.7.26
+                    ModuleMainClass                         53.0	9	§4.7.27
+                    NestHost                                55.0	11	§4.7.28
+                    NestMembers                             55.0	11	§4.7.29
+                 */
 
 
             default:

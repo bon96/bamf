@@ -7,11 +7,11 @@ import java.nio.ByteBuffer;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.7
  */
 
-public class ConstantUtf8 extends Constant {
+public class Utf8Constant extends Constant {
 
     private String string;
 
-    public ConstantUtf8(ByteBuffer byteBuffer) {
+    public Utf8Constant(ByteBuffer byteBuffer) {
         int len = byteBuffer.getShort();
         byte[] bytearr = new byte[len];
         char[] chararr = new char[len];

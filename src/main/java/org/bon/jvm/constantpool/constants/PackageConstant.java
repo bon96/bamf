@@ -4,12 +4,12 @@ import org.bon.jvm.constantpool.ConstPool;
 
 import java.nio.ByteBuffer;
 
-public class ConstantPackage extends Constant {
+public class PackageConstant extends Constant {
 
     private ConstPool constPool;
     private int nameIndex;
 
-    public ConstantPackage(ByteBuffer byteBuffer, ConstPool constPool) {
+    public PackageConstant(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
         nameIndex = byteBuffer.getShort();
     }

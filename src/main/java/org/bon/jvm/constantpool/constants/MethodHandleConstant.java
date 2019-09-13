@@ -8,13 +8,13 @@ import java.nio.ByteBuffer;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.8
  */
 
-public class ConstantMethodHandle extends Constant {
+public class MethodHandleConstant extends Constant {
 
     private ConstPool constPool;
     private int referenceKind;
     private int referenceIndex;
 
-    public ConstantMethodHandle(ByteBuffer byteBuffer, ConstPool constPool) {
+    public MethodHandleConstant(ByteBuffer byteBuffer, ConstPool constPool) {
         this.constPool = constPool;
         referenceKind = byteBuffer.get();
         referenceIndex = byteBuffer.getShort();
