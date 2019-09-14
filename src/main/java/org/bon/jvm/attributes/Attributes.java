@@ -14,6 +14,15 @@ public class Attributes {
         return attributes;
     }
 
+    public <T extends Attribute> boolean hasType(Class<T> attributeClass) {
+        for (Attribute attribute : attributes) {
+            if (attributeClass.isAssignableFrom(attribute.getClass())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public <T extends Attribute> T ofType(Class<T> attributeClass) {
         for (Attribute attribute : attributes) {
             if (attributeClass.isAssignableFrom(attribute.getClass())) {

@@ -2,9 +2,7 @@ package org.bon;
 
 import org.bon.api.ClassGroup;
 import org.bon.jvm.ClassFile;
-import org.bon.jvm.Method;
-import org.bon.jvm.attributes.Attribute;
-import org.bon.jvm.attributes.CodeAttribute;
+import org.bon.jvm.attributes.SignatureAttribute;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -28,18 +26,8 @@ public class ClassReader {
     public static void main(String[] args) throws Exception {
         ClassGroup classGroup = ClassGroup.from(new JarFile("./181.jar"));
         for (ClassFile cf : classGroup.getClasses()) {
-            if (!cf.getName().equals("en.java")) {
-                continue;
-            }
-
-            for (Method method : cf.getMethods()) {
-                for (Attribute attribute : method.getAttributes().list()) {
-                    if (attribute instanceof CodeAttribute) {
-                        for (Attribute attribute1 : ((CodeAttribute) attribute).getAttributes()) {
-                            System.out.println(attribute1.getName());
-                        }
-                    }
-                }
+            if (cf.getAttributes().hasType(SignatureAttribute.class)) {
+                System.out.println(cf.getAttributes().ofType(SignatureAttribute.class).getSignature());
             }
         }
     }

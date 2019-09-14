@@ -44,9 +44,9 @@ public class ClassGroup {
         return classes;
     }
 
-    public ClassFile find(String name) {
+    public ClassFile find(String className) {
         for (ClassFile classFile : classes) {
-            if (name.equals(classFile.getName())) {
+            if (className.equals(classFile.getName())) {
                 return classFile;
             }
         }
