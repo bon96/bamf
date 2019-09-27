@@ -23,6 +23,18 @@ public abstract class Attribute implements Cast {
         attributeLength = byteBuffer.getInt();
     }
 
+    public String getName() {
+        return constPool.get(attributeNameIndex).toString();
+    }
+
+    public int getLength() {
+        return attributeLength;
+    }
+
+    public int getAttributeNameIndex() {
+        return attributeNameIndex;
+    }
+
     public static Attribute from(ByteBuffer byteBuffer, ConstPool constPool) {
         String attrName = constPool.get(byteBuffer.getShort(byteBuffer.position())).toString();
 
@@ -94,17 +106,5 @@ public abstract class Attribute implements Cast {
             default:
                 return new SkipAttribute(byteBuffer, constPool);
         }
-    }
-
-    public String getName() {
-        return constPool.get(attributeNameIndex).toString();
-    }
-
-    public int getLength() {
-        return attributeLength;
-    }
-
-    public int getAttributeNameIndex() {
-        return attributeNameIndex;
     }
 }

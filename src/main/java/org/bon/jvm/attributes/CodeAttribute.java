@@ -15,7 +15,7 @@ public class CodeAttribute extends Attribute {
     private int maxStack;
     private int maxLocals;
 
-    private List<Byte> instructions = new ArrayList<>();
+    private List<Integer> opcodes = new ArrayList<>();
     private List<Exception> exceptions = new ArrayList<>();
     private List<Attribute> attributes = new ArrayList<>();
 
@@ -28,7 +28,9 @@ public class CodeAttribute extends Attribute {
 
         int instructionCount = byteBuffer.getInt();
         for (int i = 0; i < instructionCount; i++) {
-            instructions.add(byteBuffer.get());
+            int off = byteBuffer.arrayOffset();
+            int opcode = byteBuffer.get() & 0xFF;
+            opcodes.add(opcode);
         }
 
         int exceptionsCount = byteBuffer.getShort();
@@ -50,8 +52,8 @@ public class CodeAttribute extends Attribute {
         return maxLocals;
     }
 
-    public List<Byte> getInstructions() {
-        return instructions;
+    public List<Integer> getOpcodes() {
+        return opcodes;
     }
 
     public List<Exception> getExceptions() {
