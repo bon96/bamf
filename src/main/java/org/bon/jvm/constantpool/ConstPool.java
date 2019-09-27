@@ -35,7 +35,7 @@ public class ConstPool {
         ConstPool constPool = new ConstPool();
 
         for (int i = 0; i < size - 1; i++) {
-            int tag = in.readUnsignedByte();
+            int tag = in.readByte();
             System.out.println("Const=" + tag);
             switch (tag) {
                 case Constant.FIELD_REF:
