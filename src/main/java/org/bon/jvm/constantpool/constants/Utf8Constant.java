@@ -27,6 +27,7 @@ public class Utf8Constant extends Constant {
         int count = 0;
         int chararr_count = 0;
 
+        System.out.println("utf8len:" + len);
         in.read(bytearr, 0, len);
 
         while (count < len) {
