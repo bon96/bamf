@@ -4,7 +4,8 @@ import org.bon.jvm.attributes.Attribute;
 import org.bon.jvm.attributes.Attributes;
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,20 +18,27 @@ public class Field {
 
     private List<Attribute> attributes = new ArrayList<>();
 
-    public Field(ByteBuffer byteBuffer, ConstPool constPool) {
-        this.constPool = constPool;
-        accessFlags = byteBuffer.getShort();
-        nameIndex = byteBuffer.getShort();
-        descriptorIndex = byteBuffer.getShort();
-
-        int attributesCount = byteBuffer.getShort();
-        for (int i = 0; i < attributesCount; i++) {
-            attributes.add(Attribute.from(byteBuffer, constPool));
-        }
+    public Field() {
     }
 
 
     public Attributes getAttributes() {
         return new Attributes(attributes);
+    }
+
+    public static Field from(DataInputStream in, ConstPool constPool) throws IOException {
+        Field field = new Field();
+
+        field.constPool = constPool;
+        field.accessFlags = in.readUnsignedShort();
+        field.nameIndex = in.readUnsignedShort();
+        field.descriptorIndex = in.readUnsignedShort();
+
+        int attributesCount = in.readUnsignedShort();
+        for (int i = 0; i < attributesCount; i++) {
+            field.attributes.add(Attribute.from(in, constPool));
+        }
+
+        return field;
     }
 }

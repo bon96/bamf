@@ -4,7 +4,8 @@ import org.bon.Cast;
 import org.bon.jvm.attributes.stackmap.StackMapTableAttribute;
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.7
@@ -12,80 +13,75 @@ import java.nio.ByteBuffer;
 
 public abstract class Attribute implements Cast {
 
-    ConstPool constPool;
-
-    private int attributeNameIndex;
-    private int attributeLength;
-
-    public Attribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        this.constPool = constPool;
-        attributeNameIndex = byteBuffer.getShort();
-        attributeLength = byteBuffer.getInt();
-    }
+    protected ConstPool constPool;
+    protected int nameIndex;
+    protected int length;
 
     public String getName() {
-        return constPool.get(attributeNameIndex).toString();
+        return constPool.get(nameIndex).toString();
     }
 
     public int getLength() {
-        return attributeLength;
+        return length;
     }
 
     public int getAttributeNameIndex() {
-        return attributeNameIndex;
+        return nameIndex;
     }
 
-    public static Attribute from(ByteBuffer byteBuffer, ConstPool constPool) {
-        String attrName = constPool.get(byteBuffer.getShort(byteBuffer.position())).toString();
+    public static Attribute from(DataInputStream in, ConstPool constPool) throws IOException {
+        int nameIndex = in.readUnsignedShort();
+        int length = in.readInt();
+        String attrName = constPool.get(nameIndex).toString();
 
         switch (attrName) {
             case "ConstantValue": //45.3 1.02
-                return new ConstantValueAttribute(byteBuffer, constPool);
+                return ConstantValueAttribute.from(in, constPool, nameIndex, length);
 
             case "Code": //45.3 1.02
-                return new CodeAttribute(byteBuffer, constPool);
+                return CodeAttribute.from(in, constPool, nameIndex, length);
 
             case "Exceptions": //45.3 1.0.2
-                return new ExceptionsAttribute(byteBuffer, constPool);
+                return ExceptionsAttribute.from(in, constPool, nameIndex, length);
 
             case "InnerClasses": //45.3 1.1
-                return new InnerClassesAttribute(byteBuffer, constPool);
+                return InnerClassesAttribute.from(in, constPool, nameIndex, length);
 
             case "EnclosingMethod": // 49.0 5.0
-                return new EnclosingMethodAttribute(byteBuffer, constPool);
+                return EnclosingMethodAttribute.from(in, constPool, nameIndex, length);
 
             case "Synthetic": //45.3 1.1
-                return new SyntheticAttribute(byteBuffer, constPool);
+                return SyntheticAttribute.from(in, constPool, nameIndex, length);
 
             case "Signature": //49.0 5.0
-                return new SignatureAttribute(byteBuffer, constPool);
+                return SignatureAttribute.from(in, constPool, nameIndex, length);
 
             case "SourceFile": //45.3 1.0.2
-                return new SourceFileAttribute(byteBuffer, constPool);
+                return SourceFileAttribute.from(in, constPool, nameIndex, length);
 
             case "SourceDebugExtension": //49.0 5.0
-                return new SourceDebugExtensionAttribute(byteBuffer, constPool);
+                return SourceDebugExtensionAttribute.from(in, constPool, nameIndex, length);
 
             case "LineNumberTable": //45.3 1.0.2
-                return new LineNumberTableAttribute(byteBuffer, constPool);
+                return LineNumberTableAttribute.from(in, constPool, nameIndex, length);
 
             case "LocalVariableTable": //45.3 1.0.2
-                return new LocalVariableTableAttribute(byteBuffer, constPool);
+                return LocalVariableTableAttribute.from(in, constPool, nameIndex, length);
 
             case "LocalVariableTypeTable": //49.0 5.0
-                return new LocalVariableTypeTableAttribute(byteBuffer, constPool);
+                return LocalVariableTypeTableAttribute.from(in, constPool, nameIndex, length);
 
             case "Deprecated": //45.3 1.1
-                return new DeprecatedAttribute(byteBuffer, constPool);
+                return DeprecatedAttribute.from(in, constPool, nameIndex, length);
 
             case "StackMapTable": //50 6
-                return new StackMapTableAttribute(byteBuffer, constPool);
+                return StackMapTableAttribute.from(in, constPool, nameIndex, length);
 
             case "BootstrapMethods": //51.0 7
-                return new BootstrapMethodsAttribute(byteBuffer, constPool);
+                return BootstrapMethodsAttribute.from(in, constPool, nameIndex, length);
 
             case "MethodParameters": //52 8
-                return new MethodParametersAttribute(byteBuffer, constPool);
+                return MethodParametersAttribute.from(in, constPool, nameIndex, length);
 
                 /* TODO
                     RuntimeVisibleAnnotations	            49.0	5.0	§4.7.16
@@ -104,7 +100,7 @@ public abstract class Attribute implements Cast {
 
 
             default:
-                return new SkipAttribute(byteBuffer, constPool);
+                return new SkipAttribute(in, constPool, nameIndex, length);
         }
     }
 }

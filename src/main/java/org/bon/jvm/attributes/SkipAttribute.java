@@ -2,7 +2,8 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  * Used to skip unsupported or invalid attributes
@@ -10,9 +11,10 @@ import java.nio.ByteBuffer;
 
 public class SkipAttribute extends Attribute {
 
-    public SkipAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
+    public SkipAttribute(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        this.nameIndex = nameIndex;
+        this.length = length;
         System.out.println("Skipping " + getName() + " " + getLength());
-        byteBuffer.position(byteBuffer.position() + getLength());
+        in.skipBytes(length - 6);
     }
 }

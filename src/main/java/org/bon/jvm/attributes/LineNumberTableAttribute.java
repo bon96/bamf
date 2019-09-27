@@ -2,7 +2,8 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +15,16 @@ public class LineNumberTableAttribute extends Attribute {
 
     private List<LineNumber> lineNumbers = new ArrayList<>();
 
-    public LineNumberTableAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
+    public static LineNumberTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        LineNumberTableAttribute a = new LineNumberTableAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
 
-        int tableLength = byteBuffer.getShort();
+        int tableLength = in.readUnsignedShort();
         for (int i = 0; i < tableLength; i++) {
-            lineNumbers.add(new LineNumber(byteBuffer.getShort(), byteBuffer.getShort()));
+            a.lineNumbers.add(new LineNumber(in.readUnsignedShort(), in.readUnsignedShort()));
         }
+        return a;
     }
 
     public List<LineNumber> getLineNumbers() {

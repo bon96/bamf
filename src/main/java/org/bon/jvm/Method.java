@@ -4,7 +4,8 @@ import org.bon.jvm.attributes.Attribute;
 import org.bon.jvm.attributes.Attributes;
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,16 +19,7 @@ public class Method {
     private List<Attribute> attributes = new ArrayList<>();
 
 
-    public Method(ByteBuffer byteBuffer, ConstPool constPool) {
-        this.constPool = constPool;
-        accessFlags = byteBuffer.getShort();
-        nameIndex = byteBuffer.getShort();
-        descriptorIndex = byteBuffer.getShort();
-
-        int attributeCount = byteBuffer.getShort();
-        for (int i = 0; i < attributeCount; i++) {
-            attributes.add(Attribute.from(byteBuffer, constPool));
-        }
+    public Method() {
     }
 
     public Attributes getAttributes() {
@@ -36,5 +28,21 @@ public class Method {
 
     public String getName() {
         return constPool.get(nameIndex).toString();
+    }
+
+    public static Method from(DataInputStream in, ConstPool constPool) throws IOException {
+        Method method = new Method();
+
+        method.constPool = constPool;
+        method.accessFlags = in.readUnsignedShort();
+        method.nameIndex = in.readUnsignedShort();
+        method.descriptorIndex = in.readUnsignedShort();
+
+        int attributeCount = in.readUnsignedShort();
+        for (int i = 0; i < attributeCount; i++) {
+            method.attributes.add(Attribute.from(in, constPool));
+        }
+
+        return method;
     }
 }

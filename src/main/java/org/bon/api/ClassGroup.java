@@ -4,6 +4,7 @@ import org.bon.api.containers.Classes;
 import org.bon.jvm.ClassFile;
 import org.bon.jvm.containers.ClassFiles;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
@@ -45,7 +46,7 @@ public class ClassGroup {
         while (enr.hasMoreElements()) {
             JarEntry entry = enr.nextElement();
             if (entry.getName().endsWith(".class")) {
-                classGroup.getClassFiles().add(new ClassFile(jarFile.getInputStream(entry).readAllBytes()));
+                classGroup.getClassFiles().add(ClassFile.from(new DataInputStream(jarFile.getInputStream(entry))));
             }
         }
         return classGroup;

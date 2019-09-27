@@ -2,7 +2,8 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +15,16 @@ public class InnerClassesAttribute extends Attribute {
 
     private List<InnerClass> innerClasses = new ArrayList<>();
 
-    public InnerClassesAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
+    public static InnerClassesAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        InnerClassesAttribute a = new InnerClassesAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
 
-        int classCount = byteBuffer.getShort();
+        int classCount = in.readUnsignedShort();
         for (int i = 0; i < classCount; i++) {
-            innerClasses.add(new InnerClass(byteBuffer, constPool));
+            a.innerClasses.add(InnerClass.from(in, constPool));
         }
+        return a;
     }
 
     public static class InnerClass {
@@ -31,12 +35,14 @@ public class InnerClassesAttribute extends Attribute {
         private int innerClassAccessFlags;
 
         //TODO finish getters
-        public InnerClass(ByteBuffer byteBuffer, ConstPool constPool) {
-            this.constPool = constPool;
-            innerClassInfoIndex = byteBuffer.getShort();
-            outerClassInfoIndex = byteBuffer.getShort();
-            innerNameIndex = byteBuffer.getShort();
-            innerClassAccessFlags = byteBuffer.getShort();
+        public static InnerClass from(DataInputStream in, ConstPool constPool) throws IOException {
+            InnerClass c = new InnerClass();
+            c.constPool = constPool;
+            c.innerClassInfoIndex = in.readUnsignedShort();
+            c.outerClassInfoIndex = in.readUnsignedShort();
+            c.innerNameIndex = in.readUnsignedShort();
+            c.innerClassAccessFlags = in.readUnsignedShort();
+            return c;
         }
 
         public int getInnerClassInfoIndex() {

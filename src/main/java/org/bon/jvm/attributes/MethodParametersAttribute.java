@@ -2,7 +2,9 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.awt.*;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +22,16 @@ public class MethodParametersAttribute extends Attribute {
 
     private List<Parameter> parameters = new ArrayList<>();
 
-    public MethodParametersAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
+    public static MethodParametersAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        MethodParametersAttribute a = new MethodParametersAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
 
-        int parametersCount = byteBuffer.get();
+        int parametersCount = in.readUnsignedByte();
         for (int i = 0; i < parametersCount; i++) {
-            parameters.add(new Parameter(byteBuffer, constPool));
+            a.parameters.add(Parameter.from(in, constPool));
         }
+        return a;
     }
 
     public List<Parameter> getParameters() {
@@ -39,9 +44,11 @@ public class MethodParametersAttribute extends Attribute {
         private int accessFlags;
 
         //TODO finish getters
-        public Parameter(ByteBuffer byteBuffer, ConstPool constPool) {
-            nameIndex = byteBuffer.getShort();
-            accessFlags = byteBuffer.getShort();
+        public static Parameter from(DataInputStream in, ConstPool constPool) throws IOException {
+            Parameter p = new Parameter();
+            p.nameIndex = in.readUnsignedShort();
+            p.accessFlags = in.readUnsignedShort();
+            return p;
         }
 
         public int getNameIndex() {

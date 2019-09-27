@@ -2,7 +2,8 @@ package org.bon.jvm.constantpool;
 
 import org.bon.jvm.constantpool.constants.*;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,95 +13,10 @@ import java.util.List;
 
 
 public class ConstPool {
-
-
     //TODO figure out what should we do about longs and doubles taking two spots in the list.
     //TODO Should there be null after longs and doubles or something else?
 
-
     private List<Constant> constants = new ArrayList<>();
-
-    public ConstPool(ByteBuffer byteBuffer, int constPoolSize) {
-        for (int i = 0; i < constPoolSize - 1; i++) {
-            int tag = byteBuffer.get();
-            switch (tag) {
-                case Constant.FIELD_REF:
-                    constants.add(new FieldRefConstant(byteBuffer, this));
-                    break;
-
-                case Constant.METHOD_REF:
-                    constants.add(new MethodRefConstant(byteBuffer, this));
-                    break;
-
-                case Constant.CLASS:
-                    constants.add(new ClassConstant(byteBuffer, this));
-                    break;
-
-                case Constant.INTERFACE_METHOD_REF:
-                    constants.add(new InterfaceMethodRefConstant(byteBuffer, this));
-                    break;
-
-                case Constant.STRING:
-                    constants.add(new StringConstant(byteBuffer, this));
-                    break;
-
-                case Constant.UTF8:
-                    constants.add(new Utf8Constant(byteBuffer));
-                    break;
-
-                case Constant.NAME_AND_TYPE:
-                    constants.add(new NameAndTypeConstant(byteBuffer, this));
-                    break;
-
-                case Constant.INTEGER:
-                    constants.add(new IntegerConstant(byteBuffer));
-                    break;
-
-                case Constant.FLOAT:
-                    constants.add(new FloatConstant(byteBuffer));
-                    break;
-
-                case Constant.DOUBLE:
-                    constants.add(new DoubleConstant(byteBuffer));
-                    constants.add(null);
-                    i++;
-                    break;
-
-                case Constant.LONG:
-                    constants.add(new LongConstant(byteBuffer));
-                    constants.add(null);
-                    i++;
-                    break;
-
-                case Constant.METHOD_HANDLE:
-                    constants.add(new MethodHandleConstant(byteBuffer, this));
-                    break;
-
-                case Constant.METHOD_TYPE:
-                    constants.add(new MethodTypeConstant(byteBuffer, this));
-                    break;
-
-                case Constant.DYNAMIC:
-                    constants.add(new DynamicConstant(byteBuffer, this));
-                    break;
-
-                case Constant.INVOKE_DYNAMIC:
-                    constants.add(new InvokeDynamicConstant(byteBuffer, this));
-                    break;
-
-                case Constant.MODULE:
-                    constants.add(new ModuleConstant(byteBuffer, this));
-                    break;
-
-                case Constant.PACKAGE:
-                    constants.add(new PackageConstant(byteBuffer, this));
-                    break;
-
-                default:
-                    throw new RuntimeException("Unknown const tag " + tag + " at " + i + "/" + constPoolSize);
-            }
-        }
-    }
 
     /**
      * @param index of constant in the constant pool
@@ -113,5 +29,91 @@ public class ConstPool {
 
     public List<Constant> getConstants() {
         return constants;
+    }
+
+    public static ConstPool from(DataInputStream in, int size) throws IOException {
+        ConstPool constPool = new ConstPool();
+
+        for (int i = 0; i < size - 1; i++) {
+            int tag = in.readUnsignedByte();
+            System.out.println("Const=" + tag);
+            switch (tag) {
+                case Constant.FIELD_REF:
+                    constPool.constants.add(FieldRefConstant.from(in, constPool));
+                    break;
+
+                case Constant.METHOD_REF:
+                    constPool.constants.add(MethodRefConstant.from(in, constPool));
+                    break;
+
+                case Constant.CLASS:
+                    constPool.constants.add(ClassConstant.from(in, constPool));
+                    break;
+
+                case Constant.INTERFACE_METHOD_REF:
+                    constPool.constants.add(InterfaceMethodRefConstant.from(in, constPool));
+                    break;
+
+                case Constant.STRING:
+                    constPool.constants.add(StringConstant.from(in, constPool));
+                    break;
+
+                case Constant.UTF8:
+                    constPool.constants.add(Utf8Constant.from(in));
+                    break;
+
+                case Constant.NAME_AND_TYPE:
+                    constPool.constants.add(NameAndTypeConstant.from(in, constPool));
+                    break;
+
+                case Constant.INTEGER:
+                    constPool.constants.add(IntegerConstant.from(in));
+                    break;
+
+                case Constant.FLOAT:
+                    constPool.constants.add(FloatConstant.from(in));
+                    break;
+
+                case Constant.DOUBLE:
+                    constPool.constants.add(DoubleConstant.from(in));
+                    constPool.constants.add(null);
+                    i++;
+                    break;
+
+                case Constant.LONG:
+                    constPool.constants.add(LongConstant.from(in));
+                    constPool.constants.add(null);
+                    i++;
+                    break;
+
+                case Constant.METHOD_HANDLE:
+                    constPool.constants.add(MethodHandleConstant.from(in, constPool));
+                    break;
+
+                case Constant.METHOD_TYPE:
+                    constPool.constants.add(MethodTypeConstant.from(in, constPool));
+                    break;
+
+                case Constant.DYNAMIC:
+                    constPool.constants.add(DynamicConstant.from(in, constPool));
+                    break;
+
+                case Constant.INVOKE_DYNAMIC:
+                    constPool.constants.add(InvokeDynamicConstant.from(in, constPool));
+                    break;
+
+                case Constant.MODULE:
+                    constPool.constants.add(ModuleConstant.from(in, constPool));
+                    break;
+
+                case Constant.PACKAGE:
+                    constPool.constants.add(PackageConstant.from(in, constPool));
+                    break;
+
+                default:
+                    throw new RuntimeException("Unknown const tag " + tag + " at " + i + "/" + size);
+            }
+        }
+        return constPool;
     }
 }

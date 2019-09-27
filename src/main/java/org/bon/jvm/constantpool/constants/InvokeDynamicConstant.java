@@ -2,7 +2,8 @@ package org.bon.jvm.constantpool.constants;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.10
@@ -13,10 +14,12 @@ public class InvokeDynamicConstant extends Constant {
     private int bootstrapMethodAttrIndex;
     private int nameAndTypeIndex;
 
-    public InvokeDynamicConstant(ByteBuffer byteBuffer, ConstPool constPool) {
-        this.constPool = constPool;
-        bootstrapMethodAttrIndex = byteBuffer.getShort();
-        nameAndTypeIndex = byteBuffer.getShort();
+    public static InvokeDynamicConstant from(DataInputStream in, ConstPool constPool) throws IOException {
+        InvokeDynamicConstant c = new InvokeDynamicConstant();
+        c.constPool = constPool;
+        c.bootstrapMethodAttrIndex = in.readUnsignedShort();
+        c.nameAndTypeIndex = in.readUnsignedShort();
+        return c;
     }
 
     //TODO finish bootstrapMethod array retrieval from constant pool

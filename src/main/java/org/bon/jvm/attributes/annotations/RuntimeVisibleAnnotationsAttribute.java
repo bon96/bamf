@@ -3,7 +3,7 @@ package org.bon.jvm.attributes.annotations;
 import org.bon.jvm.attributes.Attribute;
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +15,6 @@ public class RuntimeVisibleAnnotationsAttribute extends Attribute {
 
     private List<Annotation> annotations = new ArrayList<>();
 
-    public RuntimeVisibleAnnotationsAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
+    public RuntimeVisibleAnnotationsAttribute(DataInputStream in, ConstPool constPool) {
     }
 }

@@ -6,7 +6,8 @@ import org.bon.jvm.attributes.Attributes;
 import org.bon.jvm.attributes.SourceFileAttribute;
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,6 @@ public class ClassFile {
     private int magic;
     private int minorVersion;
     private int majorVersion;
-    private int constPoolSize;
     private int accessFlags;
     private int thisClassIndex;
     private int superClassIndex;
@@ -31,39 +31,7 @@ public class ClassFile {
 
     private ConstPool constPool;
 
-    public ClassFile(byte[] classBytes) {
-        ByteBuffer byteBuf = ByteBuffer.wrap(classBytes);
-
-        magic = byteBuf.getInt();
-        minorVersion = byteBuf.getShort();
-        majorVersion = byteBuf.getShort();
-        constPoolSize = byteBuf.getShort();
-
-        constPool = new ConstPool(byteBuf, constPoolSize);
-
-        accessFlags = byteBuf.getShort();
-        thisClassIndex = byteBuf.getShort();
-        superClassIndex = byteBuf.getShort();
-
-        int interfacesCount = byteBuf.getShort();
-        for (int i = 0; i < interfacesCount; i++) {
-            interfaces.add(new Interface(constPool.get(byteBuf.getShort()).cast()));
-        }
-
-        int fieldCount = byteBuf.getShort();
-        for (int i = 0; i < fieldCount; i++) {
-            fields.add(new Field(byteBuf, constPool));
-        }
-
-        int methodCount = byteBuf.getShort();
-        for (int i = 0; i < methodCount; i++) {
-            methods.add(new Method(byteBuf, constPool));
-        }
-
-        int attributeCount = byteBuf.getShort();
-        for (int i = 0; i < attributeCount; i++) {
-            attributes.add(Attribute.from(byteBuf, constPool));
-        }
+    public ClassFile() {
     }
 
     public String getSuperName() {
@@ -76,10 +44,6 @@ public class ClassFile {
 
     public int getMajorVersion() {
         return majorVersion;
-    }
-
-    public int getConstPoolSize() {
-        return constPoolSize;
     }
 
     public boolean verifyMagic() {
@@ -180,5 +144,48 @@ public class ClassFile {
 
     public boolean isAccSynthetic() {
         return (accessFlags & 0x1000) != 0;
+    }
+
+    public static ClassFile from(DataInputStream in) throws IOException {
+        ClassFile classFile = new ClassFile();
+
+        classFile.magic = in.readInt();
+
+        classFile.minorVersion = in.readUnsignedShort();
+        classFile.majorVersion = in.readUnsignedShort();
+
+        System.out.println(classFile.minorVersion);
+        System.out.println(classFile.majorVersion);
+
+        int constPoolSize = in.readUnsignedShort();
+
+        classFile.constPool = ConstPool.from(in, constPoolSize);
+
+        classFile.accessFlags = in.readUnsignedShort();
+        classFile.thisClassIndex = in.readUnsignedShort();
+        classFile. superClassIndex = in.readUnsignedShort();
+
+        int interfacesCount = in.readUnsignedShort();
+        for (int i = 0; i < interfacesCount; i++) {
+            int index = in.readUnsignedShort();
+            classFile.interfaces.add(Interface.from(classFile.constPool.get(index).cast()));
+        }
+
+        int fieldCount = in.readUnsignedShort();
+        for (int i = 0; i < fieldCount; i++) {
+            classFile.fields.add(Field.from(in, classFile.constPool));
+        }
+
+        int methodCount = in.readUnsignedShort();
+        for (int i = 0; i < methodCount; i++) {
+            classFile.methods.add(Method.from(in, classFile.constPool));
+        }
+
+        int attributeCount = in.readUnsignedShort();
+        for (int i = 0; i < attributeCount; i++) {
+            classFile.attributes.add(Attribute.from(in, classFile.constPool));
+        }
+
+        return classFile;
     }
 }

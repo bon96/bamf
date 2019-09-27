@@ -2,7 +2,8 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +15,16 @@ public class LocalVariableTypeTableAttribute extends Attribute {
 
     private List<LocalVariableType> localVariableTypes = new ArrayList<>();
 
-    public LocalVariableTypeTableAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
+    public static LocalVariableTypeTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        LocalVariableTypeTableAttribute a = new LocalVariableTypeTableAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
 
-        int tableLength = byteBuffer.getShort();
+        int tableLength = in.readUnsignedShort();
         for (int i = 0; i < tableLength; i++) {
-            localVariableTypes.add(new LocalVariableType(byteBuffer, constPool));
+            a.localVariableTypes.add(LocalVariableType.from(in, constPool));
         }
+        return a;
     }
 
     public static class LocalVariableType {
@@ -33,13 +37,15 @@ public class LocalVariableTypeTableAttribute extends Attribute {
         private int index;
 
         //TODO finish getters
-        public LocalVariableType(ByteBuffer byteBuffer, ConstPool constPool) {
-            this.constPool = constPool;
-            startPc = byteBuffer.getShort();
-            length = byteBuffer.getShort();
-            nameIndex = byteBuffer.getShort();
-            signatureIndex = byteBuffer.getShort();
-            index = byteBuffer.getShort();
+        public static LocalVariableType from(DataInputStream in, ConstPool constPool) throws IOException {
+            LocalVariableType lv = new LocalVariableType();
+            lv.constPool = constPool;
+            lv.startPc = in.readUnsignedShort();
+            lv.length = in.readUnsignedShort();
+            lv.nameIndex = in.readUnsignedShort();
+            lv.signatureIndex = in.readUnsignedShort();
+            lv.index = in.readUnsignedShort();
+            return lv;
         }
 
         public int getStartPc() {

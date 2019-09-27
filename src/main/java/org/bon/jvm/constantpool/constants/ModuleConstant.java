@@ -2,16 +2,19 @@ package org.bon.jvm.constantpool.constants;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 public class ModuleConstant extends Constant {
 
     private ConstPool constPool;
     private int nameIndex;
 
-    public ModuleConstant(ByteBuffer byteBuffer, ConstPool constPool) {
-        this.constPool = constPool;
-        nameIndex = byteBuffer.getShort();
+    public static ModuleConstant from(DataInputStream in, ConstPool constPool) throws IOException {
+        ModuleConstant c = new ModuleConstant();
+        c.constPool = constPool;
+        c.nameIndex = in.readUnsignedShort();
+        return c;
     }
 
     public String getName() {

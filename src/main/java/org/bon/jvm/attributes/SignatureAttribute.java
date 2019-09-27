@@ -2,7 +2,8 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.7.9
@@ -12,9 +13,12 @@ public class SignatureAttribute extends Attribute {
 
     private int signatureIndex;
 
-    public SignatureAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
-        signatureIndex = byteBuffer.getShort();
+    public static SignatureAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        SignatureAttribute a = new SignatureAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
+        a.signatureIndex = in.readUnsignedShort();
+        return a;
     }
 
     public String getSignature() {

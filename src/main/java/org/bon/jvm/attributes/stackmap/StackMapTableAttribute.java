@@ -3,7 +3,8 @@ package org.bon.jvm.attributes.stackmap;
 import org.bon.jvm.attributes.Attribute;
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +16,13 @@ public class StackMapTableAttribute extends Attribute {
 
     private List<StackMapFrame> frames = new ArrayList<>();
 
-    public StackMapTableAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
-
-        int entries = byteBuffer.getShort();
+    public static StackMapTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        StackMapTableAttribute a = new StackMapTableAttribute();
+        int entries = in.readUnsignedShort();
         for (int i = 0; i < entries; i++) {
-            frames.add(StackMapFrame.from(byteBuffer));
+            a.frames.add(StackMapFrame.from(in));
         }
+        return a;
     }
 
     public List<StackMapFrame> getFrames() {

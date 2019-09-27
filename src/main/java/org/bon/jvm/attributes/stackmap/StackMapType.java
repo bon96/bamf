@@ -1,6 +1,7 @@
 package org.bon.jvm.attributes.stackmap;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  * Tommi
@@ -26,12 +27,13 @@ public class StackMapType {
     private int type;
     private int index;
 
-    public StackMapType(ByteBuffer byteBuffer) {
-        type = byteBuffer.get();
-
-        if (type == 7 || type == 8) {
-            index = byteBuffer.getShort();
+    public static StackMapType from(DataInputStream in) throws IOException {
+        StackMapType a = new StackMapType();
+        a.type = in.readUnsignedByte();
+        if (a.type == 7 || a.type == 8) {
+            a.index = in.readUnsignedShort();
         }
+        return a;
     }
 
     public int getType() {

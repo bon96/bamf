@@ -3,7 +3,8 @@ package org.bon.jvm.attributes;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.ClassConstant;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,13 +16,16 @@ public class ExceptionsAttribute extends Attribute {
 
     private List<ClassConstant> exceptions = new ArrayList<>();
 
-    public ExceptionsAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
+    public static ExceptionsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        ExceptionsAttribute a = new ExceptionsAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
 
-        int exceptionsCount = byteBuffer.getShort();
+        int exceptionsCount = in.readUnsignedShort();
         for (int i = 0; i < exceptionsCount; i++) {
-            exceptions.add(constPool.get(byteBuffer.getShort()).cast());
+            a.exceptions.add(constPool.get(in.readUnsignedShort()).cast());
         }
+        return a;
     }
 
     public List<ClassConstant> getExceptions() {

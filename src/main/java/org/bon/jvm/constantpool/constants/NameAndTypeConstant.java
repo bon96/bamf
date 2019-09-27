@@ -2,7 +2,8 @@ package org.bon.jvm.constantpool.constants;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.6
@@ -13,12 +14,6 @@ public class NameAndTypeConstant extends Constant {
     private ConstPool constPool;
     private int nameIndex;
     private int descriptorIndex;
-
-    public NameAndTypeConstant(ByteBuffer byteBuffer, ConstPool constPool) {
-        this.constPool = constPool;
-        nameIndex = byteBuffer.getShort();
-        descriptorIndex = byteBuffer.getShort();
-    }
 
     public String getName() {
         return constPool.get(nameIndex).toString();
@@ -34,5 +29,13 @@ public class NameAndTypeConstant extends Constant {
 
     public int getDescriptorIndex() {
         return descriptorIndex;
+    }
+
+    public static NameAndTypeConstant from(DataInputStream in, ConstPool constPool) throws IOException {
+        NameAndTypeConstant c = new NameAndTypeConstant();
+        c.constPool = constPool;
+        c.nameIndex = in.readUnsignedShort();
+        c.descriptorIndex = in.readUnsignedShort();
+        return c;
     }
 }

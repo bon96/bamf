@@ -2,7 +2,8 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,31 +19,6 @@ public class CodeAttribute extends Attribute {
     private List<Integer> opcodes = new ArrayList<>();
     private List<Exception> exceptions = new ArrayList<>();
     private List<Attribute> attributes = new ArrayList<>();
-
-
-    public CodeAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
-
-        maxStack = byteBuffer.getShort();
-        maxLocals = byteBuffer.getShort();
-
-        int instructionCount = byteBuffer.getInt();
-        for (int i = 0; i < instructionCount; i++) {
-            int off = byteBuffer.arrayOffset();
-            int opcode = byteBuffer.get() & 0xFF;
-            opcodes.add(opcode);
-        }
-
-        int exceptionsCount = byteBuffer.getShort();
-        for (int i = 0; i < exceptionsCount; i++) {
-            exceptions.add(new Exception(byteBuffer));
-        }
-
-        int attributesCount = byteBuffer.getShort();
-        for (int i = 0; i < attributesCount; i++) {
-            attributes.add(Attribute.from(byteBuffer, constPool));
-        }
-    }
 
     public int getMaxStack() {
         return maxStack;
@@ -64,19 +40,39 @@ public class CodeAttribute extends Attribute {
         return attributes;
     }
 
+    public static CodeAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        CodeAttribute a = new CodeAttribute();
+        a.constPool = constPool;
+        a.nameIndex = nameIndex;
+        a.length = length;
+
+        a.maxStack = in.readUnsignedShort();
+        a.maxLocals = in.readUnsignedShort();
+
+        int instructionCount = in.readInt();
+        for (int i = 0; i < instructionCount; i++) {
+            int opcode = in.readUnsignedByte();
+            a.opcodes.add(opcode);
+        }
+
+        int exceptionsCount = in.readUnsignedShort();
+        for (int i = 0; i < exceptionsCount; i++) {
+            a.exceptions.add(Exception.from(in));
+        }
+
+        int attributesCount = in.readUnsignedShort();
+        for (int i = 0; i < attributesCount; i++) {
+            a.attributes.add(Attribute.from(in, constPool));
+        }
+        return a;
+    }
+
     public static class Exception {
 
         private int start;
         private int end;
         private int handler;
         private int catchType;
-
-        public Exception(ByteBuffer byteBuffer) {
-            start = byteBuffer.getShort();
-            end = byteBuffer.getShort();
-            handler = byteBuffer.getShort();
-            catchType = byteBuffer.getShort();
-        }
 
         public int getStart() {
             return start;
@@ -92,6 +88,15 @@ public class CodeAttribute extends Attribute {
 
         public int getCatchType() {
             return catchType;
+        }
+
+        public static Exception from(DataInputStream in) throws IOException {
+            Exception e = new Exception();
+            e.start = in.readUnsignedShort();
+            e.end = in.readUnsignedShort();
+            e.handler = in.readUnsignedShort();
+            e.catchType = in.readUnsignedShort();
+            return e;
         }
     }
 }

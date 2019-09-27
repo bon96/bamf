@@ -2,7 +2,8 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,13 +21,16 @@ public class BootstrapMethodsAttribute extends Attribute {
 
     private List<BootstrapMethod> methods = new ArrayList<>();
 
-    public BootstrapMethodsAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
+    public static BootstrapMethodsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        BootstrapMethodsAttribute a = new BootstrapMethodsAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
 
-        int methodsCount = byteBuffer.getShort();
+        int methodsCount = in.readUnsignedShort();
         for (int i = 0; i < methodsCount; i++) {
-            methods.add(new BootstrapMethod(byteBuffer, constPool));
+            a.methods.add(BootstrapMethod.from(in, constPool));
         }
+        return a;
     }
 
     public List<BootstrapMethod> getMethods() {
@@ -40,12 +44,15 @@ public class BootstrapMethodsAttribute extends Attribute {
         private List<Integer> arguments = new ArrayList<>();
 
         //TODO finish getters
-        public BootstrapMethod(ByteBuffer byteBuffer, ConstPool constPool) {
-            methodRefIndex = byteBuffer.getShort();
-            int argsCount = byteBuffer.getShort();
+        public static BootstrapMethod from(DataInputStream in, ConstPool constPool) throws IOException {
+            BootstrapMethod b = new BootstrapMethod();
+            b.methodRefIndex = in.readUnsignedShort();
+
+            int argsCount = in.readUnsignedShort();
             for (int i = 0; i < argsCount; i++) {
-                arguments.add((int) byteBuffer.getShort());
+                b.arguments.add((int) in.readUnsignedShort());
             }
+            return b;
         }
 
         public int getMethodRefIndex() {

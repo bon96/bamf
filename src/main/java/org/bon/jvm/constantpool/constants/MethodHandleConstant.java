@@ -2,7 +2,8 @@ package org.bon.jvm.constantpool.constants;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.8
@@ -14,10 +15,12 @@ public class MethodHandleConstant extends Constant {
     private int referenceKind;
     private int referenceIndex;
 
-    public MethodHandleConstant(ByteBuffer byteBuffer, ConstPool constPool) {
-        this.constPool = constPool;
-        referenceKind = byteBuffer.get();
-        referenceIndex = byteBuffer.getShort();
+    public static MethodHandleConstant from(DataInputStream in, ConstPool constPool) throws IOException {
+        MethodHandleConstant c = new MethodHandleConstant();
+        c.constPool = constPool;
+        c.referenceKind = in.readUnsignedByte();
+        c.referenceIndex = in.readUnsignedShort();
+        return c;
     }
 
     public int getReferenceKind() {

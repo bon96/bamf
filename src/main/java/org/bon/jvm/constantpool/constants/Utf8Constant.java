@@ -1,7 +1,8 @@
 package org.bon.jvm.constantpool.constants;
 
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.7
@@ -11,8 +12,14 @@ public class Utf8Constant extends Constant {
 
     private String string;
 
-    public Utf8Constant(ByteBuffer byteBuffer) {
-        int len = byteBuffer.getShort();
+    @Override
+    public String toString() {
+        return string;
+    }
+
+    public static Utf8Constant from(DataInputStream in) throws IOException {
+        Utf8Constant c = new Utf8Constant();
+        int len = in.readUnsignedShort();
         byte[] bytearr = new byte[len];
         char[] chararr = new char[len];
 
@@ -20,7 +27,7 @@ public class Utf8Constant extends Constant {
         int count = 0;
         int chararr_count = 0;
 
-        byteBuffer.get(bytearr, 0, len);
+        in.read(bytearr, 0, len);
 
         while (count < len) {
             char1 = (int) bytearr[count] & 0xff;
@@ -65,11 +72,7 @@ public class Utf8Constant extends Constant {
                     break;
             }
         }
-        string = new String(chararr, 0, chararr_count);
-    }
-
-    @Override
-    public String toString() {
-        return string;
+        c.string = new String(chararr, 0, chararr_count);
+        return c;
     }
 }

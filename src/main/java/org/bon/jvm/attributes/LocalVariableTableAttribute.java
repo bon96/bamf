@@ -2,7 +2,8 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,13 +15,16 @@ public class LocalVariableTableAttribute extends Attribute {
 
     private List<LocalVariable> localVariables = new ArrayList<>();
 
-    public LocalVariableTableAttribute(ByteBuffer byteBuffer, ConstPool constPool) {
-        super(byteBuffer, constPool);
+    public static LocalVariableTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        LocalVariableTableAttribute a = new LocalVariableTableAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
 
-        int tableLength = byteBuffer.getShort();
+        int tableLength = in.readUnsignedShort();
         for (int i = 0; i < tableLength; i++) {
-            localVariables.add(new LocalVariable(byteBuffer, constPool));
+            a.localVariables.add(LocalVariable.from(in, constPool));
         }
+        return a;
     }
 
     public List<LocalVariable> getLocalVariables() {
@@ -37,13 +41,15 @@ public class LocalVariableTableAttribute extends Attribute {
         private int index;
 
         //TODO finish getters
-        public LocalVariable(ByteBuffer byteBuffer, ConstPool constPool) {
-            this.constPool = constPool;
-            startPc = byteBuffer.getShort();
-            length = byteBuffer.getShort();
-            nameIndex = byteBuffer.getShort();
-            descriptorIndex = byteBuffer.getShort();
-            index = byteBuffer.getShort();
+        public static LocalVariable from(DataInputStream in, ConstPool constPool) throws IOException {
+            LocalVariable lv = new LocalVariable();
+            lv.constPool = constPool;
+            lv.startPc = in.readUnsignedShort();
+            lv.length = in.readUnsignedShort();
+            lv.nameIndex = in.readUnsignedShort();
+            lv.descriptorIndex = in.readUnsignedShort();
+            lv.index = in.readUnsignedShort();
+            return lv;
         }
 
         public int getStartPc() {

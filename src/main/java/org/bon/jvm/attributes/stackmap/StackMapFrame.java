@@ -1,6 +1,7 @@
 package org.bon.jvm.attributes.stackmap;
 
-import java.nio.ByteBuffer;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +50,8 @@ public class StackMapFrame {
         return stackItems;
     }
 
-    public static StackMapFrame from(ByteBuffer byteBuffer) {
-        int b = byteBuffer.get() & 0xFF;
+    public static StackMapFrame from(DataInputStream in) throws IOException {
+        int b = in.readUnsignedByte();
 
         //SAME_FRAME
         if (b <= 63) {
@@ -61,37 +62,37 @@ public class StackMapFrame {
         if (b <= 127) {
             int bcOffset = b - 127;
             List<StackMapType> stackItems = new ArrayList<>();
-            stackItems.add(new StackMapType(byteBuffer));
+            stackItems.add(StackMapType.from(in));
 
             return new StackMapFrame(bcOffset, new ArrayList<>(), stackItems);
         }
 
         //SAME_LOCALS_1_STACK_ITEM_FRAME_EXTENDED
         if (b == 247) {
-            int bcOffset = byteBuffer.getShort();
+            int bcOffset = in.readUnsignedShort();
             List<StackMapType> stackItems = new ArrayList<>();
-            stackItems.add(new StackMapType(byteBuffer));
+            stackItems.add(StackMapType.from(in));
 
             return new StackMapFrame(bcOffset, new ArrayList<>(), stackItems);
         }
 
         //CHOP_FRAME
         if (b >= 248 && b <= 250) {
-            return new StackMapFrame(byteBuffer.getShort());
+            return new StackMapFrame(in.readUnsignedShort());
         }
 
         //SAME_FRAME_EXTENDED
         if (b == 251) {
-            return new StackMapFrame(byteBuffer.getShort());
+            return new StackMapFrame(in.readUnsignedShort());
         }
 
         //APPEND_FRAME
         if (b >= 252 && b <= 254) {
-            int bcOffset = byteBuffer.getShort();
+            int bcOffset = in.readUnsignedShort();
             List<StackMapType> locals = new ArrayList<>();
 
             for (int i = 0; i < b - 251; i++) {
-                locals.add(new StackMapType(byteBuffer));
+                locals.add(StackMapType.from(in));
             }
 
             return new StackMapFrame(bcOffset, locals, new ArrayList<>());
@@ -99,19 +100,19 @@ public class StackMapFrame {
 
         //FULL_FRAME
         if (b == 255) {
-            int bcOffset = byteBuffer.getShort();
-            int localsCount = byteBuffer.getShort();
+            int bcOffset = in.readUnsignedShort();
+            int localsCount = in.readUnsignedShort();
             List<StackMapType> locals = new ArrayList<>();
 
             for (int i = 0; i < localsCount; i++) {
-                locals.add(new StackMapType(byteBuffer));
+                locals.add(StackMapType.from(in));
             }
 
-            int stackItemsCount = byteBuffer.getShort();
+            int stackItemsCount = in.readUnsignedShort();
             List<StackMapType> stackItems = new ArrayList<>();
 
             for (int i = 0; i < stackItemsCount; i++) {
-                stackItems.add(new StackMapType(byteBuffer));
+                stackItems.add(StackMapType.from(in));
             }
 
             return new StackMapFrame(bcOffset, locals, stackItems);
