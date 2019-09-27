@@ -2,7 +2,6 @@ package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
 
-import java.awt.*;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,6 +21,10 @@ public class MethodParametersAttribute extends Attribute {
 
     private List<Parameter> parameters = new ArrayList<>();
 
+    public List<Parameter> getParameters() {
+        return parameters;
+    }
+
     public static MethodParametersAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         MethodParametersAttribute a = new MethodParametersAttribute();
         a.nameIndex = nameIndex;
@@ -34,22 +37,10 @@ public class MethodParametersAttribute extends Attribute {
         return a;
     }
 
-    public List<Parameter> getParameters() {
-        return parameters;
-    }
-
     public static class Parameter {
 
         private int nameIndex;
         private int accessFlags;
-
-        //TODO finish getters
-        public static Parameter from(DataInputStream in, ConstPool constPool) throws IOException {
-            Parameter p = new Parameter();
-            p.nameIndex = in.readUnsignedShort();
-            p.accessFlags = in.readUnsignedShort();
-            return p;
-        }
 
         public int getNameIndex() {
             return nameIndex;
@@ -57,6 +48,14 @@ public class MethodParametersAttribute extends Attribute {
 
         public int getAccessFlags() {
             return accessFlags;
+        }
+
+        //TODO finish getters
+        public static Parameter from(DataInputStream in, ConstPool constPool) throws IOException {
+            Parameter p = new Parameter();
+            p.nameIndex = in.readUnsignedShort();
+            p.accessFlags = in.readUnsignedShort();
+            return p;
         }
     }
 

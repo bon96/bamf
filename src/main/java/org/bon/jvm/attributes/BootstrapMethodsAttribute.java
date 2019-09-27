@@ -21,6 +21,10 @@ public class BootstrapMethodsAttribute extends Attribute {
 
     private List<BootstrapMethod> methods = new ArrayList<>();
 
+    public List<BootstrapMethod> getMethods() {
+        return methods;
+    }
+
     public static BootstrapMethodsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         BootstrapMethodsAttribute a = new BootstrapMethodsAttribute();
         a.nameIndex = nameIndex;
@@ -33,15 +37,19 @@ public class BootstrapMethodsAttribute extends Attribute {
         return a;
     }
 
-    public List<BootstrapMethod> getMethods() {
-        return methods;
-    }
-
     public static class BootstrapMethod {
 
         private ConstPool constPool;
         private int methodRefIndex;
         private List<Integer> arguments = new ArrayList<>();
+
+        public int getMethodRefIndex() {
+            return methodRefIndex;
+        }
+
+        public List<Integer> getArguments() {
+            return arguments;
+        }
 
         //TODO finish getters
         public static BootstrapMethod from(DataInputStream in, ConstPool constPool) throws IOException {
@@ -50,17 +58,9 @@ public class BootstrapMethodsAttribute extends Attribute {
 
             int argsCount = in.readUnsignedShort();
             for (int i = 0; i < argsCount; i++) {
-                b.arguments.add((int) in.readUnsignedShort());
+                b.arguments.add(in.readUnsignedShort());
             }
             return b;
-        }
-
-        public int getMethodRefIndex() {
-            return methodRefIndex;
-        }
-
-        public List<Integer> getArguments() {
-            return arguments;
         }
     }
 

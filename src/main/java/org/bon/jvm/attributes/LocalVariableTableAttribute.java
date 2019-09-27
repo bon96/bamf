@@ -15,6 +15,10 @@ public class LocalVariableTableAttribute extends Attribute {
 
     private List<LocalVariable> localVariables = new ArrayList<>();
 
+    public List<LocalVariable> getLocalVariables() {
+        return localVariables;
+    }
+
     public static LocalVariableTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         LocalVariableTableAttribute a = new LocalVariableTableAttribute();
         a.nameIndex = nameIndex;
@@ -27,10 +31,6 @@ public class LocalVariableTableAttribute extends Attribute {
         return a;
     }
 
-    public List<LocalVariable> getLocalVariables() {
-        return localVariables;
-    }
-
     public static class LocalVariable {
 
         private ConstPool constPool;
@@ -39,18 +39,6 @@ public class LocalVariableTableAttribute extends Attribute {
         private int nameIndex;
         private int descriptorIndex;
         private int index;
-
-        //TODO finish getters
-        public static LocalVariable from(DataInputStream in, ConstPool constPool) throws IOException {
-            LocalVariable lv = new LocalVariable();
-            lv.constPool = constPool;
-            lv.startPc = in.readUnsignedShort();
-            lv.length = in.readUnsignedShort();
-            lv.nameIndex = in.readUnsignedShort();
-            lv.descriptorIndex = in.readUnsignedShort();
-            lv.index = in.readUnsignedShort();
-            return lv;
-        }
 
         public int getStartPc() {
             return startPc;
@@ -70,6 +58,18 @@ public class LocalVariableTableAttribute extends Attribute {
 
         public int getIndex() {
             return index;
+        }
+
+        //TODO finish getters
+        public static LocalVariable from(DataInputStream in, ConstPool constPool) throws IOException {
+            LocalVariable lv = new LocalVariable();
+            lv.constPool = constPool;
+            lv.startPc = in.readUnsignedShort();
+            lv.length = in.readUnsignedShort();
+            lv.nameIndex = in.readUnsignedShort();
+            lv.descriptorIndex = in.readUnsignedShort();
+            lv.index = in.readUnsignedShort();
+            return lv;
         }
     }
 }

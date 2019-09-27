@@ -14,18 +14,18 @@ public class MethodTypeConstant extends Constant {
     private ConstPool constPool;
     private int descriptorIndex;
 
-    public static MethodTypeConstant from(DataInputStream in, ConstPool constPool) throws IOException {
-        MethodTypeConstant c = new MethodTypeConstant();
-        c.constPool = constPool;
-        c.descriptorIndex = in.readUnsignedShort();
-        return c;
-    }
-
     public String getDescriptor() {
         return constPool.get(descriptorIndex).toString();
     }
 
     public int getDescriptorIndex() {
         return descriptorIndex;
+    }
+
+    public static MethodTypeConstant from(DataInputStream in, ConstPool constPool) throws IOException {
+        MethodTypeConstant c = new MethodTypeConstant();
+        c.constPool = constPool;
+        c.descriptorIndex = in.readUnsignedShort();
+        return c;
     }
 }

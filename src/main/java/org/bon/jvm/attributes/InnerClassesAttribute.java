@@ -34,17 +34,6 @@ public class InnerClassesAttribute extends Attribute {
         private int innerNameIndex;
         private int innerClassAccessFlags;
 
-        //TODO finish getters
-        public static InnerClass from(DataInputStream in, ConstPool constPool) throws IOException {
-            InnerClass c = new InnerClass();
-            c.constPool = constPool;
-            c.innerClassInfoIndex = in.readUnsignedShort();
-            c.outerClassInfoIndex = in.readUnsignedShort();
-            c.innerNameIndex = in.readUnsignedShort();
-            c.innerClassAccessFlags = in.readUnsignedShort();
-            return c;
-        }
-
         public int getInnerClassInfoIndex() {
             return innerClassInfoIndex;
         }
@@ -59,6 +48,17 @@ public class InnerClassesAttribute extends Attribute {
 
         public int getInnerClassAccessFlags() {
             return innerClassAccessFlags;
+        }
+
+        //TODO finish getters
+        public static InnerClass from(DataInputStream in, ConstPool constPool) throws IOException {
+            InnerClass c = new InnerClass();
+            c.constPool = constPool;
+            c.innerClassInfoIndex = in.readUnsignedShort();
+            c.outerClassInfoIndex = in.readUnsignedShort();
+            c.innerNameIndex = in.readUnsignedShort();
+            c.innerClassAccessFlags = in.readUnsignedShort();
+            return c;
         }
     }
 }

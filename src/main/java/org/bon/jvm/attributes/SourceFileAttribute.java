@@ -13,14 +13,6 @@ public class SourceFileAttribute extends Attribute {
 
     private int sourceFileIndex;
 
-    public static SourceFileAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        SourceFileAttribute a = new SourceFileAttribute();
-        a.nameIndex = nameIndex;
-        a.length = length;
-        a.sourceFileIndex = in.readUnsignedShort();
-        return a;
-    }
-
     /**
      * The string referenced by the sourcefile_index item will be interpreted
      * as indicating the name of the source file from which this class file was compiled.
@@ -35,5 +27,13 @@ public class SourceFileAttribute extends Attribute {
 
     public int getSourceFileIndex() {
         return sourceFileIndex;
+    }
+
+    public static SourceFileAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        SourceFileAttribute a = new SourceFileAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
+        a.sourceFileIndex = in.readUnsignedShort();
+        return a;
     }
 }

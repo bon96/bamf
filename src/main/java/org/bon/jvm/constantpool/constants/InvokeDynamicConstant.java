@@ -14,19 +14,11 @@ public class InvokeDynamicConstant extends Constant {
     private int bootstrapMethodAttrIndex;
     private int nameAndTypeIndex;
 
-    public static InvokeDynamicConstant from(DataInputStream in, ConstPool constPool) throws IOException {
-        InvokeDynamicConstant c = new InvokeDynamicConstant();
-        c.constPool = constPool;
-        c.bootstrapMethodAttrIndex = in.readUnsignedShort();
-        c.nameAndTypeIndex = in.readUnsignedShort();
-        return c;
-    }
-
-    //TODO finish bootstrapMethod array retrieval from constant pool
-
     public NameAndTypeConstant getNameAndType() {
         return constPool.get(nameAndTypeIndex).cast();
     }
+
+    //TODO finish bootstrapMethod array retrieval from constant pool
 
     public int getBootstrapMethodAttrIndex() {
         return bootstrapMethodAttrIndex;
@@ -34,5 +26,13 @@ public class InvokeDynamicConstant extends Constant {
 
     public int getNameAndTypeIndex() {
         return nameAndTypeIndex;
+    }
+
+    public static InvokeDynamicConstant from(DataInputStream in, ConstPool constPool) throws IOException {
+        InvokeDynamicConstant c = new InvokeDynamicConstant();
+        c.constPool = constPool;
+        c.bootstrapMethodAttrIndex = in.readUnsignedShort();
+        c.nameAndTypeIndex = in.readUnsignedShort();
+        return c;
     }
 }

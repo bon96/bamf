@@ -10,18 +10,18 @@ public class ModuleConstant extends Constant {
     private ConstPool constPool;
     private int nameIndex;
 
-    public static ModuleConstant from(DataInputStream in, ConstPool constPool) throws IOException {
-        ModuleConstant c = new ModuleConstant();
-        c.constPool = constPool;
-        c.nameIndex = in.readUnsignedShort();
-        return c;
-    }
-
     public String getName() {
         return constPool.get(nameIndex).toString();
     }
 
     public int getNameIndex() {
         return nameIndex;
+    }
+
+    public static ModuleConstant from(DataInputStream in, ConstPool constPool) throws IOException {
+        ModuleConstant c = new ModuleConstant();
+        c.constPool = constPool;
+        c.nameIndex = in.readUnsignedShort();
+        return c;
     }
 }

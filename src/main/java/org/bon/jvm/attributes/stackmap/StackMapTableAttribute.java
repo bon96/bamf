@@ -16,6 +16,10 @@ public class StackMapTableAttribute extends Attribute {
 
     private List<StackMapFrame> frames = new ArrayList<>();
 
+    public List<StackMapFrame> getFrames() {
+        return frames;
+    }
+
     public static StackMapTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         StackMapTableAttribute a = new StackMapTableAttribute();
         int entries = in.readUnsignedShort();
@@ -23,10 +27,6 @@ public class StackMapTableAttribute extends Attribute {
             a.frames.add(StackMapFrame.from(in));
         }
         return a;
-    }
-
-    public List<StackMapFrame> getFrames() {
-        return frames;
     }
 
 }

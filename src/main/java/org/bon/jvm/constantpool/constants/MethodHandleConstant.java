@@ -15,14 +15,6 @@ public class MethodHandleConstant extends Constant {
     private int referenceKind;
     private int referenceIndex;
 
-    public static MethodHandleConstant from(DataInputStream in, ConstPool constPool) throws IOException {
-        MethodHandleConstant c = new MethodHandleConstant();
-        c.constPool = constPool;
-        c.referenceKind = in.readUnsignedByte();
-        c.referenceIndex = in.readUnsignedShort();
-        return c;
-    }
-
     public int getReferenceKind() {
         return referenceKind;
     }
@@ -33,5 +25,13 @@ public class MethodHandleConstant extends Constant {
 
     public int getReferenceIndex() {
         return referenceIndex;
+    }
+
+    public static MethodHandleConstant from(DataInputStream in, ConstPool constPool) throws IOException {
+        MethodHandleConstant c = new MethodHandleConstant();
+        c.constPool = constPool;
+        c.referenceKind = in.readUnsignedByte();
+        c.referenceIndex = in.readUnsignedShort();
+        return c;
     }
 }

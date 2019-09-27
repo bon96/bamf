@@ -15,6 +15,10 @@ public class LineNumberTableAttribute extends Attribute {
 
     private List<LineNumber> lineNumbers = new ArrayList<>();
 
+    public List<LineNumber> getLineNumbers() {
+        return lineNumbers;
+    }
+
     public static LineNumberTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         LineNumberTableAttribute a = new LineNumberTableAttribute();
         a.nameIndex = nameIndex;
@@ -25,10 +29,6 @@ public class LineNumberTableAttribute extends Attribute {
             a.lineNumbers.add(new LineNumber(in.readUnsignedShort(), in.readUnsignedShort()));
         }
         return a;
-    }
-
-    public List<LineNumber> getLineNumbers() {
-        return lineNumbers;
     }
 
     public static class LineNumber {

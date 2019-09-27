@@ -4,10 +4,6 @@ import org.bon.api.ClassGroup;
 import org.bon.jvm.ClassFile;
 import org.bon.jvm.attributes.SignatureAttribute;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.DataInputStream;
 import java.util.jar.JarFile;
 
 

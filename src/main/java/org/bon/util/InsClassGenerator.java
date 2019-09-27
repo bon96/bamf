@@ -1,5 +1,9 @@
 package org.bon.util;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+
 /**
  * Tommi
  * Date: 26/09/2019
@@ -211,25 +215,434 @@ public class InsClassGenerator {
             "tableswitch aa\n" +
             "wide c4";
 
-    public static void main(String[] args) throws Exception {
-        String source =
-                "package org.bon.jvm.Instructions;\n" +
-                        "\n" +
-                        "/**\n" +
-                        " * Tommi\n" +
-                        " * Date: 26/09/2019\n" +
-                        " * Time: 20.00\n" +
-                        " */\n" +
-                        "\n" +
-                        "public class variable1 extends Instruction {\n" +
-                        "}\n";
 
-        for (String s : opcodes.split("\n")) {
-            String name = s.split(" ")[0];
-            String nameUpperCase = name.substring(0, 1).toUpperCase() + name.substring(1);
-            String opcode = s.split(" ")[1];
-            System.out.println("case " + "0x" + opcode + ":");
-            System.out.println("    return new " + nameUpperCase + "();");
+    public static String opcodes2 =
+            "Aaload\n" +
+
+                    "Aastore\n" +
+
+                    "Aconst_null\n" +
+
+                    "Aload\n" +
+
+                    "Aload\n" +
+
+                    "Aload\n" +
+
+                    "Aload\n" +
+
+                    "Aload\n" +
+
+                    "Anewarray\n" +
+
+                    "Areturn\n" +
+
+                    "Arraylength\n" +
+
+                    "Astore\n" +
+
+                    "Astore\n" +
+
+                    "Astore\n" +
+
+                    "Astore\n" +
+
+                    "Astore\n" +
+
+                    "Athrow\n" +
+
+                    "Baload\n" +
+
+                    "Bastore\n" +
+
+                    "Bipush\n" +
+
+                    "Caload\n" +
+
+                    "Castore\n" +
+
+                    "Checkcast\n" +
+
+                    "D2f\n" +
+
+                    "D2i\n" +
+
+                    "D2l\n" +
+
+                    "Dadd\n" +
+
+                    "Daload\n" +
+
+                    "Dastore\n" +
+
+                    "Dcmpg\n" +
+
+                    "Dcmpl\n" +
+
+                    "Dconst\n" +
+
+                    "Dconst\n" +
+
+                    "Ddiv\n" +
+
+                    "Dload\n" +
+
+                    "Dload\n" +
+
+                    "Dload\n" +
+
+                    "Dload\n" +
+
+                    "Dload\n" +
+
+                    "Dmul\n" +
+
+                    "Dneg\n" +
+
+                    "Drem\n" +
+
+                    "Dreturn\n" +
+
+                    "Dstore\n" +
+
+                    "Dstore\n" +
+
+                    "Dstore\n" +
+
+                    "Dstore\n" +
+
+                    "Dstore\n" +
+
+                    "Dsub\n" +
+
+                    "Dup\n" +
+
+                    "Dup_x1\n" +
+
+                    "Dup_x2\n" +
+
+                    "Dup2\n" +
+
+                    "Dup2_x1\n" +
+
+                    "Dup2_x2\n" +
+
+                    "F2d\n" +
+
+                    "F2i\n" +
+
+                    "F2l\n" +
+
+                    "Fadd\n" +
+
+                    "Faload\n" +
+
+                    "Fastore\n" +
+
+                    "Fcmpg\n" +
+
+                    "Fcmpl\n" +
+
+                    "Fconst\n" +
+
+                    "Fconst\n" +
+
+                    "Fconst\n" +
+
+                    "Fdiv\n" +
+
+                    "Fload\n" +
+
+                    "Fload\n" +
+
+                    "Fload\n" +
+
+                    "Fload\n" +
+
+                    "Fload\n" +
+
+                    "Fmul\n" +
+
+                    "Fneg\n" +
+
+                    "Frem\n" +
+
+                    "Freturn\n" +
+
+                    "Fstore\n" +
+
+                    "Fstore\n" +
+
+                    "Fstore\n" +
+
+                    "Fstore\n" +
+
+                    "Fstore\n" +
+
+                    "Fsub\n" +
+
+                    "Getfield\n" +
+
+                    "Getstatic\n" +
+
+                    "Goto\n" +
+
+                    "Goto_w\n" +
+
+                    "I2b\n" +
+
+                    "I2c\n" +
+
+                    "I2d\n" +
+
+                    "I2f\n" +
+
+                    "I2l\n" +
+
+                    "I2s\n" +
+
+                    "Iadd\n" +
+
+                    "Iaload\n" +
+
+                    "Iand\n" +
+
+                    "Iastore\n" +
+
+                    "Iconst_m1\n" +
+
+                    "Iconst\n" +
+
+                    "Iconst\n" +
+
+                    "Iconst\n" +
+
+                    "Iconst\n" +
+
+                    "Iconst\n" +
+
+                    "Iconst\n" +
+
+                    "Idiv\n" +
+
+                    "If_acmpeq\n" +
+
+                    "If_acmpne\n" +
+
+                    "If_icmpeq\n" +
+
+                    "If_icmpge\n" +
+
+                    "If_icmpgt\n" +
+
+                    "If_icmple\n" +
+
+                    "If_icmplt\n" +
+
+                    "If_icmpne\n" +
+
+                    "Ifeq\n" +
+
+                    "Ifge\n" +
+
+                    "Ifgt\n" +
+
+                    "Ifle\n" +
+
+                    "Iflt\n" +
+
+                    "Ifne\n" +
+
+                    "Ifnonnull\n" +
+
+                    "Ifnull\n" +
+
+                    "Iinc\n" +
+
+                    "Iload\n" +
+
+                    "Iload\n" +
+
+                    "Iload\n" +
+
+                    "Iload\n" +
+
+                    "Iload\n" +
+
+                    "Imul\n" +
+
+                    "Ineg\n" +
+
+                    "Instanceof\n" +
+
+                    "Invokedynamic\n" +
+
+                    "Invokeinterface\n" +
+
+                    "Invokespecial\n" +
+
+                    "Invokestatic\n" +
+
+                    "Invokevirtual\n" +
+
+                    "Ior\n" +
+
+                    "Irem\n" +
+
+                    "Ireturn\n" +
+
+                    "Ishl\n" +
+
+                    "Ishr\n" +
+
+                    "Istore\n" +
+
+                    "Istore\n" +
+
+                    "Istore\n" +
+
+                    "Istore\n" +
+
+                    "Istore\n" +
+
+                    "Isub\n" +
+
+                    "Iushr\n" +
+
+                    "Ixor\n" +
+
+                    "Jsr\n" +
+
+                    "Jsr_w\n" +
+
+                    "L2d\n" +
+
+                    "L2f\n" +
+
+                    "L2i\n" +
+
+                    "Ladd\n" +
+
+                    "Laload\n" +
+
+                    "Land\n" +
+
+                    "Lastore\n" +
+
+                    "Lcmp\n" +
+
+                    "Lconst\n" +
+
+                    "Lconst\n" +
+
+                    "Ldc\n" +
+
+                    "Ldc_w\n" +
+
+                    "Ldc2_w\n" +
+
+                    "Ldiv\n" +
+
+                    "Lload\n" +
+
+                    "Lload\n" +
+
+                    "Lload\n" +
+
+                    "Lload\n" +
+
+                    "Lload\n" +
+
+                    "Lmul\n" +
+
+                    "Lneg\n" +
+
+                    "Lor\n" +
+
+                    "Lrem\n" +
+
+                    "Lreturn\n" +
+
+                    "Lshl\n" +
+
+                    "Lshr\n" +
+
+                    "Lstore\n" +
+
+                    "Lstore\n" +
+
+                    "Lstore\n" +
+
+                    "Lstore\n" +
+
+                    "Lstore\n" +
+
+                    "Lsub\n" +
+
+                    "Lushr\n" +
+
+                    "Lxor\n" +
+
+                    "Monitorenter\n" +
+
+                    "Monitorexit\n" +
+
+                    "Multianewarray\n" +
+
+                    "New\n" +
+
+                    "Newarray\n" +
+
+                    "Nop\n" +
+
+                    "Pop\n" +
+
+                    "Pop2\n" +
+
+                    "Putfield\n" +
+
+                    "Putstatic\n" +
+
+                    "Ret\n" +
+
+                    "Return\n" +
+
+                    "Saload\n" +
+
+                    "Sastore\n" +
+
+                    "Sipush\n" +
+
+                    "Swap\n" +
+                    "Lookupswitch\n" +
+                    "Tableswitch\n" +
+                    "Wide";
+
+
+    public static void main(String[] args) throws Exception {
+        for (String s : opcodes2.split("\n")) {
+            File file = new File("./src/main/java/org/bon/jvm/Instructions/" + s + ".java");
+            FileWriter fw = new FileWriter(file, true);
+            FileReader fr = new FileReader(file);
+
+
+            int i = 0;
+            int read;
+            int last = 0;
+            while ((read = fr.read()) != -1) {
+                if (((char) read) == '}') {
+                    last = i;
+                }
+                i++;
+            }
+
+            fw.append("" +
+                    "@Override" +
+                    "public String getName() {" +
+                    "    return \"" + s + "\";" +
+                    "}");
+
+            fw.close();
             // System.out.println("public static int " + name.toUpperCase() + " = " + "0x" + opcode + ";");
         }
         //System.out.println(opcodes);

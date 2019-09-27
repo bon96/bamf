@@ -36,18 +36,6 @@ public class LocalVariableTypeTableAttribute extends Attribute {
         private int signatureIndex;
         private int index;
 
-        //TODO finish getters
-        public static LocalVariableType from(DataInputStream in, ConstPool constPool) throws IOException {
-            LocalVariableType lv = new LocalVariableType();
-            lv.constPool = constPool;
-            lv.startPc = in.readUnsignedShort();
-            lv.length = in.readUnsignedShort();
-            lv.nameIndex = in.readUnsignedShort();
-            lv.signatureIndex = in.readUnsignedShort();
-            lv.index = in.readUnsignedShort();
-            return lv;
-        }
-
         public int getStartPc() {
             return startPc;
         }
@@ -66,6 +54,18 @@ public class LocalVariableTypeTableAttribute extends Attribute {
 
         public int getIndex() {
             return index;
+        }
+
+        //TODO finish getters
+        public static LocalVariableType from(DataInputStream in, ConstPool constPool) throws IOException {
+            LocalVariableType lv = new LocalVariableType();
+            lv.constPool = constPool;
+            lv.startPc = in.readUnsignedShort();
+            lv.length = in.readUnsignedShort();
+            lv.nameIndex = in.readUnsignedShort();
+            lv.signatureIndex = in.readUnsignedShort();
+            lv.index = in.readUnsignedShort();
+            return lv;
         }
     }
 }

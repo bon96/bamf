@@ -16,6 +16,10 @@ public class ExceptionsAttribute extends Attribute {
 
     private List<ClassConstant> exceptions = new ArrayList<>();
 
+    public List<ClassConstant> getExceptions() {
+        return exceptions;
+    }
+
     public static ExceptionsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         ExceptionsAttribute a = new ExceptionsAttribute();
         a.nameIndex = nameIndex;
@@ -26,9 +30,5 @@ public class ExceptionsAttribute extends Attribute {
             a.exceptions.add(constPool.get(in.readUnsignedShort()).cast());
         }
         return a;
-    }
-
-    public List<ClassConstant> getExceptions() {
-        return exceptions;
     }
 }

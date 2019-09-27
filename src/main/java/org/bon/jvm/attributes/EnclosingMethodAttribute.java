@@ -13,6 +13,14 @@ public class EnclosingMethodAttribute extends Attribute {
     private int classIndex;
     private int methodIndex;
 
+    public int getClassIndex() {
+        return classIndex;
+    }
+
+    public int getMethodIndex() {
+        return methodIndex;
+    }
+
     //TODO finish getters
     public static EnclosingMethodAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         EnclosingMethodAttribute a = new EnclosingMethodAttribute();
@@ -21,13 +29,5 @@ public class EnclosingMethodAttribute extends Attribute {
         a.classIndex = in.readUnsignedShort();
         a.methodIndex = in.readUnsignedShort();
         return a;
-    }
-
-    public int getClassIndex() {
-        return classIndex;
-    }
-
-    public int getMethodIndex() {
-        return methodIndex;
     }
 }

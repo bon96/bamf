@@ -160,7 +160,7 @@ public class ClassFile {
 
         classFile.accessFlags = in.readUnsignedShort();
         classFile.thisClassIndex = in.readUnsignedShort();
-        classFile. superClassIndex = in.readUnsignedShort();
+        classFile.superClassIndex = in.readUnsignedShort();
 
         int interfacesCount = in.readUnsignedShort();
         for (int i = 0; i < interfacesCount; i++) {

@@ -13,19 +13,19 @@ public class SignatureAttribute extends Attribute {
 
     private int signatureIndex;
 
-    public static SignatureAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        SignatureAttribute a = new SignatureAttribute();
-        a.nameIndex = nameIndex;
-        a.length = length;
-        a.signatureIndex = in.readUnsignedShort();
-        return a;
-    }
-
     public String getSignature() {
         return constPool.get(signatureIndex).toString();
     }
 
     public int getSignatureIndex() {
         return signatureIndex;
+    }
+
+    public static SignatureAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        SignatureAttribute a = new SignatureAttribute();
+        a.nameIndex = nameIndex;
+        a.length = length;
+        a.signatureIndex = in.readUnsignedShort();
+        return a;
     }
 }

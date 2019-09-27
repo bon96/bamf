@@ -27,6 +27,14 @@ public class StackMapType {
     private int type;
     private int index;
 
+    public int getType() {
+        return type;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
     public static StackMapType from(DataInputStream in) throws IOException {
         StackMapType a = new StackMapType();
         a.type = in.readUnsignedByte();
@@ -34,13 +42,5 @@ public class StackMapType {
             a.index = in.readUnsignedShort();
         }
         return a;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public int getIndex() {
-        return index;
     }
 }

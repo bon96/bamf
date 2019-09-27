@@ -14,6 +14,14 @@ public class ConstantValueAttribute extends Attribute {
 
     private int constantValueIndex;
 
+    public Constant getConst() {
+        return constPool.get(constantValueIndex);
+    }
+
+    public int getConstantValueIndex() {
+        return constantValueIndex;
+    }
+
     public static ConstantValueAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         ConstantValueAttribute a = new ConstantValueAttribute();
         a.constPool = constPool;
@@ -22,13 +30,5 @@ public class ConstantValueAttribute extends Attribute {
 
         a.constantValueIndex = in.readUnsignedShort();
         return a;
-    }
-
-    public Constant getConst() {
-        return constPool.get(constantValueIndex);
-    }
-
-    public int getConstantValueIndex() {
-        return constantValueIndex;
     }
 }

@@ -11,13 +11,13 @@ public class LongConstant extends Constant {
 
     private long value;
 
+    public long getValue() {
+        return value;
+    }
+
     public static LongConstant from(DataInputStream in) throws IOException {
         LongConstant c = new LongConstant();
         c.value = in.readLong();
         return c;
-    }
-
-    public long getValue() {
-        return value;
     }
 }

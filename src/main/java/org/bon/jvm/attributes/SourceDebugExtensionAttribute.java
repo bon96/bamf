@@ -13,6 +13,10 @@ public class SourceDebugExtensionAttribute extends Attribute {
 
     private String debugInfo;
 
+    public String getDebugInfo() {
+        return debugInfo;
+    }
+
     public static SourceDebugExtensionAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         SourceDebugExtensionAttribute a = new SourceDebugExtensionAttribute();
         a.nameIndex = nameIndex;
@@ -33,9 +37,5 @@ public class SourceDebugExtensionAttribute extends Attribute {
         }
         a.debugInfo = new String(chars, 0, chars.length);
         return a;
-    }
-
-    public String getDebugInfo() {
-        return debugInfo;
     }
 }
