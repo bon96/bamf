@@ -154,9 +154,6 @@ public class ClassFile {
         classFile.minorVersion = in.readUnsignedShort();
         classFile.majorVersion = in.readUnsignedShort();
 
-        System.out.println(classFile.minorVersion);
-        System.out.println(classFile.majorVersion);
-
         int constPoolSize = in.readUnsignedShort();
 
         classFile.constPool = ConstPool.from(in, constPoolSize);

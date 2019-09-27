@@ -36,7 +36,6 @@ public class ConstPool {
 
         for (int i = 0; i < size - 1; i++) {
             int tag = in.readByte();
-            System.out.println(i + " " + tag);
             switch (tag) {
                 case Constant.FIELD_REF:
                     constPool.constants.add(FieldRefConstant.from(in, constPool));
