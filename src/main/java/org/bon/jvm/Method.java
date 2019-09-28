@@ -19,10 +19,6 @@ public class Method {
 
     private List<Attribute> attributes = new ArrayList<>();
 
-
-    public Method() {
-    }
-
     public Attributes getAttributes() {
         return new Attributes(attributes);
     }

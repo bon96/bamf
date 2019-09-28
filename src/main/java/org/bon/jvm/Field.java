@@ -19,10 +19,6 @@ public class Field {
 
     private List<Attribute> attributes = new ArrayList<>();
 
-    public Field() {
-    }
-
-
     public Attributes getAttributes() {
         return new Attributes(attributes);
     }

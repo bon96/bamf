@@ -33,9 +33,6 @@ public class ClassFile {
 
     private ConstPool constPool;
 
-    public ClassFile() {
-    }
-
     public String getSuperName() {
         return constPool.get(superClassIndex).toString();
     }
