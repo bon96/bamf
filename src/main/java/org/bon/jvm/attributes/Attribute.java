@@ -5,6 +5,7 @@ import org.bon.jvm.attributes.stackmap.StackMapTableAttribute;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -28,6 +29,8 @@ public abstract class Attribute implements Cast {
     public int getAttributeNameIndex() {
         return nameIndex;
     }
+
+    public abstract void writeTo(DataOutputStream out) throws IOException;
 
     public static Attribute from(DataInputStream in, ConstPool constPool) throws IOException {
         int nameIndex = in.readUnsignedShort();
@@ -97,7 +100,6 @@ public abstract class Attribute implements Cast {
                     NestHost                                55.0	11	§4.7.28
                     NestMembers                             55.0	11	§4.7.29
                  */
-
 
             default:
                 return new SkipAttribute(in, constPool, nameIndex, length);

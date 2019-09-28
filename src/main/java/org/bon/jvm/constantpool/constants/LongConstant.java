@@ -1,6 +1,7 @@
 package org.bon.jvm.constantpool.constants;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -13,6 +14,12 @@ public class LongConstant extends Constant {
 
     public long getValue() {
         return value;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeByte(Constant.LONG);
+        out.writeLong(value);
     }
 
     public static LongConstant from(DataInputStream in) throws IOException {

@@ -4,112 +4,60 @@ import java.util.*;
 
 /**
  * Tommi
- * Date: 14/09/2019
- * Time: 1.51
+ * Date: 28/09/2019
+ * Time: 13.45
  */
 
-public abstract class ModSafeList<E> implements List<E> {
+public abstract class ModSafeList<E> implements Iterable<E> {
 
     private List<E> list = new ArrayList<>();
 
-    public int size() {
-        return list.size();
-    }
+    protected abstract void onAdd(E e);
 
-    public boolean isEmpty() {
-        return list.isEmpty();
-    }
-
-    public boolean contains(Object o) {
-        return list.contains(o);
-    }
-
-    public abstract void onAdd(E e);
-
-    public boolean add(E e) {
-        return list.add(e);
-    }
-
-    public abstract void onRemove(E e);
-
-    public boolean remove(Object o) {
-        return list.remove(o);
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    public void clear() {
-        for (E e : list) {
-            onRemove(e);
-        }
-        list.clear();
-    }
+    protected abstract void onRemove(E e);
 
     public E get(int index) {
         return list.get(index);
     }
 
-    @Override
-    public E set(int index, E element) {
-        return null;
+    public boolean add(E e) {
+        onAdd(e);
+        return list.add(e);
     }
 
-    @Override
-    public void add(int index, E element) {
-
+    public boolean remove(int index) {
+        return remove(get(index));
     }
 
-    @Override
-    public E remove(int index) {
-        return null;
+    public boolean remove(E e) {
+        onRemove(e);
+        return list.remove(e);
     }
 
-    @Override
-    public int indexOf(Object o) {
-        return 0;
+    public boolean contains(E e) {
+        return list.contains(e);
     }
 
-    @Override
-    public int lastIndexOf(Object o) {
-        return 0;
+    public boolean containsAll(Collection<? extends E> c) {
+        return list.containsAll(c);
     }
 
-    @Override
-    public ListIterator<E> listIterator() {
-        return null;
+    public boolean addAll(Collection<? extends E> c) {
+        for (E e : c) {
+            add(e);
+        }
+        return true;
     }
 
-    @Override
-    public ListIterator<E> listIterator(int index) {
-        return null;
+    public boolean removeAll(Collection<? extends E> c) {
+        for (E e : c) {
+            remove(e);
+        }
+        return true;
     }
 
-    @Override
-    public List<E> subList(int fromIndex, int toIndex) {
-        return null;
+    public int size() {
+        return list.size();
     }
 
     @Override
@@ -117,14 +65,7 @@ public abstract class ModSafeList<E> implements List<E> {
         return new Itr();
     }
 
-    @Override
-    public Object[] toArray() {
-        return new Object[0];
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        return null;
+    public static void main(String[] args) {
     }
 
     private class Itr implements Iterator<E> {
@@ -132,7 +73,7 @@ public abstract class ModSafeList<E> implements List<E> {
 
         @Override
         public E next() {
-            if (current >= size()) {
+            if (current >= list.size()) {
                 throw new NoSuchElementException();
             }
             return list.get(current++);
@@ -140,7 +81,7 @@ public abstract class ModSafeList<E> implements List<E> {
 
         @Override
         public boolean hasNext() {
-            return current < size();
+            return current < list.size();
         }
     }
 }

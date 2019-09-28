@@ -3,6 +3,7 @@ package org.bon.jvm.constantpool.constants;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -27,6 +28,13 @@ public class DynamicConstant extends Constant {
 
     public int getNameAndTypeIndex() {
         return nameAndTypeIndex;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeByte(Constant.DYNAMIC);
+        out.writeShort(bootstrapMethodAttrIndex);
+        out.writeShort(nameAndTypeIndex);
     }
 
     public static DynamicConstant from(DataInputStream in, ConstPool constPool) throws IOException {

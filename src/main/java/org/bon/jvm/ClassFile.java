@@ -6,7 +6,9 @@ import org.bon.jvm.attributes.Attributes;
 import org.bon.jvm.attributes.SourceFileAttribute;
 import org.bon.jvm.constantpool.ConstPool;
 
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -146,6 +148,43 @@ public class ClassFile {
         return (accessFlags & 0x1000) != 0;
     }
 
+    public byte[] writeToBytes() throws IOException {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(bos);
+
+        out.writeInt(magic);
+        out.writeShort(minorVersion);
+        out.writeShort(majorVersion);
+
+        constPool.writeTo(out);
+
+        out.writeShort(accessFlags);
+        out.writeShort(thisClassIndex);
+        out.writeShort(superClassIndex);
+
+        out.writeShort(interfaces.size());
+        for (Interface i : interfaces) {
+            i.writeTo(out);
+        }
+
+        out.writeShort(fields.size());
+        for (Field f : fields) {
+            f.writeTo(out);
+        }
+
+        out.writeShort(methods.size());
+        for (Method m : methods) {
+            m.writeTo(out);
+        }
+
+        out.writeShort(attributes.size());
+        for (Attribute a : attributes) {
+            a.writeTo(out);
+        }
+
+        return bos.toByteArray();
+    }
+
     public static ClassFile from(DataInputStream in) throws IOException {
         ClassFile classFile = new ClassFile();
 
@@ -164,8 +203,7 @@ public class ClassFile {
 
         int interfacesCount = in.readUnsignedShort();
         for (int i = 0; i < interfacesCount; i++) {
-            int index = in.readUnsignedShort();
-            classFile.interfaces.add(Interface.from(classFile.constPool.get(index).cast()));
+            classFile.interfaces.add(Interface.from(in, classFile.constPool));
         }
 
         int fieldCount = in.readUnsignedShort();

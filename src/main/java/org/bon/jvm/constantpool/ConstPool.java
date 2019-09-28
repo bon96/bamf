@@ -3,6 +3,7 @@ package org.bon.jvm.constantpool;
 import org.bon.jvm.constantpool.constants.*;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +14,8 @@ import java.util.List;
 
 
 public class ConstPool {
-    //TODO figure out what should we do about longs and doubles taking two spots in the list.
-    //TODO Should there be null after longs and doubles or something else?
 
+    //TODO figure out what should we do about longs and doubles taking two spots in the list.
     private List<Constant> constants = new ArrayList<>();
 
     /**
@@ -24,11 +24,24 @@ public class ConstPool {
      */
 
     public Constant get(int index) {
-        return getConstants().get(index - 1);
+        return getAll().get(index - 1);
     }
 
-    public List<Constant> getConstants() {
+    public List<Constant> getAll() {
         return constants;
+    }
+
+    public int size() {
+        return constants.size();
+    }
+
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeShort(size());
+        for (Constant constant : getAll()) {
+            if (constant != null) {
+                constant.writeTo(out);
+            }
+        }
     }
 
     public static ConstPool from(DataInputStream in, int size) throws IOException {

@@ -1,18 +1,33 @@
 package org.bon.jvm;
 
+import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.ClassConstant;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 
 public class Interface {
 
-    private ClassConstant classConstant;
+    private ConstPool constPool;
+    private int classConstantIndex;
 
-    public Interface() {
+    public int getClassConstantIndex() {
+        return classConstantIndex;
     }
 
+    public ClassConstant getClassConstant() {
+        return constPool.get(classConstantIndex).cast();
+    }
 
-    public static Interface from(ClassConstant c) {
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeShort(classConstantIndex);
+    }
+
+    public static Interface from(DataInputStream in, ConstPool constPool) throws IOException {
         Interface i = new Interface();
-        i.classConstant = c;
+        i.constPool = constPool;
+        i.classConstantIndex = in.readShort();
         return i;
     }
 }

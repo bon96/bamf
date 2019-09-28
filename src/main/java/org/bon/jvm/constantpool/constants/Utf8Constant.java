@@ -2,6 +2,7 @@ package org.bon.jvm.constantpool.constants;
 
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -15,6 +16,12 @@ public class Utf8Constant extends Constant {
     @Override
     public String toString() {
         return string;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeByte(Constant.UTF8);
+        out.writeUTF(string);
     }
 
     public static Utf8Constant from(DataInputStream in) throws IOException {

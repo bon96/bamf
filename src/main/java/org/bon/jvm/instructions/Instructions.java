@@ -1,4 +1,4 @@
-package org.bon.jvm.Instructions;
+package org.bon.jvm.instructions;
 
 /**
  * Tommi

@@ -3,6 +3,7 @@ package org.bon.jvm.constantpool.constants;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -25,6 +26,13 @@ public class MethodHandleConstant extends Constant {
 
     public int getReferenceIndex() {
         return referenceIndex;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeByte(Constant.METHOD_HANDLE);
+        out.writeShort(referenceKind);
+        out.writeShort(referenceIndex);
     }
 
     public static MethodHandleConstant from(DataInputStream in, ConstPool constPool) throws IOException {

@@ -5,6 +5,7 @@ import org.bon.jvm.attributes.Attributes;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,17 @@ public class Field {
 
     public Attributes getAttributes() {
         return new Attributes(attributes);
+    }
+
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeShort(accessFlags);
+        out.writeShort(nameIndex);
+        out.writeShort(descriptorIndex);
+
+        out.writeShort(attributes.size());
+        for (Attribute attr : attributes) {
+            attr.writeTo(out);
+        }
     }
 
     public static Field from(DataInputStream in, ConstPool constPool) throws IOException {

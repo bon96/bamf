@@ -1,6 +1,7 @@
 package org.bon.jvm.constantpool.constants;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -13,6 +14,12 @@ public class IntegerConstant extends Constant {
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeByte(Constant.INTEGER);
+        out.writeInt(value);
     }
 
     public static IntegerConstant from(DataInputStream in) throws IOException {

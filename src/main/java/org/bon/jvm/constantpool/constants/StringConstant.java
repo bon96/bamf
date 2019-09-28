@@ -3,6 +3,7 @@ package org.bon.jvm.constantpool.constants;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -21,6 +22,12 @@ public class StringConstant extends Constant {
 
     public int getStringIndex() {
         return stringIndex;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeByte(Constant.STRING);
+        out.writeShort(stringIndex);
     }
 
     public static StringConstant from(DataInputStream in, ConstPool constPool) throws IOException {

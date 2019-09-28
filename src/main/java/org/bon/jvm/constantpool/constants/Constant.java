@@ -2,6 +2,9 @@ package org.bon.jvm.constantpool.constants;
 
 import org.bon.Cast;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 public abstract class Constant implements Cast {
 
     public static final int UTF8 = 1;                     // 45.3 1.0.2
@@ -21,5 +24,7 @@ public abstract class Constant implements Cast {
     public static final int INVOKE_DYNAMIC = 18;          // 51.0 7
     public static final int MODULE = 19;                  // 53.0 9
     public static final int PACKAGE = 20;                 // 53.0 9
+
+    public abstract void writeTo(DataOutputStream out) throws IOException;
 
 }

@@ -3,6 +3,7 @@ package org.bon.jvm.constantpool.constants;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -22,6 +23,11 @@ public class ClassConstant extends Constant {
         return nameIndex;
     }
 
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+        out.writeByte(Constant.CLASS);
+        out.writeShort(nameIndex);
+    }
 
     public static ClassConstant from(DataInputStream in, ConstPool constPool) throws IOException {
         ClassConstant c = new ClassConstant();
