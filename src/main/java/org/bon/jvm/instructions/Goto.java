@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Goto extends Instruction {
 
+    private int offset;
+
+    public Goto(int offset) {
+        this.offset = offset;
+    }
+
     @Override
     public String getName() {
         return "Goto";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Goto i = new Goto();
-        return i;
+        return new Goto(in.readUnsignedShort());
     }
 }

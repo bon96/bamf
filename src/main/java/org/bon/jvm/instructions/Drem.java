@@ -19,7 +19,6 @@ public class Drem extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Drem i = new Drem();
-        return i;
+        return new Drem();
     }
 }

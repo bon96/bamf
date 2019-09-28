@@ -19,7 +19,6 @@ public class Dastore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Dastore i = new Dastore();
-        return i;
+        return new Dastore();
     }
 }

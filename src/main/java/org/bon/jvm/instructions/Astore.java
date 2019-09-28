@@ -24,14 +24,16 @@ public class Astore extends Instruction {
         return "Astore";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Astore i = new Astore(420);
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Astore(in.readUnsignedShort());
+        } else {
+            return new Astore(in.readUnsignedByte());
+        }
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, int index) throws IOException {
-        Astore i = new Astore(index);
-        return i;
+        return new Astore(index);
     }
 
 }

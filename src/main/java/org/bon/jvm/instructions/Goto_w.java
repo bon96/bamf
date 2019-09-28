@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Goto_w extends Instruction {
 
+    private int index;
+
+    public Goto_w(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Goto_w";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Goto_w i = new Goto_w();
-        return i;
+        return new Goto_w(in.readInt());
     }
 }

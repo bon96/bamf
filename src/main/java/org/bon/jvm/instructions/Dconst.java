@@ -25,8 +25,7 @@ public class Dconst extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, double d) throws IOException {
-        Dconst i = new Dconst(d);
-        return i;
+        return new Dconst(d);
     }
 
 }

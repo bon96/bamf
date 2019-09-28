@@ -19,7 +19,6 @@ public class I2c extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        I2c i = new I2c();
-        return i;
+        return new I2c();
     }
 }

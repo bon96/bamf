@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Getstatic extends Instruction {
 
+    private int index;
+
+    public Getstatic(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Getstatic";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Getstatic i = new Getstatic();
-        return i;
+        return new Getstatic(in.readUnsignedShort());
     }
 }

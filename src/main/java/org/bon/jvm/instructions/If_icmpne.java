@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class If_icmpne extends Instruction {
 
+    private int offset;
+
+    public If_icmpne(int offset) {
+        this.offset = offset;
+    }
+
     @Override
     public String getName() {
         return "If_icmpne";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        If_icmpne i = new If_icmpne();
-        return i;
+        return new If_icmpne(in.readUnsignedShort());
     }
 }

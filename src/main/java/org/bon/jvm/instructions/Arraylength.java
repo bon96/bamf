@@ -19,7 +19,6 @@ public class Arraylength extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Arraylength i = new Arraylength();
-        return i;
+        return new Arraylength();
     }
 }

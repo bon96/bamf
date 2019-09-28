@@ -24,9 +24,12 @@ public class Fstore extends Instruction {
         return "Fstore";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Fstore i = new Fstore(420);
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Fstore(in.readUnsignedShort());
+        } else {
+            return new Fstore(in.readUnsignedByte());
+        }
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, float f) throws IOException {

@@ -19,7 +19,6 @@ public class I2s extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        I2s i = new I2s();
-        return i;
+        return new I2s();
     }
 }

@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Ifnull extends Instruction {
 
+    private int offset;
+
+    public Ifnull(int offset) {
+        this.offset = offset;
+    }
+
     @Override
     public String getName() {
         return "Ifnull";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Ifnull i = new Ifnull();
-        return i;
+        return new Ifnull(in.readUnsignedShort());
     }
 }

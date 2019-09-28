@@ -24,14 +24,15 @@ public class Fload extends Instruction {
         return "Fload";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Fload i = new Fload(420);
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Fload(in.readUnsignedShort());
+        } else {
+            return new Fload(in.readUnsignedByte());
+        }
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, int index) throws IOException {
-        Fload i = new Fload(index);
-        return i;
+        return new Fload(index);
     }
-
 }

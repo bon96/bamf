@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Ifgt extends Instruction {
 
+    private int offset;
+
+    public Ifgt(int offset) {
+        this.offset = offset;
+    }
+
     @Override
     public String getName() {
         return "Ifgt";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Ifgt i = new Ifgt();
-        return i;
+        return new Ifgt(in.readUnsignedShort());
     }
 }

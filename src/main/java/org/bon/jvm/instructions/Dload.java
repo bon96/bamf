@@ -24,14 +24,16 @@ public class Dload extends Instruction {
         return "Dload";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Dload i = new Dload(420);
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Dload(in.readUnsignedShort());
+        } else {
+            return new Dload(in.readUnsignedByte());
+        }
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, int index) throws IOException {
-        Dload i = new Dload(index);
-        return i;
+        return new Dload(index);
     }
 
 }

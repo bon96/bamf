@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Iflt extends Instruction {
 
+    private int offset;
+
+    public Iflt(int offset) {
+        this.offset = offset;
+    }
+
     @Override
     public String getName() {
         return "Iflt";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Iflt i = new Iflt();
-        return i;
+        return new Iflt(in.readUnsignedShort());
     }
 }

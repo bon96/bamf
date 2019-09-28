@@ -19,7 +19,6 @@ public class D2i extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        D2i i = new D2i();
-        return i;
+        return new D2i();
     }
 }

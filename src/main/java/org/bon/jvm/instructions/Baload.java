@@ -19,7 +19,6 @@ public class Baload extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Baload i = new Baload();
-        return i;
+        return new Baload();
     }
 }

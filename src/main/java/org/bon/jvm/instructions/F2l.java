@@ -19,7 +19,6 @@ public class F2l extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        F2l i = new F2l();
-        return i;
+        return new F2l();
     }
 }

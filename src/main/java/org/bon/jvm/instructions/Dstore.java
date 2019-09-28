@@ -24,14 +24,16 @@ public class Dstore extends Instruction {
         return "Dstore";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Dstore i = new Dstore(420);
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Dstore(in.readUnsignedShort());
+        } else {
+            return new Dstore(in.readUnsignedByte());
+        }
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, double d) throws IOException {
-        Dstore i = new Dstore(d);
-        return i;
+        return new Dstore(d);
     }
 
 }

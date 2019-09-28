@@ -19,7 +19,6 @@ public class Idiv extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Idiv i = new Idiv();
-        return i;
+        return new Idiv();
     }
 }

@@ -25,8 +25,6 @@ public class Iconst extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, int i) throws IOException {
-        Iconst ins = new Iconst(i);
-        return ins;
+        return new Iconst(i);
     }
-
 }

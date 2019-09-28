@@ -19,7 +19,6 @@ public class Iadd extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Iadd i = new Iadd();
-        return i;
+        return new Iadd();
     }
 }

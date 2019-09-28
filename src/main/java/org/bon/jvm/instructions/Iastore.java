@@ -19,7 +19,6 @@ public class Iastore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Iastore i = new Iastore();
-        return i;
+        return new Iastore();
     }
 }

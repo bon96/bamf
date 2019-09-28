@@ -19,7 +19,6 @@ public class Iconst_m1 extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Iconst_m1 i = new Iconst_m1();
-        return i;
+        return new Iconst_m1();
     }
 }

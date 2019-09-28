@@ -19,7 +19,6 @@ public class Dup2 extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Dup2 i = new Dup2();
-        return i;
+        return new Dup2();
     }
 }

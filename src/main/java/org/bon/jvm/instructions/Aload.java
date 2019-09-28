@@ -25,13 +25,15 @@ public class Aload extends Instruction {
     }
 
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Aload i = new Aload(420);
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Aload(in.readUnsignedShort());
+        } else {
+            return new Aload(in.readUnsignedByte());
+        }
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, int index) throws IOException {
-        Aload i = new Aload(index);
-        return i;
+        return new Aload(index);
     }
 }

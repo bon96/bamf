@@ -19,7 +19,6 @@ public class Bastore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Bastore i = new Bastore();
-        return i;
+        return new Bastore();
     }
 }

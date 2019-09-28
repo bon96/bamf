@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Ifeq extends Instruction {
 
+    private int offset;
+
+    public Ifeq(int offset) {
+        this.offset = offset;
+    }
+
     @Override
     public String getName() {
         return "Ifeq";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Ifeq i = new Ifeq();
-        return i;
+        return new Ifeq(in.readUnsignedShort());
     }
 }

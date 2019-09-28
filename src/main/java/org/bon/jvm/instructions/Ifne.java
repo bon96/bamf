@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Ifne extends Instruction {
 
+    private int offset;
+
+    public Ifne(int offset) {
+        this.offset = offset;
+    }
+
     @Override
     public String getName() {
         return "Ifne";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Ifne i = new Ifne();
-        return i;
+        return new Ifne(in.readUnsignedShort());
     }
 }

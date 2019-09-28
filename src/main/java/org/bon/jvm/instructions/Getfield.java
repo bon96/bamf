@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Getfield extends Instruction {
 
+    private int index;
+
+    public Getfield(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Getfield";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Getfield i = new Getfield();
-        return i;
+        return new Getfield(in.readUnsignedShort());
     }
 }

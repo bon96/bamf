@@ -19,7 +19,6 @@ public class Fastore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Fastore i = new Fastore();
-        return i;
+        return new Fastore();
     }
 }

@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Bipush extends Instruction {
 
+    private byte b;
+
+    public Bipush(byte b) {
+        this.b = b;
+    }
+
     @Override
     public String getName() {
         return "Bipush";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Bipush i = new Bipush();
-        return i;
+        return new Bipush(in.readByte());
     }
 }

@@ -19,7 +19,6 @@ public class Dcmpl extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Dcmpl i = new Dcmpl();
-        return i;
+        return new Dcmpl();
     }
 }

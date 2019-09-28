@@ -19,7 +19,6 @@ public class Caload extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Caload i = new Caload();
-        return i;
+        return new Caload();
     }
 }

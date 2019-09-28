@@ -19,7 +19,6 @@ public class Athrow extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Athrow i = new Athrow();
-        return i;
+        return new Athrow();
     }
 }

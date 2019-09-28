@@ -226,7 +226,7 @@ public class Instructions {
             case 0x01:
                 return Aconst_null.from(in, constPool);
             case 0x19:
-                return Aload.from(in, constPool);
+                return Aload.from(in, constPool, false);
             case 0x2a:
                 return Aload.from(in, constPool, 0);
             case 0x2b:
@@ -242,7 +242,7 @@ public class Instructions {
             case 0xbe:
                 return Arraylength.from(in, constPool);
             case 0x3a:
-                return Astore.from(in, constPool);
+                return Astore.from(in, constPool, false);
             case 0x4b:
                 return Astore.from(in, constPool, 0);
             case 0x4c:
@@ -288,7 +288,7 @@ public class Instructions {
             case 0x6f:
                 return Ddiv.from(in, constPool);
             case 0x18:
-                return Dload.from(in, constPool);
+                return Dload.from(in, constPool, false);
             case 0x26:
                 return Dload.from(in, constPool, 0);
             case 0x27:
@@ -306,7 +306,7 @@ public class Instructions {
             case 0xaf:
                 return Dreturn.from(in, constPool);
             case 0x39:
-                return Dstore.from(in, constPool);
+                return Dstore.from(in, constPool, false);
             case 0x47:
                 return Dstore.from(in, constPool, 0);
             case 0x48:
@@ -354,7 +354,7 @@ public class Instructions {
             case 0x6e:
                 return Fdiv.from(in, constPool);
             case 0x17:
-                return Fload.from(in, constPool);
+                return Fload.from(in, constPool, false);
             case 0x22:
                 return Fload.from(in, constPool, 0);
             case 0x23:
@@ -372,7 +372,7 @@ public class Instructions {
             case 0xae:
                 return Freturn.from(in, constPool);
             case 0x38:
-                return Fstore.from(in, constPool);
+                return Fstore.from(in, constPool, false);
             case 0x43:
                 return Fstore.from(in, constPool, 0);
             case 0x44:

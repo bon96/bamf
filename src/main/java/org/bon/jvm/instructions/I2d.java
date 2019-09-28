@@ -19,7 +19,6 @@ public class I2d extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        I2d i = new I2d();
-        return i;
+        return new I2d();
     }
 }

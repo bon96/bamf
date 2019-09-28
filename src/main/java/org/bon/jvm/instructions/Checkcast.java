@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Checkcast extends Instruction {
 
+    private int index;
+
+    public Checkcast(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Checkcast";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Checkcast i = new Checkcast();
-        return i;
+        return new Checkcast(in.readUnsignedShort());
     }
 }

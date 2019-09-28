@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Anewarray extends Instruction {
 
+    private int index;
+
+    public Anewarray(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Anewarray";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Anewarray i = new Anewarray();
-        return i;
+        return new Anewarray(in.readUnsignedShort());
     }
 }
