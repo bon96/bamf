@@ -3,6 +3,7 @@ package org.bon.jvm.attributes;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -27,6 +28,11 @@ public class SourceFileAttribute extends Attribute {
 
     public int getSourceFileIndex() {
         return sourceFileIndex;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
     }
 
     public static SourceFileAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {

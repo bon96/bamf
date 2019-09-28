@@ -4,6 +4,7 @@ import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.ClassConstant;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,11 @@ public class ExceptionsAttribute extends Attribute {
 
     public List<ClassConstant> getExceptions() {
         return exceptions;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
     }
 
     public static ExceptionsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {

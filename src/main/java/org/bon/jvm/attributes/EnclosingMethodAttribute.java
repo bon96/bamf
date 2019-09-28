@@ -3,6 +3,7 @@ package org.bon.jvm.attributes;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -19,6 +20,11 @@ public class EnclosingMethodAttribute extends Attribute {
 
     public int getMethodIndex() {
         return methodIndex;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
     }
 
     //TODO finish getters

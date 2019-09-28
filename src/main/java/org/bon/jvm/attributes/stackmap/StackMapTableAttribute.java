@@ -4,6 +4,7 @@ import org.bon.jvm.attributes.Attribute;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,11 @@ public class StackMapTableAttribute extends Attribute {
 
     public List<StackMapFrame> getFrames() {
         return frames;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
     }
 
     public static StackMapTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {

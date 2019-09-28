@@ -3,6 +3,7 @@ package org.bon.jvm.attributes;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -15,6 +16,11 @@ public class SourceDebugExtensionAttribute extends Attribute {
 
     public String getDebugInfo() {
         return debugInfo;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
     }
 
     public static SourceDebugExtensionAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {

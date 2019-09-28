@@ -3,6 +3,7 @@ package org.bon.jvm.attributes;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,11 @@ import java.util.List;
 public class InnerClassesAttribute extends Attribute {
 
     private List<InnerClass> innerClasses = new ArrayList<>();
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
+    }
 
     public static InnerClassesAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         InnerClassesAttribute a = new InnerClassesAttribute();

@@ -1,8 +1,10 @@
 package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.Instructions;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,11 @@ public class CodeAttribute extends Attribute {
         return attributes;
     }
 
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
+    }
+
     public static CodeAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         CodeAttribute a = new CodeAttribute();
         a.constPool = constPool;
@@ -51,8 +58,10 @@ public class CodeAttribute extends Attribute {
 
         int instructionCount = in.readInt();
         for (int i = 0; i < instructionCount; i++) {
-            int opcode = in.readUnsignedByte();
-            a.opcodes.add(opcode);
+            int offset = i;
+            Instructions.from(in, constPool);
+            //int opcode = in.readUnsignedByte();
+            //a.opcodes.add(opcode);
         }
 
         int exceptionsCount = in.readUnsignedShort();

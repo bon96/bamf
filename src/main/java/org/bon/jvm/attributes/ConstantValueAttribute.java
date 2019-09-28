@@ -4,6 +4,7 @@ import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.Constant;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 /**
@@ -20,6 +21,11 @@ public class ConstantValueAttribute extends Attribute {
 
     public int getConstantValueIndex() {
         return constantValueIndex;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
     }
 
     public static ConstantValueAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {

@@ -4,6 +4,8 @@ import org.bon.jvm.attributes.Attribute;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,5 +18,10 @@ public class RuntimeVisibleAnnotationsAttribute extends Attribute {
     private List<Annotation> annotations = new ArrayList<>();
 
     public RuntimeVisibleAnnotationsAttribute(DataInputStream in, ConstPool constPool) {
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
     }
 }

@@ -3,6 +3,7 @@ package org.bon.jvm.attributes;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,11 @@ public class LocalVariableTableAttribute extends Attribute {
 
     public List<LocalVariable> getLocalVariables() {
         return localVariables;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out) throws IOException {
+
     }
 
     public static LocalVariableTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {

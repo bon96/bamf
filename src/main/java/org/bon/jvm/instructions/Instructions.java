@@ -1,5 +1,10 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.constantpool.ConstPool;
+
+import java.io.DataInputStream;
+import java.io.IOException;
+
 /**
  * Tommi
  * Date: 26/09/2019
@@ -209,4 +214,416 @@ public class Instructions {
     public static int LOOKUPSWITCH = 0xab;
     public static int TABLESWITCH = 0xaa;
     public static int WIDE = 0xc4;
-}
+
+
+    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+        int opcode = in.readUnsignedByte();
+        switch (opcode) {
+            case 0x32:
+                return Aaload.from(in, constPool);
+            case 0x53:
+                return Aastore.from(in, constPool);
+            case 0x01:
+                return Aconst_null.from(in, constPool);
+            case 0x19:
+                return Aload.from(in, constPool, 420);
+            case 0x2a:
+                return Aload.from(in, constPool, 0);
+            case 0x2b:
+                return Aload.from(in, constPool, 1);
+            case 0x2c:
+                return Aload.from(in, constPool, 2);
+            case 0x2d:
+                return Aload.from(in, constPool, 3);
+            case 0xbd:
+                return Anewarray.from(in, constPool);
+            case 0xb0:
+                return Areturn.from(in, constPool);
+            case 0xbe:
+                return Arraylength.from(in, constPool);
+            case 0x3a:
+                return Astore.from(in, constPool, 420);
+            case 0x4b:
+                return Astore.from(in, constPool, 0);
+            case 0x4c:
+                return Astore.from(in, constPool, 1);
+            case 0x4d:
+                return Astore.from(in, constPool, 2);
+            case 0x4e:
+                return Astore.from(in, constPool, 3);
+            case 0xbf:
+                return Athrow.from(in, constPool);
+            case 0x33:
+                return Baload.from(in, constPool);
+            case 0x54:
+                return Bastore.from(in, constPool);
+            case 0x10:
+                return Bipush.from(in, constPool);
+            case 0x34:
+                return Caload.from(in, constPool);
+            case 0x55:
+                return Castore.from(in, constPool);
+            case 0xc0:
+                return Checkcast.from(in, constPool);
+            case 0x90:
+                return D2f.from(in, constPool);
+            case 0x8e:
+                return D2i.from(in, constPool);
+            case 0x8f:
+                return D2l.from(in, constPool);
+            case 0x63:
+                return Dadd.from(in, constPool);
+            case 0x31:
+                return Daload.from(in, constPool);
+            case 0x52:
+                return Dastore.from(in, constPool);
+            case 0x98:
+                return Dcmpg.from(in, constPool);
+            case 0x97:
+                return Dcmpl.from(in, constPool);
+            case 0x0e:
+                return Dconst.from(in, constPool, 0);
+            case 0x0f:
+                return Dconst.from(in, constPool, 1);
+            case 0x6f:
+                return Ddiv.from(in, constPool);
+            case 0x18:
+                return Dload.from(in, constPool, 420);
+            case 0x26:
+                return Dload.from(in, constPool, 0);
+            case 0x27:
+                return Dload.from(in, constPool, 1);
+            case 0x28:
+                return Dload.from(in, constPool, 2);
+            case 0x29:
+                return Dload.from(in, constPool, 3);
+            case 0x6b:
+                return Dmul.from(in, constPool);
+            case 0x77:
+                return Dneg.from(in, constPool);
+            case 0x73:
+                return Drem.from(in, constPool);
+            case 0xaf:
+                return Dreturn.from(in, constPool);
+            case 0x39:
+                return Dstore.from(in, constPool, 420);
+            case 0x47:
+                return Dstore.from(in, constPool, 0);
+            case 0x48:
+                return Dstore.from(in, constPool, 1);
+            case 0x49:
+                return Dstore.from(in, constPool, 2);
+            case 0x4a:
+                return Dstore.from(in, constPool, 3);
+            case 0x67:
+                return Dsub.from(in, constPool);
+            case 0x59:
+                return Dup.from(in, constPool);
+            case 0x5a:
+                return Dup_x1.from(in, constPool);
+            case 0x5b:
+                return Dup_x2.from(in, constPool);
+            case 0x5c:
+                return Dup2.from(in, constPool);
+            case 0x5d:
+                return Dup2_x1.from(in, constPool);
+            case 0x5e:
+                return Dup2_x2.from(in, constPool);
+            case 0x8d:
+                return F2d.from(in, constPool);
+            case 0x8b:
+                return F2i.from(in, constPool);
+            case 0x8c:
+                return F2l.from(in, constPool);
+            case 0x62:
+                return Fadd.from(in, constPool);
+            case 0x30:
+                return Faload.from(in, constPool);
+            case 0x51:
+                return Fastore.from(in, constPool);
+            case 0x96:
+                return Fcmpg.from(in, constPool);
+            case 0x95:
+                return Fcmpl.from(in, constPool);
+            case 0x0b:
+                return Fconst.from(in, constPool, 0);
+            case 0x0c:
+                return Fconst.from(in, constPool, 1);
+            case 0x0d:
+                return Fconst.from(in, constPool, 2);
+            case 0x6e:
+                return Fdiv.from(in, constPool);
+            case 0x17:
+                return Fload.from(in, constPool, 420);
+            case 0x22:
+                return Fload.from(in, constPool, 0);
+            case 0x23:
+                return Fload.from(in, constPool, 1);
+            case 0x24:
+                return Fload.from(in, constPool, 2);
+            case 0x25:
+                return Fload.from(in, constPool, 3);
+            case 0x6a:
+                return Fmul.from(in, constPool);
+            case 0x76:
+                return Fneg.from(in, constPool);
+            case 0x72:
+                return Frem.from(in, constPool);
+            case 0xae:
+                return Freturn.from(in, constPool);
+            case 0x38:
+                return Fstore.from(in, constPool, 420);
+            case 0x43:
+                return Fstore.from(in, constPool, 0);
+            case 0x44:
+                return Fstore.from(in, constPool, 1);
+            case 0x45:
+                return Fstore.from(in, constPool, 2);
+            case 0x46:
+                return Fstore.from(in, constPool, 3);
+            case 0x66:
+                return Fsub.from(in, constPool);
+            case 0xb4:
+                return Getfield.from(in, constPool);
+            case 0xb2:
+                return Getstatic.from(in, constPool);
+            case 0xa7:
+                return Goto.from(in, constPool);
+            case 0xc8:
+                return Goto_w.from(in, constPool);
+            case 0x91:
+                return I2b.from(in, constPool);
+            case 0x92:
+                return I2c.from(in, constPool);
+            case 0x87:
+                return I2d.from(in, constPool);
+            case 0x86:
+                return I2f.from(in, constPool);
+            case 0x85:
+                return I2l.from(in, constPool);
+            case 0x93:
+                return I2s.from(in, constPool);
+            case 0x60:
+                return Iadd.from(in, constPool);
+            case 0x2e:
+                return Iaload.from(in, constPool);
+            case 0x7e:
+                return Iand.from(in, constPool);
+            case 0x4f:
+                return Iastore.from(in, constPool);
+            case 0x02:
+                return Iconst_m1.from(in, constPool);
+            case 0x03:
+                return Iconst.from(in, constPool, 0);
+            case 0x04:
+                return Iconst.from(in, constPool, 1);
+            case 0x05:
+                return Iconst.from(in, constPool, 2);
+            case 0x06:
+                return Iconst.from(in, constPool, 3);
+            case 0x07:
+                return Iconst.from(in, constPool, 4);
+            case 0x08:
+                return Iconst.from(in, constPool, 5);
+            case 0x6c:
+                return Idiv.from(in, constPool);
+            case 0xa5:
+                return If_acmpeq.from(in, constPool);
+            case 0xa6:
+                return If_acmpne.from(in, constPool);
+            case 0x9f:
+                return If_icmpeq.from(in, constPool);
+            case 0xa2:
+                return If_icmpge.from(in, constPool);
+            case 0xa3:
+                return If_icmpgt.from(in, constPool);
+            case 0xa4:
+                return If_icmple.from(in, constPool);
+            case 0xa1:
+                return If_icmplt.from(in, constPool);
+            case 0xa0:
+                return If_icmpne.from(in, constPool);
+            case 0x99:
+                return Ifeq.from(in, constPool);
+            case 0x9c:
+                return Ifge.from(in, constPool);
+            case 0x9d:
+                return Ifgt.from(in, constPool);
+            case 0x9e:
+                return Ifle.from(in, constPool);
+            case 0x9b:
+                return Iflt.from(in, constPool);
+            case 0x9a:
+                return Ifne.from(in, constPool);
+            case 0xc7:
+                return Ifnonnull.from(in, constPool);
+            case 0xc6:
+                return Ifnull.from(in, constPool);
+            case 0x84:
+                return Iinc.from(in, constPool);
+            case 0x15:
+                return Iload.from(in, constPool, 420);
+            case 0x1a:
+                return Iload.from(in, constPool, 0);
+            case 0x1b:
+                return Iload.from(in, constPool, 1);
+            case 0x1c:
+                return Iload.from(in, constPool, 2);
+            case 0x1d:
+                return Iload.from(in, constPool, 3);
+            case 0x68:
+                return Imul.from(in, constPool);
+            case 0x74:
+                return Ineg.from(in, constPool);
+            case 0xc1:
+                return Instanceof.from(in, constPool);
+            case 0xba:
+                return Invokedynamic.from(in, constPool);
+            case 0xb9:
+                return Invokeinterface.from(in, constPool);
+            case 0xb7:
+                return Invokespecial.from(in, constPool);
+            case 0xb8:
+                return Invokestatic.from(in, constPool);
+            case 0xb6:
+                return Invokevirtual.from(in, constPool);
+            case 0x80:
+                return Ior.from(in, constPool);
+            case 0x70:
+                return Irem.from(in, constPool);
+            case 0xac:
+                return Ireturn.from(in, constPool);
+            case 0x78:
+                return Ishl.from(in, constPool);
+            case 0x7a:
+                return Ishr.from(in, constPool);
+            case 0x36:
+                return Istore.from(in, constPool, 420);
+            case 0x3b:
+                return Istore.from(in, constPool, 0);
+            case 0x3c:
+                return Istore.from(in, constPool, 1);
+            case 0x3d:
+                return Istore.from(in, constPool, 2);
+            case 0x3e:
+                return Istore.from(in, constPool, 3);
+            case 0x64:
+                return Isub.from(in, constPool);
+            case 0x7c:
+                return Iushr.from(in, constPool);
+            case 0x82:
+                return Ixor.from(in, constPool);
+            case 0xa8:
+                return Jsr.from(in, constPool);
+            case 0xc9:
+                return Jsr_w.from(in, constPool);
+            case 0x8a:
+                return L2d.from(in, constPool);
+            case 0x89:
+                return L2f.from(in, constPool);
+            case 0x88:
+                return L2i.from(in, constPool);
+            case 0x61:
+                return Ladd.from(in, constPool);
+            case 0x2f:
+                return Laload.from(in, constPool);
+            case 0x7f:
+                return Land.from(in, constPool);
+            case 0x50:
+                return Lastore.from(in, constPool);
+            case 0x94:
+                return Lcmp.from(in, constPool);
+            case 0x09:
+                return Lconst.from(in, constPool, 0);
+            case 0x0a:
+                return Lconst.from(in, constPool, 1);
+            case 0x12:
+                return Ldc.from(in, constPool);
+            case 0x13:
+                return Ldc_w.from(in, constPool);
+            case 0x14:
+                return Ldc2_w.from(in, constPool);
+            case 0x6d:
+                return Ldiv.from(in, constPool);
+            case 0x16:
+                return Lload.from(in, constPool, 420);
+            case 0x1e:
+                return Lload.from(in, constPool, 0);
+            case 0x1f:
+                return Lload.from(in, constPool, 1);
+            case 0x20:
+                return Lload.from(in, constPool, 2);
+            case 0x21:
+                return Lload.from(in, constPool, 3);
+            case 0x69:
+                return Lmul.from(in, constPool);
+            case 0x75:
+                return Lneg.from(in, constPool);
+            case 0x81:
+                return Lor.from(in, constPool);
+            case 0x71:
+                return Lrem.from(in, constPool);
+            case 0xad:
+                return Lreturn.from(in, constPool);
+            case 0x79:
+                return Lshl.from(in, constPool);
+            case 0x7b:
+                return Lshr.from(in, constPool);
+            case 0x37:
+                return Lstore.from(in, constPool, 420);
+            case 0x3f:
+                return Lstore.from(in, constPool, 0);
+            case 0x40:
+                return Lstore.from(in, constPool, 1);
+            case 0x41:
+                return Lstore.from(in, constPool, 2);
+            case 0x42:
+                return Lstore.from(in, constPool, 3);
+            case 0x65:
+                return Lsub.from(in, constPool);
+            case 0x7d:
+                return Lushr.from(in, constPool);
+            case 0x83:
+                return Lxor.from(in, constPool);
+            case 0xc2:
+                return Monitorenter.from(in, constPool);
+            case 0xc3:
+                return Monitorexit.from(in, constPool);
+            case 0xc5:
+                return Multianewarray.from(in, constPool);
+            case 0xbb:
+                return New.from(in, constPool);
+            case 0xbc:
+                return Newarray.from(in, constPool);
+            case 0x00:
+                return Nop.from(in, constPool);
+            case 0x57:
+                return Pop.from(in, constPool);
+            case 0x58:
+                return Pop2.from(in, constPool);
+            case 0xb5:
+                return Putfield.from(in, constPool);
+            case 0xb3:
+                return Putstatic.from(in, constPool);
+            case 0xa9:
+                return Ret.from(in, constPool);
+            case 0xb1:
+                return Return.from(in, constPool);
+            case 0x35:
+                return Saload.from(in, constPool);
+            case 0x56:
+                return Sastore.from(in, constPool);
+            case 0x11:
+                return Sipush.from(in, constPool);
+            case 0x5f:
+                return Swap.from(in, constPool);
+            case 0xab:
+                return Lookupswitch.from(in, constPool);
+            case 0xaa:
+                return Tableswitch.from(in, constPool);
+            case 0xc4:
+                return Wide.from(in, constPool);
+            default:
+                throw new UnsupportedOperationException(in, constPool"Unsupported opcode " + opcode);
+        }
+    }
