@@ -19,6 +19,7 @@ public class Invokeinterface extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Invokeinterface i = new Invokeinterface();
+        return i;
     }
 }

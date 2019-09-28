@@ -19,6 +19,7 @@ public class Ifnonnull extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ifnonnull i = new Ifnonnull();
+        return i;
     }
 }

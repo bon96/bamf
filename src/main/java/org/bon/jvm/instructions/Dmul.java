@@ -19,6 +19,7 @@ public class Dmul extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Dmul i = new Dmul();
+        return i;
     }
 }

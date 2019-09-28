@@ -25,7 +25,13 @@ public class Istore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+        Istore ins = new Istore(420);
+        return ins;
+    }
 
+    public static Instruction from(DataInputStream in, ConstPool constPool, int i) throws IOException {
+        Istore ins = new Istore(i);
+        return ins;
     }
 
 }

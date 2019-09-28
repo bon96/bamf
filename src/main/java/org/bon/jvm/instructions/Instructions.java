@@ -226,7 +226,7 @@ public class Instructions {
             case 0x01:
                 return Aconst_null.from(in, constPool);
             case 0x19:
-                return Aload.from(in, constPool, 420);
+                return Aload.from(in, constPool);
             case 0x2a:
                 return Aload.from(in, constPool, 0);
             case 0x2b:
@@ -242,7 +242,7 @@ public class Instructions {
             case 0xbe:
                 return Arraylength.from(in, constPool);
             case 0x3a:
-                return Astore.from(in, constPool, 420);
+                return Astore.from(in, constPool);
             case 0x4b:
                 return Astore.from(in, constPool, 0);
             case 0x4c:
@@ -288,7 +288,7 @@ public class Instructions {
             case 0x6f:
                 return Ddiv.from(in, constPool);
             case 0x18:
-                return Dload.from(in, constPool, 420);
+                return Dload.from(in, constPool);
             case 0x26:
                 return Dload.from(in, constPool, 0);
             case 0x27:
@@ -306,7 +306,7 @@ public class Instructions {
             case 0xaf:
                 return Dreturn.from(in, constPool);
             case 0x39:
-                return Dstore.from(in, constPool, 420);
+                return Dstore.from(in, constPool);
             case 0x47:
                 return Dstore.from(in, constPool, 0);
             case 0x48:
@@ -354,7 +354,7 @@ public class Instructions {
             case 0x6e:
                 return Fdiv.from(in, constPool);
             case 0x17:
-                return Fload.from(in, constPool, 420);
+                return Fload.from(in, constPool);
             case 0x22:
                 return Fload.from(in, constPool, 0);
             case 0x23:
@@ -372,7 +372,7 @@ public class Instructions {
             case 0xae:
                 return Freturn.from(in, constPool);
             case 0x38:
-                return Fstore.from(in, constPool, 420);
+                return Fstore.from(in, constPool);
             case 0x43:
                 return Fstore.from(in, constPool, 0);
             case 0x44:
@@ -462,7 +462,7 @@ public class Instructions {
             case 0x84:
                 return Iinc.from(in, constPool);
             case 0x15:
-                return Iload.from(in, constPool, 420);
+                return Iload.from(in, constPool);
             case 0x1a:
                 return Iload.from(in, constPool, 0);
             case 0x1b:
@@ -498,7 +498,7 @@ public class Instructions {
             case 0x7a:
                 return Ishr.from(in, constPool);
             case 0x36:
-                return Istore.from(in, constPool, 420);
+                return Istore.from(in, constPool);
             case 0x3b:
                 return Istore.from(in, constPool, 0);
             case 0x3c:
@@ -546,7 +546,7 @@ public class Instructions {
             case 0x6d:
                 return Ldiv.from(in, constPool);
             case 0x16:
-                return Lload.from(in, constPool, 420);
+                return Lload.from(in, constPool);
             case 0x1e:
                 return Lload.from(in, constPool, 0);
             case 0x1f:
@@ -570,7 +570,7 @@ public class Instructions {
             case 0x7b:
                 return Lshr.from(in, constPool);
             case 0x37:
-                return Lstore.from(in, constPool, 420);
+                return Lstore.from(in, constPool);
             case 0x3f:
                 return Lstore.from(in, constPool, 0);
             case 0x40:
@@ -624,6 +624,7 @@ public class Instructions {
             case 0xc4:
                 return Wide.from(in, constPool);
             default:
-                throw new UnsupportedOperationException(in, constPool"Unsupported opcode " + opcode);
+                throw new UnsupportedOperationException("Unsupported opcode " + opcode);
         }
     }
+}

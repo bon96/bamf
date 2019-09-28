@@ -19,6 +19,7 @@ public class Ldc_w extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ldc_w i = new Ldc_w();
+        return i;
     }
 }

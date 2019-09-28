@@ -19,6 +19,7 @@ public class Invokespecial extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Invokespecial i = new Invokespecial();
+        return i;
     }
 }

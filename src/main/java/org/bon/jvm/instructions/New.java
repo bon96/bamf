@@ -19,6 +19,7 @@ public class New extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        New i = new New();
+        return i;
     }
 }

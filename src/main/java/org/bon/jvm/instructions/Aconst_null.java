@@ -19,6 +19,7 @@ public class Aconst_null extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Aconst_null i = new Aconst_null();
+        return i;
     }
 }

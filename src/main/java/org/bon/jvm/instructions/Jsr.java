@@ -19,6 +19,7 @@ public class Jsr extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Jsr i = new Jsr();
+        return i;
     }
 }

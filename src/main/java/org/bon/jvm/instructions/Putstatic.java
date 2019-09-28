@@ -19,6 +19,7 @@ public class Putstatic extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Putstatic i = new Putstatic();
+        return i;
     }
 }

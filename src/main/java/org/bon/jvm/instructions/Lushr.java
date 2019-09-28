@@ -19,6 +19,7 @@ public class Lushr extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Lushr i = new Lushr();
+        return i;
     }
 }

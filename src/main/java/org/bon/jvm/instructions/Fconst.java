@@ -24,8 +24,9 @@ public class Fconst extends Instruction {
         return "Fconst";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+    public static Instruction from(DataInputStream in, ConstPool constPool, float f) throws IOException {
+        Fconst i = new Fconst(f);
+        return i;
     }
 
 }

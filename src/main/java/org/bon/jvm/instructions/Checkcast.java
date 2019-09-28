@@ -19,6 +19,7 @@ public class Checkcast extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Checkcast i = new Checkcast();
+        return i;
     }
 }

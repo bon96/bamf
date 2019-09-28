@@ -19,6 +19,7 @@ public class Lneg extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Lneg i = new Lneg();
+        return i;
     }
 }

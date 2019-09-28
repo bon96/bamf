@@ -19,6 +19,7 @@ public class Anewarray extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Anewarray i = new Anewarray();
+        return i;
     }
 }

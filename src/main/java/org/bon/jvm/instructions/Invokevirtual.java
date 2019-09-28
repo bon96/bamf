@@ -19,6 +19,7 @@ public class Invokevirtual extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Invokevirtual i = new Invokevirtual();
+        return i;
     }
 }

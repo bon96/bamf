@@ -19,6 +19,7 @@ public class If_icmple extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        If_icmple i = new If_icmple();
+        return i;
     }
 }

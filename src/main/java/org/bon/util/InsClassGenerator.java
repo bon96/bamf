@@ -1,8 +1,9 @@
 package org.bon.util;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Tommi
@@ -622,27 +623,20 @@ public class InsClassGenerator {
     public static void main(String[] args) throws Exception {
         for (String s : opcodes2.split("\n")) {
             File file = new File("./src/main/java/org/bon/jvm/Instructions/" + s + ".java");
-            FileWriter fw = new FileWriter(file, true);
-            FileReader fr = new FileReader(file);
+            List<String> source = Files.readAllLines(Paths.get(file.toURI()));
 
-
-            int i = 0;
-            int read;
-            int last = 0;
-            while ((read = fr.read()) != -1) {
-                if (((char) read) == '}') {
-                    last = i;
+            int fromBody = 0;
+            for (int i = 0; i < source.size(); i++) {
+                if (source.get(i).contains("from")) {
+                    fromBody = i + 1;
                 }
-                i++;
             }
 
-            fw.append("" +
-                    "@Override" +
-                    "public String getName() {" +
-                    "    return \"" + s + "\";" +
-                    "}");
+            System.out.println(source.get(fromBody - 1));
+            break;
 
-            fw.close();
+            //FileWriter fw = new FileWriter(file, true);
+            //fw.close();
             // System.out.println("public static int " + name.toUpperCase() + " = " + "0x" + opcode + ";");
         }
         //System.out.println(opcodes);

@@ -19,6 +19,7 @@ public class Tableswitch extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Tableswitch i = new Tableswitch();
+        return i;
     }
 }

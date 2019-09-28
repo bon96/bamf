@@ -25,7 +25,13 @@ public class Dstore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+        Dstore i = new Dstore(420);
+        return i;
+    }
 
+    public static Instruction from(DataInputStream in, ConstPool constPool, double d) throws IOException {
+        Dstore i = new Dstore(d);
+        return i;
     }
 
 }

@@ -19,6 +19,7 @@ public class Ior extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ior i = new Ior();
+        return i;
     }
 }

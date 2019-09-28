@@ -25,7 +25,13 @@ public class Fload extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+        Fload i = new Fload(420);
+        return i;
+    }
 
+    public static Instruction from(DataInputStream in, ConstPool constPool, int index) throws IOException {
+        Fload i = new Fload(index);
+        return i;
     }
 
 }

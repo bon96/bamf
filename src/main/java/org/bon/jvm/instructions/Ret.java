@@ -19,6 +19,7 @@ public class Ret extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ret i = new Ret();
+        return i;
     }
 }

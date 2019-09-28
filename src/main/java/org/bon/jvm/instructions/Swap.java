@@ -19,6 +19,7 @@ public class Swap extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Swap i = new Swap();
+        return i;
     }
 }

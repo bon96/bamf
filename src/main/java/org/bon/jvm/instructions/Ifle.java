@@ -19,6 +19,7 @@ public class Ifle extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ifle i = new Ifle();
+        return i;
     }
 }

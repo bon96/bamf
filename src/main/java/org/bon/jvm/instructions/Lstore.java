@@ -25,7 +25,13 @@ public class Lstore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+        Lstore i = new Lstore(420);
+        return i;
+    }
 
+    public static Instruction from(DataInputStream in, ConstPool constPool, long l) throws IOException {
+        Lstore i = new Lstore(l);
+        return i;
     }
 
 }

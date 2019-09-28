@@ -19,6 +19,7 @@ public class Frem extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Frem i = new Frem();
+        return i;
     }
 }

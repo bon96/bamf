@@ -19,6 +19,7 @@ public class If_acmpne extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        If_acmpne i = new If_acmpne();
+        return i;
     }
 }

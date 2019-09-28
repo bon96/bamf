@@ -19,6 +19,7 @@ public class Ifgt extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ifgt i = new Ifgt();
+        return i;
     }
 }

@@ -19,6 +19,7 @@ public class Getstatic extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Getstatic i = new Getstatic();
+        return i;
     }
 }

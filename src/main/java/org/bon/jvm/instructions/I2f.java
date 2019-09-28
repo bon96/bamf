@@ -19,6 +19,7 @@ public class I2f extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        I2f i = new I2f();
+        return i;
     }
 }

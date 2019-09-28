@@ -19,6 +19,7 @@ public class Dcmpg extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Dcmpg i = new Dcmpg();
+        return i;
     }
 }

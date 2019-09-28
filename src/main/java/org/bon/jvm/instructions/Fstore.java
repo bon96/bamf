@@ -25,6 +25,12 @@ public class Fstore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+        Fstore i = new Fstore(420);
+        return i;
+    }
 
+    public static Instruction from(DataInputStream in, ConstPool constPool, float f) throws IOException {
+        Fstore i = new Fstore(f);
+        return i;
     }
 }

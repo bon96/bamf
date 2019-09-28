@@ -19,6 +19,7 @@ public class Ixor extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ixor i = new Ixor();
+        return i;
     }
 }

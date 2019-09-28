@@ -19,6 +19,7 @@ public class Lookupswitch extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Lookupswitch i = new Lookupswitch();
+        return i;
     }
 }

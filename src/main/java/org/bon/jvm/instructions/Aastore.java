@@ -19,6 +19,7 @@ public class Aastore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Aastore i = new Aastore();
+        return i;
     }
 }

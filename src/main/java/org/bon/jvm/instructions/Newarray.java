@@ -19,6 +19,7 @@ public class Newarray extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Newarray i = new Newarray();
+        return i;
     }
 }

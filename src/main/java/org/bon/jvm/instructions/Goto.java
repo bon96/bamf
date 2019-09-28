@@ -19,6 +19,7 @@ public class Goto extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Goto i = new Goto();
+        return i;
     }
 }

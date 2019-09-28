@@ -19,6 +19,7 @@ public class Ldiv extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ldiv i = new Ldiv();
+        return i;
     }
 }

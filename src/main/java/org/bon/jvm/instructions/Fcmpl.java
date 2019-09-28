@@ -19,6 +19,7 @@ public class Fcmpl extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Fcmpl i = new Fcmpl();
+        return i;
     }
 }

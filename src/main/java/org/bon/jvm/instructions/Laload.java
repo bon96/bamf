@@ -19,6 +19,7 @@ public class Laload extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Laload i = new Laload();
+        return i;
     }
 }

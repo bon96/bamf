@@ -19,6 +19,7 @@ public class Ireturn extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ireturn i = new Ireturn();
+        return i;
     }
 }

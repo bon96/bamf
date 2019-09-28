@@ -19,6 +19,7 @@ public class Fneg extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Fneg i = new Fneg();
+        return i;
     }
 }

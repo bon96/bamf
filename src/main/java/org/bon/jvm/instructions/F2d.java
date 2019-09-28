@@ -19,6 +19,7 @@ public class F2d extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        F2d i = new F2d();
+        return i;
     }
 }

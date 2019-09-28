@@ -19,6 +19,7 @@ public class Sipush extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Sipush i = new Sipush();
+        return i;
     }
 }

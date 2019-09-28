@@ -19,6 +19,7 @@ public class Goto_w extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Goto_w i = new Goto_w();
+        return i;
     }
 }

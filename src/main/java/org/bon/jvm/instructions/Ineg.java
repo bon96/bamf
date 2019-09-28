@@ -19,6 +19,7 @@ public class Ineg extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ineg i = new Ineg();
+        return i;
     }
 }

@@ -19,6 +19,7 @@ public class Fcmpg extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Fcmpg i = new Fcmpg();
+        return i;
     }
 }

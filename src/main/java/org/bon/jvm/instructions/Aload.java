@@ -24,8 +24,14 @@ public class Aload extends Instruction {
         return "Aload";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
 
+    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+        Aload i = new Aload(420);
+        return i;
     }
 
+    public static Instruction from(DataInputStream in, ConstPool constPool, int index) throws IOException {
+        Aload i = new Aload(index);
+        return i;
+    }
 }

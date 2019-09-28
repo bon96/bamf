@@ -19,6 +19,7 @@ public class Lastore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Lastore i = new Lastore();
+        return i;
     }
 }

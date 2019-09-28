@@ -19,6 +19,7 @@ public class Daload extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Daload i = new Daload();
+        return i;
     }
 }

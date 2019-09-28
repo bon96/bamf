@@ -7,7 +7,6 @@ import org.bon.jvm.containers.ClassFiles;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -19,14 +18,14 @@ import java.util.jar.JarFile;
 
 public class ClassGroup {
 
-    private List<ClassFile> classFiles = new ClassFiles();
-    private List<Class> classes = new Classes();
+    private ClassFiles classFiles = new ClassFiles();
+    private Classes classes = new Classes();
 
-    public List<Class> getClasses() {
+    public Classes getClasses() {
         return classes;
     }
 
-    public List<ClassFile> getClassFiles() {
+    public ClassFiles getClassFiles() {
         return classFiles;
     }
 

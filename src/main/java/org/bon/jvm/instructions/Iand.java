@@ -19,6 +19,7 @@ public class Iand extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Iand i = new Iand();
+        return i;
     }
 }

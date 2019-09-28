@@ -19,6 +19,7 @@ public class Fsub extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Fsub i = new Fsub();
+        return i;
     }
 }

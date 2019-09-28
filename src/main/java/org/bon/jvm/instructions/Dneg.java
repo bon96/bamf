@@ -19,6 +19,7 @@ public class Dneg extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Dneg i = new Dneg();
+        return i;
     }
 }

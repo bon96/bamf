@@ -19,6 +19,7 @@ public class Iinc extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Iinc i = new Iinc();
+        return i;
     }
 }

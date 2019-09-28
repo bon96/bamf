@@ -19,6 +19,7 @@ public class Getfield extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Getfield i = new Getfield();
+        return i;
     }
 }

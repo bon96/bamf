@@ -19,6 +19,7 @@ public class Dadd extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Dadd i = new Dadd();
+        return i;
     }
 }

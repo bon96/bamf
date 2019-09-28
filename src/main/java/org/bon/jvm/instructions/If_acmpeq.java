@@ -19,6 +19,7 @@ public class If_acmpeq extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        If_acmpeq i = new If_acmpeq();
+        return i;
     }
 }

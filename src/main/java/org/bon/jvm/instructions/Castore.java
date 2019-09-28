@@ -19,6 +19,7 @@ public class Castore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Castore i = new Castore();
+        return i;
     }
 }

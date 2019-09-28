@@ -19,6 +19,7 @@ public class Dreturn extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Dreturn i = new Dreturn();
+        return i;
     }
 }

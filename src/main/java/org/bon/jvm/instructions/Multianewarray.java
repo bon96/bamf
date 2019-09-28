@@ -19,6 +19,7 @@ public class Multianewarray extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Multianewarray i = new Multianewarray();
+        return i;
     }
 }

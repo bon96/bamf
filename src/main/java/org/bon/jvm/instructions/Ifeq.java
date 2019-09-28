@@ -19,6 +19,7 @@ public class Ifeq extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Ifeq i = new Ifeq();
+        return i;
     }
 }

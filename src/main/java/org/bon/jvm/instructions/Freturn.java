@@ -19,6 +19,7 @@ public class Freturn extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Freturn i = new Freturn();
+        return i;
     }
 }

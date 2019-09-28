@@ -19,6 +19,7 @@ public class Nop extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Nop i = new Nop();
+        return i;
     }
 }

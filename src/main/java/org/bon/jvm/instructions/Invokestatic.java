@@ -19,6 +19,7 @@ public class Invokestatic extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Invokestatic i = new Invokestatic();
+        return i;
     }
 }

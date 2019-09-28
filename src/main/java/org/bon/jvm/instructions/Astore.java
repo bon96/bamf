@@ -25,7 +25,13 @@ public class Astore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+        Astore i = new Astore(420);
+        return i;
+    }
 
+    public static Instruction from(DataInputStream in, ConstPool constPool, int index) throws IOException {
+        Astore i = new Astore(index);
+        return i;
     }
 
 }

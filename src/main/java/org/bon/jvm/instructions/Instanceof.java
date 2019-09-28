@@ -19,6 +19,7 @@ public class Instanceof extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-
+        Instanceof i = new Instanceof();
+        return i;
     }
 }
