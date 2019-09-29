@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Dconst extends Instruction {
+public class Dconst extends Instruction implements ConstInstruction<Double> {
 
     private double d;
 
@@ -22,6 +23,11 @@ public class Dconst extends Instruction {
     @Override
     public String getName() {
         return "Dconst";
+    }
+
+    @Override
+    public Double getValue() {
+        return d;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, double d) throws IOException {

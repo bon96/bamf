@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.ConversionInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class L2d extends Instruction {
+public class L2d extends Instruction implements ConversionInstruction {
 
     @Override
     public String getName() {

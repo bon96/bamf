@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Fconst extends Instruction {
+public class Fconst extends Instruction implements ConstInstruction<Float> {
 
     private float f;
 
@@ -22,6 +23,11 @@ public class Fconst extends Instruction {
     @Override
     public String getName() {
         return "Fconst";
+    }
+
+    @Override
+    public Float getValue() {
+        return f;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, float f) throws IOException {

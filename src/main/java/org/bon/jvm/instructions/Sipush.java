@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Sipush extends Instruction {
+public class Sipush extends Instruction implements ConstInstruction<Short> {
 
     private int value;
 
@@ -22,6 +23,11 @@ public class Sipush extends Instruction {
     @Override
     public String getName() {
         return "Sipush";
+    }
+
+    @Override
+    public Short getValue() {
+        return (short) value;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {

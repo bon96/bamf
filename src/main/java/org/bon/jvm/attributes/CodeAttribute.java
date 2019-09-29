@@ -1,6 +1,7 @@
 package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.Instruction;
 import org.bon.jvm.instructions.Instructions;
 
 import java.io.DataInputStream;
@@ -18,9 +19,9 @@ public class CodeAttribute extends Attribute {
     private int maxStack;
     private int maxLocals;
 
-    private List<Integer> opcodes = new ArrayList<>();
     private List<Exception> exceptions = new ArrayList<>();
     private List<Attribute> attributes = new ArrayList<>();
+    private List<Instruction> instructions;
 
     public int getMaxStack() {
         return maxStack;
@@ -30,8 +31,8 @@ public class CodeAttribute extends Attribute {
         return maxLocals;
     }
 
-    public List<Integer> getOpcodes() {
-        return opcodes;
+    public List<Instruction> getInstructions() {
+        return instructions;
     }
 
     public List<Exception> getExceptions() {
@@ -56,13 +57,7 @@ public class CodeAttribute extends Attribute {
         a.maxStack = in.readUnsignedShort();
         a.maxLocals = in.readUnsignedShort();
 
-        int instructionCount = in.readInt();
-        for (int i = 0; i < instructionCount; i++) {
-            int offset = i;
-            Instructions.from(in, constPool);
-            //int opcode = in.readUnsignedByte();
-            //a.opcodes.add(opcode);
-        }
+        a.instructions = Instructions.from(in, constPool);
 
         int exceptionsCount = in.readUnsignedShort();
         for (int i = 0; i < exceptionsCount; i++) {

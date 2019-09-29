@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.StoreInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,17 +12,22 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Lstore extends Instruction {
+public class Lstore extends Instruction implements StoreInstruction {
 
-    private long l;
+    private int index;
 
-    public Lstore(long l) {
-        this.l = l;
+    public Lstore(int index) {
+        this.index = index;
     }
 
     @Override
     public String getName() {
         return "Lstore";
+    }
+
+    @Override
+    public int getIndex() {
+        return index;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
@@ -32,8 +38,8 @@ public class Lstore extends Instruction {
         }
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool, long l) throws IOException {
-        return new Lstore(l);
+    public static Instruction from(DataInputStream in, ConstPool constPool, int index) throws IOException {
+        return new Lstore(index);
     }
 
 }

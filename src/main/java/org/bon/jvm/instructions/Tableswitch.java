@@ -19,7 +19,21 @@ public class Tableswitch extends Instruction {
         return "Tableswitch";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+    public static Instruction from(DataInputStream in, ConstPool constPool, int offset) throws IOException {
+        in.skipBytes(((4 - (offset % 4)) % 4));
+
+        //defaultBytes
+        int index = in.readInt();
+
+        int low = in.readInt();
+        int high = in.readInt();
+        int length = high - low + 1;
+
+        for (int i = 0; i < length; i++) {
+            //jump offsets
+            in.readInt();
+        }
+
         return new Tableswitch();
     }
 }

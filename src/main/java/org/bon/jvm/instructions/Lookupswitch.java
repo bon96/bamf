@@ -20,7 +20,20 @@ public class Lookupswitch extends Instruction {
         return "Lookupswitch";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
+    public static Instruction from(DataInputStream in, ConstPool constPool, int offset) throws IOException {
+        in.skipBytes(((4 - (offset % 4)) % 4));
+
+        //defaultBytes
+        int index = in.readInt();
+
+        int length = in.readInt();
+
+        for (int i = 0; i < length; i++) {
+            //match-offset pairs
+            in.readInt();
+            in.readInt();
+        }
+
         Lookupswitch i = new Lookupswitch();
         return i;
     }

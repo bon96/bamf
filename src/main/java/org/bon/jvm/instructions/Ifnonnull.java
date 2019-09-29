@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.BranchInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Ifnonnull extends Instruction {
+public class Ifnonnull extends Instruction implements BranchInstruction {
 
     private int offset;
 
@@ -22,6 +23,11 @@ public class Ifnonnull extends Instruction {
     @Override
     public String getName() {
         return "Ifnonnull";
+    }
+
+    @Override
+    public int getTargetIndex() {
+        return offset;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {

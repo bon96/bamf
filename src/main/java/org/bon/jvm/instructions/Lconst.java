@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Lconst extends Instruction {
+public class Lconst extends Instruction implements ConstInstruction<Long> {
 
     private long l;
 
@@ -22,6 +23,11 @@ public class Lconst extends Instruction {
     @Override
     public String getName() {
         return "Lconst";
+    }
+
+    @Override
+    public Long getValue() {
+        return l;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, long l) throws IOException {

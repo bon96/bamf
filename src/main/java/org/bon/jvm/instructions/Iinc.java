@@ -11,6 +11,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
+//TODO figure out getters
 public class Iinc extends Instruction {
 
     private int index;
@@ -30,7 +31,7 @@ public class Iinc extends Instruction {
         if (wide) {
             return new Iinc(in.readUnsignedShort(), in.readShort());
         } else {
-            return new Iinc(in.readUnsignedShort(), in.readByte());
+            return new Iinc(in.readUnsignedByte(), in.readByte());
         }
     }
 }

@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Ldc extends Instruction {
+public class Ldc extends Instruction implements ConstInstruction {
 
     private int index;
 
@@ -22,6 +23,11 @@ public class Ldc extends Instruction {
     @Override
     public String getName() {
         return "Ldc";
+    }
+
+    @Override
+    public Object getValue() {
+        throw new UnsupportedOperationException("not yet implemented");
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {

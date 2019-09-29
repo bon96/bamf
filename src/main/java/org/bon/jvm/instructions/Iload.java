@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.LoadInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Iload extends Instruction {
+public class Iload extends Instruction implements LoadInstruction {
 
     private int index;
 
@@ -22,6 +23,11 @@ public class Iload extends Instruction {
     @Override
     public String getName() {
         return "Iload";
+    }
+
+    @Override
+    public int getIndex() {
+        return index;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {

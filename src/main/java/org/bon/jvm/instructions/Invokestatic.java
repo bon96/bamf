@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.InvokeInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Invokestatic extends Instruction {
+public class Invokestatic extends Instruction implements InvokeInstruction {
 
     private int index;
 
@@ -22,6 +23,11 @@ public class Invokestatic extends Instruction {
     @Override
     public String getName() {
         return "Invokestatic";
+    }
+
+    @Override
+    public int getMethodRefIndex() {
+        return index;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
