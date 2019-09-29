@@ -19,7 +19,6 @@ public class Wide extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Wide i = new Wide();
-        return i;
+        return new Wide();
     }
 }

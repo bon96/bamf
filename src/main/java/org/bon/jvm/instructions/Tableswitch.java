@@ -11,6 +11,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
+//TODO idk what the fuck is going on here
 public class Tableswitch extends Instruction {
 
     @Override
@@ -19,7 +20,6 @@ public class Tableswitch extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Tableswitch i = new Tableswitch();
-        return i;
+        return new Tableswitch();
     }
 }

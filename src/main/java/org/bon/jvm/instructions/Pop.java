@@ -19,7 +19,6 @@ public class Pop extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Pop i = new Pop();
-        return i;
+        return new Pop();
     }
 }

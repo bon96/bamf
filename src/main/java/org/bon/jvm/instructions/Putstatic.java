@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Putstatic extends Instruction {
 
+    private int index;
+
+    public Putstatic(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Putstatic";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Putstatic i = new Putstatic();
-        return i;
+        return new Putstatic(in.readUnsignedShort());
     }
 }

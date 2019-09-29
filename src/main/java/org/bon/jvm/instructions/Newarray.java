@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Newarray extends Instruction {
 
+    private int type;
+
+    public Newarray(int type) {
+        this.type = type;
+    }
+
     @Override
     public String getName() {
         return "Newarray";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Newarray i = new Newarray();
-        return i;
+        return new Newarray(in.readByte());
     }
 }

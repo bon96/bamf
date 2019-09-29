@@ -19,7 +19,6 @@ public class Lmul extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Lmul i = new Lmul();
-        return i;
+        return new Lmul();
     }
 }

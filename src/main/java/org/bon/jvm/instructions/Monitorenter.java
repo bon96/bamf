@@ -19,7 +19,6 @@ public class Monitorenter extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Monitorenter i = new Monitorenter();
-        return i;
+        return new Monitorenter();
     }
 }

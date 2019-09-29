@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Instanceof extends Instruction {
 
+    private int index;
+
+    public Instanceof(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Instanceof";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Instanceof i = new Instanceof();
-        return i;
+        return new Instanceof(in.readUnsignedShort());
     }
 }

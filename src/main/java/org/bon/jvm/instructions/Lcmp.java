@@ -19,7 +19,6 @@ public class Lcmp extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Lcmp i = new Lcmp();
-        return i;
+        return new Lcmp();
     }
 }

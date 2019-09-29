@@ -19,7 +19,6 @@ public class Lrem extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Lrem i = new Lrem();
-        return i;
+        return new Lrem();
     }
 }

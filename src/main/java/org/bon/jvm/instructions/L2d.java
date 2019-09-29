@@ -19,7 +19,6 @@ public class L2d extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        L2d i = new L2d();
-        return i;
+        return new L2d();
     }
 }

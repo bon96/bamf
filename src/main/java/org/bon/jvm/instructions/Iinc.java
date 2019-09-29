@@ -13,13 +13,24 @@ import java.io.IOException;
 
 public class Iinc extends Instruction {
 
+    private int index;
+    private int constant;
+
+    public Iinc(int index, int constant) {
+        this.index = index;
+        this.constant = constant;
+    }
+
     @Override
     public String getName() {
         return "Iinc";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Iinc i = new Iinc();
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Iinc(in.readUnsignedShort(), in.readShort());
+        } else {
+            return new Iinc(in.readUnsignedShort(), in.readByte());
+        }
     }
 }

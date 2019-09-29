@@ -13,13 +13,20 @@ import java.io.IOException;
 
 public class Multianewarray extends Instruction {
 
+    private int index;
+    private int dimensions;
+
+    public Multianewarray(int index, int dimensions) {
+        this.index = index;
+        this.dimensions = dimensions;
+    }
+
     @Override
     public String getName() {
         return "Multianewarray";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Multianewarray i = new Multianewarray();
-        return i;
+        return new Multianewarray(in.readUnsignedShort(), in.readByte());
     }
 }

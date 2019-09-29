@@ -19,7 +19,6 @@ public class Monitorexit extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Monitorexit i = new Monitorexit();
-        return i;
+        return new Monitorexit();
     }
 }

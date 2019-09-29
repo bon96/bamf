@@ -19,7 +19,6 @@ public class Irem extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Irem i = new Irem();
-        return i;
+        return new Irem();
     }
 }

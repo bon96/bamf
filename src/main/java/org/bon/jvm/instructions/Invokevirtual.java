@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Invokevirtual extends Instruction {
 
+    private int index;
+
+    public Invokevirtual(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Invokevirtual";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Invokevirtual i = new Invokevirtual();
-        return i;
+        return new Invokevirtual(in.readUnsignedShort());
     }
 }

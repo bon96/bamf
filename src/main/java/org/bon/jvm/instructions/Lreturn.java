@@ -19,7 +19,6 @@ public class Lreturn extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Lreturn i = new Lreturn();
-        return i;
+        return new Lreturn();
     }
 }

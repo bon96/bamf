@@ -19,7 +19,6 @@ public class Isub extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Isub i = new Isub();
-        return i;
+        return new Isub();
     }
 }

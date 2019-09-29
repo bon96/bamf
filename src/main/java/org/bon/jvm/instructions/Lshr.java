@@ -19,7 +19,6 @@ public class Lshr extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Lshr i = new Lshr();
-        return i;
+        return new Lshr();
     }
 }

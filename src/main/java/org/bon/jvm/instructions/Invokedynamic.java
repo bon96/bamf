@@ -13,13 +13,20 @@ import java.io.IOException;
 
 public class Invokedynamic extends Instruction {
 
+    private int index;
+
+    public Invokedynamic(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Invokedynamic";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Invokedynamic i = new Invokedynamic();
-        return i;
+        int index = in.readUnsignedShort();
+        in.skipBytes(2); //invokedynamic always has two extra zero bytes
+        return new Invokedynamic(index);
     }
 }

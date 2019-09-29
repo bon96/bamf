@@ -13,13 +13,22 @@ import java.io.IOException;
 
 public class Ret extends Instruction {
 
+    private int index;
+
+    public Ret(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Ret";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Ret i = new Ret();
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Ret(in.readUnsignedShort());
+        } else {
+            return new Ret(in.readUnsignedByte());
+        }
     }
 }

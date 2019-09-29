@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Sipush extends Instruction {
 
+    private int value;
+
+    public Sipush(int value) {
+        this.value = value;
+    }
+
     @Override
     public String getName() {
         return "Sipush";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Sipush i = new Sipush();
-        return i;
+        return new Sipush(in.readShort());
     }
 }

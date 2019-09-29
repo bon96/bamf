@@ -24,14 +24,15 @@ public class Istore extends Instruction {
         return "Istore";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Istore ins = new Istore(420);
-        return ins;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Istore(in.readUnsignedShort());
+        } else {
+            return new Istore(in.readUnsignedByte());
+        }
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, int i) throws IOException {
-        Istore ins = new Istore(i);
-        return ins;
+        return new Istore(i);
     }
-
 }

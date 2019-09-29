@@ -19,7 +19,6 @@ public class Ishl extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Ishl i = new Ishl();
-        return i;
+        return new Ishl();
     }
 }

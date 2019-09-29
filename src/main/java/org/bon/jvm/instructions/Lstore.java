@@ -24,14 +24,16 @@ public class Lstore extends Instruction {
         return "Lstore";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Lstore i = new Lstore(420);
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Lstore(in.readUnsignedShort());
+        } else {
+            return new Lstore(in.readUnsignedByte());
+        }
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, long l) throws IOException {
-        Lstore i = new Lstore(l);
-        return i;
+        return new Lstore(l);
     }
 
 }

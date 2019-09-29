@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Invokestatic extends Instruction {
 
+    private int index;
+
+    public Invokestatic(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Invokestatic";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Invokestatic i = new Invokestatic();
-        return i;
+        return new Invokestatic(in.readUnsignedShort());
     }
 }

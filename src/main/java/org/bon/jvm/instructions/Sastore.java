@@ -19,7 +19,6 @@ public class Sastore extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Sastore i = new Sastore();
-        return i;
+        return new Sastore();
     }
 }

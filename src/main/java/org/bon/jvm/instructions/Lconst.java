@@ -25,8 +25,7 @@ public class Lconst extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, long l) throws IOException {
-        Lconst i = new Lconst(l);
-        return i;
+        return new Lconst(l);
     }
 
 }

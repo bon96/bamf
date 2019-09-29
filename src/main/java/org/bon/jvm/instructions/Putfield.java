@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Putfield extends Instruction {
 
+    private int index;
+
+    public Putfield(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Putfield";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Putfield i = new Putfield();
-        return i;
+        return new Putfield(in.readUnsignedShort());
     }
 }

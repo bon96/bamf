@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Invokespecial extends Instruction {
 
+    private int index;
+
+    public Invokespecial(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Invokespecial";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Invokespecial i = new Invokespecial();
-        return i;
+        return new Invokespecial(in.readUnsignedShort());
     }
 }

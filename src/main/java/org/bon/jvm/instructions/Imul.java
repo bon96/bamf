@@ -19,7 +19,6 @@ public class Imul extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Imul i = new Imul();
-        return i;
+        return new Imul();
     }
 }

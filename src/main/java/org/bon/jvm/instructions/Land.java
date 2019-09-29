@@ -19,7 +19,6 @@ public class Land extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Land i = new Land();
-        return i;
+        return new Land();
     }
 }

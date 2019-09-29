@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class Jsr_w extends Instruction {
 
+    private int offset;
+
+    public Jsr_w(int offset) {
+        this.offset = offset;
+    }
+
     @Override
     public String getName() {
         return "Jsr_w";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Jsr_w i = new Jsr_w();
-        return i;
+        return new Jsr_w(in.readInt());
     }
 }

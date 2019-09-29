@@ -24,14 +24,15 @@ public class Iload extends Instruction {
         return "Iload";
     }
 
-    public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Iload i = new Iload(420);
-        return i;
+    public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
+        if (wide) {
+            return new Iload(in.readUnsignedShort());
+        } else {
+            return new Iload(in.readUnsignedByte());
+        }
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, int index) throws IOException {
-        Iload i = new Iload(index);
-        return i;
+        return new Iload(index);
     }
-
 }

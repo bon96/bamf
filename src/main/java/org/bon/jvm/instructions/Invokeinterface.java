@@ -13,13 +13,20 @@ import java.io.IOException;
 
 public class Invokeinterface extends Instruction {
 
+    private int index;
+
+    public Invokeinterface(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "Invokeinterface";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Invokeinterface i = new Invokeinterface();
-        return i;
+        int index = in.readUnsignedShort();
+        in.skipBytes(1); //invokeinterface always has one extra zero byte
+        return new Invokeinterface(index);
     }
 }

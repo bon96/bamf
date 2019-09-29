@@ -13,13 +13,18 @@ import java.io.IOException;
 
 public class New extends Instruction {
 
+    private int index;
+
+    public New(int index) {
+        this.index = index;
+    }
+
     @Override
     public String getName() {
         return "New";
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        New i = new New();
-        return i;
+        return new New(in.readUnsignedShort());
     }
 }

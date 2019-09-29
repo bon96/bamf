@@ -19,7 +19,6 @@ public class Lxor extends Instruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        Lxor i = new Lxor();
-        return i;
+        return new Lxor();
     }
 }
