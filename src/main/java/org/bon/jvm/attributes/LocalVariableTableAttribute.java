@@ -27,6 +27,7 @@ public class LocalVariableTableAttribute extends Attribute {
 
     public static LocalVariableTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         LocalVariableTableAttribute a = new LocalVariableTableAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
 

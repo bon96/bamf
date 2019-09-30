@@ -27,6 +27,7 @@ public class LineNumberTableAttribute extends Attribute {
 
     public static LineNumberTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         LineNumberTableAttribute a = new LineNumberTableAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
 

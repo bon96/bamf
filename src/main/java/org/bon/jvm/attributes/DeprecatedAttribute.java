@@ -19,6 +19,7 @@ public class DeprecatedAttribute extends Attribute {
 
     public static DeprecatedAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) {
         DeprecatedAttribute a = new DeprecatedAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
         return a;

@@ -20,6 +20,18 @@ public class Field {
         return aClass;
     }
 
+    public int getAccessFlags() {
+        return getJVM().getAccessFlags();
+    }
+
+    public String getName() {
+        return getJVM().getName();
+    }
+
+    public String getDescriptor() {
+        return getJVM().getDescriptor();
+    }
+
     public org.bon.jvm.Field getJVM() {
         return field;
     }

@@ -29,6 +29,7 @@ public class SignatureAttribute extends Attribute {
 
     public static SignatureAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         SignatureAttribute a = new SignatureAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
         a.signatureIndex = in.readUnsignedShort();

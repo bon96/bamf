@@ -23,6 +23,18 @@ public class Field {
         return new Attributes(attributes);
     }
 
+    public int getAccessFlags() {
+        return accessFlags;
+    }
+
+    public String getName() {
+        return constPool.get(nameIndex).toString();
+    }
+
+    public String getDescriptor() {
+        return constPool.get(descriptorIndex).toString();
+    }
+
     public void writeTo(DataOutputStream out) throws IOException {
         out.writeShort(accessFlags);
         out.writeShort(nameIndex);

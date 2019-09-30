@@ -19,6 +19,7 @@ public class SyntheticAttribute extends Attribute {
 
     public static SyntheticAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) {
         SyntheticAttribute a = new SyntheticAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
         return a;

@@ -33,6 +33,7 @@ public class BootstrapMethodsAttribute extends Attribute {
 
     public static BootstrapMethodsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         BootstrapMethodsAttribute a = new BootstrapMethodsAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
 

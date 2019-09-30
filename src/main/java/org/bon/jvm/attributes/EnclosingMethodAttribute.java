@@ -30,6 +30,7 @@ public class EnclosingMethodAttribute extends Attribute {
     //TODO finish getters
     public static EnclosingMethodAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         EnclosingMethodAttribute a = new EnclosingMethodAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
         a.classIndex = in.readUnsignedShort();

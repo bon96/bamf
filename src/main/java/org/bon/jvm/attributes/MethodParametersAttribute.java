@@ -33,6 +33,7 @@ public class MethodParametersAttribute extends Attribute {
 
     public static MethodParametersAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         MethodParametersAttribute a = new MethodParametersAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
 

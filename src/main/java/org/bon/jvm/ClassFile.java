@@ -37,6 +37,10 @@ public class ClassFile {
         return constPool.get(superClassIndex).toString();
     }
 
+    public int getMagic() {
+        return magic;
+    }
+
     public int getMinorVersion() {
         return minorVersion;
     }
@@ -67,6 +71,10 @@ public class ClassFile {
 
     public String getName() {
         return getAttributes().ofType(SourceFileAttribute.class).getSourceFileName();
+    }
+
+    public int getAccessFlags() {
+        return accessFlags;
     }
 
     public boolean isAccPublic() {

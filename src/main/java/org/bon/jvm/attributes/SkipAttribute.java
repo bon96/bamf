@@ -13,10 +13,11 @@ import java.io.IOException;
 public class SkipAttribute extends Attribute {
 
     public SkipAttribute(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        this.constPool = constPool;
         this.nameIndex = nameIndex;
         this.length = length;
-        System.out.println("Skipping " + getName() + " " + getLength());
-        in.skipBytes(length - 6);
+        //System.out.println("Skipping " + getName() + " " + getLength());
+        in.skipBytes(length);
     }
 
     @Override

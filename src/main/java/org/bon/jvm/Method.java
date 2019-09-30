@@ -23,8 +23,16 @@ public class Method {
         return new Attributes(attributes);
     }
 
+    public int getAccessFlags() {
+        return accessFlags;
+    }
+
     public String getName() {
         return constPool.get(nameIndex).toString();
+    }
+
+    public String getDescriptor() {
+        return constPool.get(descriptorIndex).toString();
     }
 
     public void writeTo(DataOutputStream out) throws IOException {

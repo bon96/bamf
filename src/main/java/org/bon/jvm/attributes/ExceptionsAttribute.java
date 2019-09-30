@@ -28,6 +28,7 @@ public class ExceptionsAttribute extends Attribute {
 
     public static ExceptionsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         ExceptionsAttribute a = new ExceptionsAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
 

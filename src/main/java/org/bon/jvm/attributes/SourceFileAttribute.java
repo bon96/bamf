@@ -37,6 +37,7 @@ public class SourceFileAttribute extends Attribute {
 
     public static SourceFileAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         SourceFileAttribute a = new SourceFileAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
         a.sourceFileIndex = in.readUnsignedShort();

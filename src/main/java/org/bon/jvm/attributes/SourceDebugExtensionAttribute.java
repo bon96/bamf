@@ -25,6 +25,7 @@ public class SourceDebugExtensionAttribute extends Attribute {
 
     public static SourceDebugExtensionAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         SourceDebugExtensionAttribute a = new SourceDebugExtensionAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
 

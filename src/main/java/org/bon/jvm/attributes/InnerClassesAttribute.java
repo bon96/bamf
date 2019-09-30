@@ -23,6 +23,7 @@ public class InnerClassesAttribute extends Attribute {
 
     public static InnerClassesAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
         InnerClassesAttribute a = new InnerClassesAttribute();
+        a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;
 
