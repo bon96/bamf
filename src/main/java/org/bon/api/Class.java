@@ -46,10 +46,6 @@ public class Class {
         return new Type(getName());
     }
 
-    public int getAccessFlags() {
-        return getJVM().getAccessFlags();
-    }
-
     public Class getSuper() {
         ClassFile cf = getGroup().find(getJVM().getSuperName());
         return cf == null ? null : new Class(classGroup, cf);
@@ -69,5 +65,42 @@ public class Class {
 
     public ClassFile getJVM() {
         return classFile;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+
+    public boolean isPublic() {
+        return getJVM().isAccPublic();
+    }
+
+    public boolean isFinal() {
+        return getJVM().isAccFinal();
+    }
+
+    public boolean isAbstract() {
+        return getJVM().isAccAbstract();
+    }
+
+    public boolean isAnnotation() {
+        return getJVM().isAccAnnotation();
+    }
+
+    public boolean isEnum() {
+        return getJVM().isAccEnum();
+    }
+
+    public boolean isModule() {
+        return getJVM().isAccModule();
+    }
+
+    public boolean isInterface() {
+        return getJVM().isAccInterface();
+    }
+
+    public boolean isSynthetic() {
+        return getJVM().isAccSynthetic();
     }
 }

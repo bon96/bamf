@@ -35,6 +35,43 @@ public class Field {
         return constPool.get(descriptorIndex).toString();
     }
 
+    public boolean isAccPublic() {
+        return (accessFlags & 0x0001) != 0;
+    }
+
+    public boolean isAccPrivate() {
+        return (accessFlags & 0x0002) != 0;
+    }
+
+    public boolean isAccProtected() {
+        return (accessFlags & 0x0004) != 0;
+    }
+
+    public boolean isAccStatic() {
+        return (accessFlags & 0x0008) != 0;
+    }
+
+    public boolean isAccFinal() {
+        return (accessFlags & 0x0010) != 0;
+    }
+
+    public boolean isAccVolatile() {
+        return (accessFlags & 0x0040) != 0;
+    }
+
+    public boolean isAccTransient() {
+        return (accessFlags & 0x0080) != 0;
+    }
+
+    public boolean isAccSynthetic() {
+        return (accessFlags & 0x1000) != 0;
+    }
+
+    public boolean isAccEnum() {
+        return (accessFlags & 0x4000) != 0;
+    }
+
+
     public void writeTo(DataOutputStream out) throws IOException {
         out.writeShort(accessFlags);
         out.writeShort(nameIndex);

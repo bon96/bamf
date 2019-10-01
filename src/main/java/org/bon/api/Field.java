@@ -22,16 +22,44 @@ public class Field {
         return aClass;
     }
 
-    public int getAccessFlags() {
-        return getJVM().getAccessFlags();
+    public boolean isPublic() {
+        return getJVM().isAccPublic();
+    }
+
+    public boolean isPrivate() {
+        return getJVM().isAccPrivate();
+    }
+
+    public boolean isProtected() {
+        return getJVM().isAccProtected();
+    }
+
+    public boolean isStatic() {
+        return getJVM().isAccStatic();
+    }
+
+    public boolean isFinal() {
+        return getJVM().isAccFinal();
+    }
+
+    public boolean isVolatile() {
+        return getJVM().isAccVolatile();
+    }
+
+    public boolean isTransient() {
+        return getJVM().isAccTransient();
+    }
+
+    public boolean isSynthetic() {
+        return getJVM().isAccSynthetic();
+    }
+
+    public boolean isEnum() {
+        return getJVM().isAccEnum();
     }
 
     public String getName() {
         return getJVM().getName();
-    }
-
-    public String getDescriptor() {
-        return getJVM().getDescriptor();
     }
 
     public Type getType() {

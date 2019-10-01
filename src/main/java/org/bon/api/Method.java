@@ -1,5 +1,7 @@
 package org.bon.api;
 
+import org.bon.api.util.MethodDescriptor;
+
 /**
  * Tommi
  * Date: 14/09/2019
@@ -28,8 +30,56 @@ public class Method {
         return getJVM().getName();
     }
 
-    public String getDescriptor() {
-        return getJVM().getDescriptor();
+    public MethodDescriptor getDescriptor() {
+        return new MethodDescriptor(getJVM().getDescriptor());
+    }
+
+    public boolean isPublic() {
+        return getJVM().isAccPublic();
+    }
+
+    public boolean isPrivate() {
+        return getJVM().isAccPrivate();
+    }
+
+    public boolean isProtected() {
+        return getJVM().isAccProtected();
+    }
+
+    public boolean isStatic() {
+        return getJVM().isAccStatic();
+    }
+
+    public boolean isFinal() {
+        return getJVM().isAccFinal();
+    }
+
+    public boolean isSynchroniced() {
+        return getJVM().isAccSynchroniced();
+    }
+
+    public boolean isBridge() {
+        return getJVM().isAccBridge();
+    }
+
+    public boolean hasVarArgs() {
+        return getJVM().isAccVarArgs();
+    }
+
+    public boolean isNative() {
+        return getJVM().isAccNative();
+    }
+
+    public boolean isAbstract() {
+        return getJVM().isAccAbstract();
+    }
+
+    public boolean isStrict() {
+        return getJVM().isAccStrict();
+    }
+
+    public boolean isSynthetic() {
+        return getJVM().isAccSynthetic();
     }
 
     public org.bon.jvm.Method getJVM() {

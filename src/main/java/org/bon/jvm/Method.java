@@ -35,6 +35,54 @@ public class Method {
         return constPool.get(descriptorIndex).toString();
     }
 
+    public boolean isAccPublic() {
+        return (accessFlags & 0x0001) != 0;
+    }
+
+    public boolean isAccPrivate() {
+        return (accessFlags & 0x0002) != 0;
+    }
+
+    public boolean isAccProtected() {
+        return (accessFlags & 0x0004) != 0;
+    }
+
+    public boolean isAccStatic() {
+        return (accessFlags & 0x0008) != 0;
+    }
+
+    public boolean isAccFinal() {
+        return (accessFlags & 0x0010) != 0;
+    }
+
+    public boolean isAccSynchroniced() {
+        return (accessFlags & 0x0020) != 0;
+    }
+
+    public boolean isAccBridge() {
+        return (accessFlags & 0x0040) != 0;
+    }
+
+    public boolean isAccVarArgs() {
+        return (accessFlags & 0x0080) != 0;
+    }
+
+    public boolean isAccNative() {
+        return (accessFlags & 0x0100) != 0;
+    }
+
+    public boolean isAccAbstract() {
+        return (accessFlags & 0x0400) != 0;
+    }
+
+    public boolean isAccStrict() {
+        return (accessFlags & 0x0800) != 0;
+    }
+
+    public boolean isAccSynthetic() {
+        return (accessFlags & 0x1000) != 0;
+    }
+
     public void writeTo(DataOutputStream out) throws IOException {
         out.writeShort(accessFlags);
         out.writeShort(nameIndex);
