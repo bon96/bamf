@@ -84,6 +84,10 @@ public class Type {
         return dimensions;
     }
 
+    public Type array(int dimensions) {
+        return new Type(type, dimensions);
+    }
+
     public boolean isArray() {
         return getDimensions() > 0;
     }
