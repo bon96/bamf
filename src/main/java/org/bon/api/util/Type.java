@@ -65,6 +65,7 @@ public class Type {
         }
 
         String fixed = "";
+
         fixed += "[".repeat(this.dimensions);
         fixed += "L";
         fixed += cleaned;
