@@ -4,6 +4,7 @@ import org.bon.api.util.Type;
 import org.bon.jvm.ClassFile;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -102,5 +103,27 @@ public class Class {
 
     public boolean isSynthetic() {
         return getJVM().isAccSynthetic();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null) {
+            return false;
+        }
+
+        if (!(o instanceof Class)) {
+            return false;
+        }
+        Class that = (Class) o;
+        return getName().equals(that.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(classFile);
     }
 }
