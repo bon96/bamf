@@ -61,7 +61,10 @@ public class Type {
 
 
         if (stripped.length() == 1 && "VZCBSIFJD".contains(stripped)) {
-            this.type = type;
+            String fixed = "";
+            fixed += "[".repeat(this.dimensions);
+            fixed += stripped;
+            this.type = fixed;
             this.primitive = true;
             return;
         }
