@@ -1,5 +1,7 @@
 package org.bon.api;
 
+import org.bon.api.util.Type;
+
 /**
  * Tommi
  * Date: 14/09/2019
@@ -30,6 +32,10 @@ public class Field {
 
     public String getDescriptor() {
         return getJVM().getDescriptor();
+    }
+
+    public Type getType() {
+        return new Type(getJVM().getDescriptor());
     }
 
     public org.bon.jvm.Field getJVM() {
