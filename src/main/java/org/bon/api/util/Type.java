@@ -26,6 +26,7 @@ public class Type {
     private String type;
     private int dimensions;
     private boolean primitive;
+    private String stripped;
 
     public Type(Object o, int dimensions) {
         this(o.getClass(), dimensions);
@@ -55,10 +56,11 @@ public class Type {
         }
 
 
-        String cleaned = type.replace("[", "").replace("L", "")
+        stripped = type.replace("[", "").replace("L", "")
                 .replace(";", "").replace(".", "/");
 
-        if (cleaned.length() == 1) {
+
+        if (stripped.length() == 1 && "VZCBSIFJD".contains(stripped)) {
             this.type = type;
             this.primitive = true;
             return;
@@ -68,15 +70,14 @@ public class Type {
 
         fixed += "[".repeat(this.dimensions);
         fixed += "L";
-        fixed += cleaned;
+        fixed += stripped;
         fixed += ";";
 
         this.type = fixed;
     }
 
-    @Override
-    public String toString() {
-        return type;
+    public String getStripped() {
+        return stripped;
     }
 
     public int getDimensions() {
@@ -92,9 +93,28 @@ public class Type {
     }
 
     @Override
+    public String toString() {
+        return type;
+    }
+
+    @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null) {
+            return false;
+        }
+
+        if (o instanceof String) {
+            return toString().equals(new Type((String) o).toString());
+        }
+
+        if (getClass() != o.getClass()) {
+            return false;
+        }
+
         Type type1 = (Type) o;
         return Objects.equals(toString(), type1.toString());
     }

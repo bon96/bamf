@@ -29,6 +29,11 @@ public class ClassConstant extends Constant {
         out.writeShort(nameIndex);
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
+
     public static ClassConstant from(DataInputStream in, ConstPool constPool) throws IOException {
         ClassConstant c = new ClassConstant();
         c.constPool = constPool;

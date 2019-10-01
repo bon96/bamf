@@ -1,5 +1,6 @@
 package org.bon.api;
 
+import org.bon.api.util.Type;
 import org.bon.jvm.ClassFile;
 
 import java.util.List;
@@ -39,6 +40,10 @@ public class Class {
 
     public String getName() {
         return getJVM().getName();
+    }
+
+    public Type getType() {
+        return new Type(getName());
     }
 
     public int getAccessFlags() {

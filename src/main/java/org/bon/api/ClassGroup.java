@@ -45,7 +45,9 @@ public class ClassGroup {
         while (enr.hasMoreElements()) {
             JarEntry entry = enr.nextElement();
             if (entry.getName().endsWith(".class")) {
-                classGroup.getClassFiles().add(ClassFile.from(new DataInputStream(jarFile.getInputStream(entry))));
+                ClassFile cf = ClassFile.from(new DataInputStream(jarFile.getInputStream(entry)));
+                classGroup.getClassFiles().add(cf);
+                classGroup.getClasses().add(new Class(classGroup, cf));
             }
         }
         return classGroup;

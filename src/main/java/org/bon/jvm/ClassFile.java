@@ -3,7 +3,6 @@ package org.bon.jvm;
 
 import org.bon.jvm.attributes.Attribute;
 import org.bon.jvm.attributes.Attributes;
-import org.bon.jvm.attributes.SourceFileAttribute;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.ByteArrayOutputStream;
@@ -70,7 +69,7 @@ public class ClassFile {
     }
 
     public String getName() {
-        return getAttributes().ofType(SourceFileAttribute.class).getSourceFileName();
+        return constPool.get(thisClassIndex).toString();
     }
 
     public int getAccessFlags() {
