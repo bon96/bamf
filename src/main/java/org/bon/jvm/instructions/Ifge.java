@@ -26,8 +26,13 @@ public class Ifge extends Instruction implements BranchInstruction {
     }
 
     @Override
-    public int getTargetIndex() {
+    public int getTargetOffset() {
         return offset;
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + offset;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {

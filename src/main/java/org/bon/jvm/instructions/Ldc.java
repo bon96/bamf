@@ -5,6 +5,7 @@ import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Tommi
@@ -14,9 +15,15 @@ import java.io.IOException;
 
 public class Ldc extends Instruction implements ConstInstruction {
 
+    private ConstPool constPool;
     private int index;
 
     public Ldc(int index) {
+        this.index = index;
+    }
+
+    public Ldc(ConstPool constPool, int index) {
+        this.constPool = constPool;
         this.index = index;
     }
 
@@ -27,10 +34,23 @@ public class Ldc extends Instruction implements ConstInstruction {
 
     @Override
     public Object getValue() {
-        throw new UnsupportedOperationException("not yet implemented");
+        return constPool.get(index);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ldc ldc = (Ldc) o;
+        return index == ldc.index;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index);
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        return new Ldc(in.readUnsignedByte());
+        return new Ldc(constPool, in.readUnsignedByte());
     }
 }

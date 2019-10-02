@@ -5,6 +5,7 @@ import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Tommi
@@ -28,6 +29,19 @@ public class Fconst extends Instruction implements ConstInstruction<Float> {
     @Override
     public Float getValue() {
         return f;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fconst fconst = (Fconst) o;
+        return Float.compare(fconst.f, f) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(f);
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, float f) throws IOException {

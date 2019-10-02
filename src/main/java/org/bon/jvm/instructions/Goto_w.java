@@ -13,15 +13,24 @@ import java.io.IOException;
 
 public class Goto_w extends Instruction {
 
-    private int index;
+    private int offset;
 
-    public Goto_w(int index) {
-        this.index = index;
+    public Goto_w(int offset) {
+        this.offset = offset;
+    }
+
+    public int getOffset() {
+        return offset;
     }
 
     @Override
     public String getName() {
         return "Goto_w";
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + offset;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {

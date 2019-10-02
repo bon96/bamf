@@ -5,6 +5,7 @@ import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Tommi
@@ -28,6 +29,24 @@ public class Bipush extends Instruction implements ConstInstruction<Byte> {
     @Override
     public Byte getValue() {
         return b;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Bipush bipush = (Bipush) o;
+        return b == bipush.b;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(b);
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + b;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {

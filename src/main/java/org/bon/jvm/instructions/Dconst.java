@@ -5,6 +5,7 @@ import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Tommi
@@ -30,8 +31,20 @@ public class Dconst extends Instruction implements ConstInstruction<Double> {
         return d;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Dconst dconst = (Dconst) o;
+        return Double.compare(dconst.d, d) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(d);
+    }
+
     public static Instruction from(DataInputStream in, ConstPool constPool, double d) throws IOException {
         return new Dconst(d);
     }
-
 }

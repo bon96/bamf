@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions.types;
 
+import org.bon.api.util.MethodDescriptor;
+
 /**
  * Tommi
  * Date: 29/09/2019
@@ -7,5 +9,12 @@ package org.bon.jvm.instructions.types;
  */
 
 public interface InvokeInstruction {
+
     int getMethodRefIndex();
+
+    String getTargetClass();
+
+    String getTarget();
+
+    MethodDescriptor getTargetDescriptor();
 }

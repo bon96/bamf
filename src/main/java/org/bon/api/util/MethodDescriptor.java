@@ -60,6 +60,17 @@ public class MethodDescriptor {
     }
 
     @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder("(");
+        for (Type type : getArguments()) {
+            s.append(type.toString());
+        }
+
+        s.append(")").append(getReturn().toString());
+        return s.toString();
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(arguments, returnValue);
     }

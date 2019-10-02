@@ -5,6 +5,7 @@ import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Tommi
@@ -28,6 +29,19 @@ public class Sipush extends Instruction implements ConstInstruction<Short> {
     @Override
     public Short getValue() {
         return (short) value;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Sipush sipush = (Sipush) o;
+        return getValue() == sipush.getValue();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getValue());
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {

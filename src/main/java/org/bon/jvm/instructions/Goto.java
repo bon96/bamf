@@ -19,9 +19,18 @@ public class Goto extends Instruction {
         this.offset = offset;
     }
 
+    public int getOffset() {
+        return offset;
+    }
+
     @Override
     public String getName() {
         return "Goto";
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + offset;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {

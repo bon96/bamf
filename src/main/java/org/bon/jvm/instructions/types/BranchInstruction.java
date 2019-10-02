@@ -7,5 +7,5 @@ package org.bon.jvm.instructions.types;
  */
 
 public interface BranchInstruction {
-    int getTargetIndex();
+    int getTargetOffset();
 }
