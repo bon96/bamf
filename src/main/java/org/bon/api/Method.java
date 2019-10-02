@@ -1,6 +1,11 @@
 package org.bon.api;
 
 import org.bon.api.util.MethodDescriptor;
+import org.bon.jvm.attributes.CodeAttribute;
+import org.bon.jvm.instructions.Instruction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Tommi
@@ -20,6 +25,14 @@ public class Method {
 
     public Class getOwner() {
         return aClass;
+    }
+
+    public List<Instruction> getInstructions() {
+        if (!getJVM().getAttributes().hasType(CodeAttribute.class)) {
+            return new ArrayList<>();
+        } else {
+            return getJVM().getAttributes().ofType(CodeAttribute.class).getInstructions();
+        }
     }
 
     public int getAccessFlags() {
