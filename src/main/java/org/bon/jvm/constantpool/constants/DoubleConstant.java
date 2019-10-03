@@ -9,11 +9,12 @@ import java.io.IOException;
  */
 
 
-public class DoubleConstant extends Constant {
+public class DoubleConstant extends Constant implements ValueConstant<Double> {
 
     private double value;
 
-    public double getValue() {
+    @Override
+    public Double getValue() {
         return value;
     }
 

@@ -8,11 +8,12 @@ import java.io.IOException;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.4
  */
 
-public class IntegerConstant extends Constant {
+public class IntegerConstant extends Constant implements ValueConstant<Integer> {
 
     private int value;
 
-    public int getValue() {
+    @Override
+    public Integer getValue() {
         return value;
     }
 

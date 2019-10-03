@@ -8,11 +8,12 @@ import java.io.IOException;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.4
  */
 
-public class FloatConstant extends Constant {
+public class FloatConstant extends Constant implements ValueConstant<Float> {
 
     private float value;
 
-    public float getValue() {
+    @Override
+    public Float getValue() {
         return value;
     }
 

@@ -1,6 +1,8 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.constantpool.constants.Constant;
+import org.bon.jvm.constantpool.constants.ValueConstant;
 import org.bon.jvm.instructions.types.ConstInstruction;
 
 import java.io.DataInputStream;
@@ -44,7 +46,17 @@ public class Ldc extends Instruction implements ConstInstruction {
         return Objects.hash(object);
     }
 
+    @Override
+    public String toString() {
+        return getName() + " " + getValue();
+    }
+
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        return new Ldc(constPool.get(in.readUnsignedByte()));
+        Constant constant = constPool.get(in.readUnsignedByte());
+        if (constant instanceof ValueConstant) {
+            return new Ldc(((ValueConstant) constant).getValue());
+        } else {
+            return new Ldc(constant);
+        }
     }
 }

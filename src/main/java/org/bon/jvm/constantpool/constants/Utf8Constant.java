@@ -9,7 +9,7 @@ import java.io.IOException;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.7
  */
 
-public class Utf8Constant extends Constant {
+public class Utf8Constant extends Constant implements ValueConstant<String> {
 
     private String string;
 
@@ -22,6 +22,11 @@ public class Utf8Constant extends Constant {
     public void writeTo(DataOutputStream out) throws IOException {
         out.writeByte(Constant.UTF8);
         out.writeUTF(string);
+    }
+
+    @Override
+    public String getValue() {
+        return string;
     }
 
     public static Utf8Constant from(DataInputStream in) throws IOException {

@@ -10,7 +10,7 @@ import java.io.IOException;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.3
  */
 
-public class StringConstant extends Constant {
+public class StringConstant extends Constant implements ValueConstant<String> {
 
     private ConstPool constPool;
     private int stringIndex;
@@ -28,6 +28,11 @@ public class StringConstant extends Constant {
     public void writeTo(DataOutputStream out) throws IOException {
         out.writeByte(Constant.STRING);
         out.writeShort(stringIndex);
+    }
+
+    @Override
+    public String getValue() {
+        return toString();
     }
 
     public static StringConstant from(DataInputStream in, ConstPool constPool) throws IOException {

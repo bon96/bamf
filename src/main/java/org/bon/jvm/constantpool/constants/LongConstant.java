@@ -8,11 +8,12 @@ import java.io.IOException;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.5
  */
 
-public class LongConstant extends Constant {
+public class LongConstant extends Constant implements ValueConstant<Long> {
 
     private long value;
 
-    public long getValue() {
+    @Override
+    public Long getValue() {
         return value;
     }
 
