@@ -23,6 +23,7 @@ public class Type {
     public static final Type CHARSQEUENCE = new Type("Ljava/lang/CharSequence;");
     public static final Type THROWABLE = new Type("Ljava/lang/Throwable;");
     public static final Type EXCEPTION = new Type("Ljava/lang/Exception;");
+    public static final Type BIGINTEGER = new Type("Ljava/math/BigInteger;");
 
     private String type;
     private int dimensions;
