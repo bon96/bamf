@@ -5,6 +5,7 @@ import org.bon.jvm.instructions.types.LoadInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Tommi
@@ -30,6 +31,23 @@ public class Aload extends Instruction implements LoadInstruction {
         return index;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Aload aload = (Aload) o;
+        return getIndex() == aload.getIndex();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIndex());
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + index;
+    }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
         if (wide) {

@@ -5,6 +5,7 @@ import org.bon.jvm.instructions.types.StoreInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Tommi
@@ -28,6 +29,24 @@ public class Fstore extends Instruction implements StoreInstruction {
     @Override
     public int getIndex() {
         return index;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fstore fstore = (Fstore) o;
+        return getIndex() == fstore.getIndex();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIndex());
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + index;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool, boolean wide) throws IOException {
