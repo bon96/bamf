@@ -15,16 +15,10 @@ import java.util.Objects;
 
 public class Ldc2_w extends Instruction implements ConstInstruction {
 
-    private ConstPool constPool;
-    private int index;
+    private Object object;
 
-    public Ldc2_w(int index) {
-        this.index = index;
-    }
-
-    public Ldc2_w(ConstPool constPool, int index) {
-        this.constPool = constPool;
-        this.index = index;
+    public Ldc2_w(Object object) {
+        this.object = object;
     }
 
     @Override
@@ -34,7 +28,7 @@ public class Ldc2_w extends Instruction implements ConstInstruction {
 
     @Override
     public Object getValue() {
-        return constPool.get(index);
+        return object;
     }
 
     @Override
@@ -42,15 +36,15 @@ public class Ldc2_w extends Instruction implements ConstInstruction {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ldc2_w ldc2_w = (Ldc2_w) o;
-        return index == ldc2_w.index;
+        return object.equals(ldc2_w.object);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(index);
+        return Objects.hash(object);
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        return new Ldc2_w(constPool, in.readUnsignedShort());
+        return new Ldc2_w(constPool.get(in.readUnsignedShort()));
     }
 }
