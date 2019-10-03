@@ -36,7 +36,7 @@ public class Bipush extends Instruction implements ConstInstruction<Byte> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bipush bipush = (Bipush) o;
-        return b == bipush.b;
+        return getValue().equals(bipush.getValue());
     }
 
     @Override

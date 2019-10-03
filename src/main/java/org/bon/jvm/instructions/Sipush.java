@@ -36,12 +36,17 @@ public class Sipush extends Instruction implements ConstInstruction<Short> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Sipush sipush = (Sipush) o;
-        return getValue() == sipush.getValue();
+        return getValue().equals(sipush.getValue());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getValue());
+    }
+
+    @Override
+    public String toString() {
+        return getName() + " " + getValue();
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
