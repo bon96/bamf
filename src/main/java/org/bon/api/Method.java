@@ -95,6 +95,11 @@ public class Method {
         return getJVM().isAccSynthetic();
     }
 
+    @Override
+    public String toString() {
+        return getName();
+    }
+
     public org.bon.jvm.Method getJVM() {
         return method;
     }
