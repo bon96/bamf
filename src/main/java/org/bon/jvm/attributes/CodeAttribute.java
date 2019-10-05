@@ -1,5 +1,6 @@
 package org.bon.jvm.attributes;
 
+import org.bon.jvm.Method;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.instructions.Instruction;
 import org.bon.jvm.instructions.Instructions;
@@ -48,7 +49,7 @@ public class CodeAttribute extends Attribute {
 
     }
 
-    public static CodeAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static CodeAttribute from(DataInputStream in, ConstPool constPool, Method method, int nameIndex, int length) throws IOException {
         CodeAttribute a = new CodeAttribute();
         a.constPool = constPool;
         a.nameIndex = nameIndex;
@@ -57,7 +58,7 @@ public class CodeAttribute extends Attribute {
         a.maxStack = in.readUnsignedShort();
         a.maxLocals = in.readUnsignedShort();
 
-        a.instructions = Instructions.from(in, constPool);
+        a.instructions = Instructions.from(in, constPool, method);
 
         int exceptionsCount = in.readUnsignedShort();
         for (int i = 0; i < exceptionsCount; i++) {

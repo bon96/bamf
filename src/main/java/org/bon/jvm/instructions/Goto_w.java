@@ -13,14 +13,23 @@ import java.io.IOException;
 
 public class Goto_w extends Instruction {
 
-    private int offset;
+    private int jumpOffset;
+    private int jumpTarget;
 
-    public Goto_w(int offset) {
-        this.offset = offset;
+    public Goto_w(int jumpOffset) {
+        this.jumpOffset = jumpOffset;
     }
 
-    public int getOffset() {
-        return offset;
+    int getJumpOffset() {
+        return jumpOffset;
+    }
+
+    public int getJumpTarget() {
+        return jumpTarget;
+    }
+
+    void setJumpTarget(int targetOffset) {
+        this.jumpTarget = targetOffset;
     }
 
     @Override
@@ -30,7 +39,7 @@ public class Goto_w extends Instruction {
 
     @Override
     public String toString() {
-        return getName() + " " + offset;
+        return getName() + " " + jumpTarget;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {

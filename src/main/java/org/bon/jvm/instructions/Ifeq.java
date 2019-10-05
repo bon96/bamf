@@ -15,6 +15,7 @@ import java.io.IOException;
 public class Ifeq extends Instruction implements BranchInstruction {
 
     private int offset;
+    private int target;
 
     public Ifeq(int offset) {
         this.offset = offset;
@@ -26,16 +27,26 @@ public class Ifeq extends Instruction implements BranchInstruction {
     }
 
     @Override
-    public int getTargetOffset() {
+    public int getJumpOffset() {
         return offset;
     }
 
     @Override
+    public int getJumpTarget() {
+        return target;
+    }
+
+    @Override
+    public void setJumpTarget(int target) {
+        this.target = target;
+    }
+
+    @Override
     public String toString() {
-        return getName() + " " + offset;
+        return getName() + " " + target;
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        return new Ifeq(in.readUnsignedShort());
+        return new Ifeq(in.readShort());
     }
 }

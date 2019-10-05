@@ -1,6 +1,7 @@
 package org.bon.jvm.attributes;
 
 import org.bon.Cast;
+import org.bon.jvm.Method;
 import org.bon.jvm.attributes.stackmap.StackMapTableAttribute;
 import org.bon.jvm.constantpool.ConstPool;
 
@@ -33,6 +34,10 @@ public abstract class Attribute implements Cast {
     public abstract void writeTo(DataOutputStream out) throws IOException;
 
     public static Attribute from(DataInputStream in, ConstPool constPool) throws IOException {
+        return from(in, constPool, null);
+    }
+
+    public static Attribute from(DataInputStream in, ConstPool constPool, Method method) throws IOException {
         int nameIndex = in.readUnsignedShort();
         int length = in.readInt();
         String attrName = constPool.get(nameIndex).toString();
@@ -42,7 +47,7 @@ public abstract class Attribute implements Cast {
                 return ConstantValueAttribute.from(in, constPool, nameIndex, length);
 
             case "Code": //45.3 1.02
-                return CodeAttribute.from(in, constPool, nameIndex, length);
+                return CodeAttribute.from(in, constPool, method, nameIndex, length);
 
             case "Exceptions": //45.3 1.0.2
                 return ExceptionsAttribute.from(in, constPool, nameIndex, length);

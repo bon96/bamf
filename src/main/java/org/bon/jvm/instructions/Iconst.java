@@ -44,6 +44,11 @@ public class Iconst extends Instruction implements ConstInstruction<Integer> {
         return Objects.hash(i);
     }
 
+    @Override
+    public String toString() {
+        return getName() + " " + i;
+    }
+
     public static Instruction from(DataInputStream in, ConstPool constPool, int i) throws IOException {
         return new Iconst(i);
     }

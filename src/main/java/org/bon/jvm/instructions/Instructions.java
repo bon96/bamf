@@ -1,6 +1,8 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.Method;
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.BranchInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -218,7 +220,7 @@ public class Instructions {
     public static final int WIDE = 0xc4;
 
 
-    public static List<Instruction> from(DataInputStream in, ConstPool constPool) throws IOException {
+    public static List<Instruction> from(DataInputStream in, ConstPool constPool, Method method) throws IOException {
         int size = in.readInt();
         int start = in.available();
         int end = start - size;
@@ -841,7 +843,42 @@ public class Instructions {
                 default:
                     throw new UnsupportedOperationException("Unsupported opcode " + opcode);
             }
+            instructions.get(instructions.size() - 1).setOffset(opcodeOffset);
+            instructions.get(instructions.size() - 1).setOwner(method);
         }
+
+        main:
+        for (Instruction instruction : instructions) {
+            if (instruction instanceof Goto) {
+                Goto go = instruction.cast();
+                for (int i = 0; i < instructions.size(); i++) {
+                    if (instructions.get(i).getOffset() == go.getOffset() + go.getJumpOffset()) {
+                        go.setJumpTarget(i);
+                        continue main;
+                    }
+                }
+                throw new IOException("Invalid Goto jump offset " + go.getJumpOffset());
+            } else if (instruction instanceof Goto_w) {
+                Goto_w go = instruction.cast();
+                for (int i = 0; i < instructions.size(); i++) {
+                    if (instructions.get(i).getOffset() == go.getOffset() + go.getJumpOffset()) {
+                        go.setJumpTarget(i);
+                        continue main;
+                    }
+                }
+                throw new IOException("Invalid Goto_w jump offset " + go.getJumpOffset());
+            } else if (instruction instanceof BranchInstruction) {
+                BranchInstruction branchIns = instruction.cast();
+                for (int i = 0; i < instructions.size(); i++) {
+                    if (instructions.get(i).getOffset() == branchIns.getOffset() + branchIns.getJumpOffset()) {
+                        branchIns.setJumpTarget(i);
+                        continue main;
+                    }
+                }
+                throw new IOException("Invalid BranchInstruction jump offset " + branchIns.getJumpOffset());
+            }
+        }
+
         return instructions;
     }
 }

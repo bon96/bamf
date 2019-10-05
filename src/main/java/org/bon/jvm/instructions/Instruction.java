@@ -1,7 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.Cast;
-import org.bon.api.Method;
+import org.bon.jvm.Method;
 
 /**
  * Tommi
@@ -12,12 +12,21 @@ import org.bon.api.Method;
 public abstract class Instruction implements Cast {
 
     private Method owner;
+    private int offset;
+
+    public int getOffset() {
+        return offset;
+    }
+
+    public void setOffset(int offset) {
+        this.offset = offset;
+    }
 
     public Method getOwner() {
         return owner;
     }
 
-    public void setOwner(Method owner) {
+    void setOwner(Method owner) {
         this.owner = owner;
     }
 

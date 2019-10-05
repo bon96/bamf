@@ -48,6 +48,11 @@ public class Getstatic extends Instruction {
         return constPool.get(index).cast();
     }
 
+    @Override
+    public String toString() {
+        return getName() + " " + getTargetType() + " " + getTargetClass() + "." + getTarget();
+    }
+
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
         return new Getstatic(constPool, in.readUnsignedShort());
     }
