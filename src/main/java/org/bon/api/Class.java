@@ -56,6 +56,25 @@ public class Class {
         return getJVM().getMethods().stream().map(m -> new Method(this, m)).collect(Collectors.toList());
     }
 
+    public Method getStaticConstructor() {
+        for(Method method: getMethods()) {
+            if(method.getName().equals("<clinit>")) {
+                return method;
+            }
+        }
+        return null;
+    }
+
+
+    public Method getConstructor() {
+        for(Method method: getMethods()) {
+            if(method.getName().equals("<init>")) {
+                return method;
+            }
+        }
+        return null;
+    }
+
     public List<Field> getFields() {
         return getJVM().getFields().stream().map(f -> new Field(this, f)).collect(Collectors.toList());
     }
