@@ -81,7 +81,7 @@ public class Class {
         }
         return null;
     }
-    
+
     public Method getConstructor() {
         for(Method method: getMethods()) {
             if(method.getName().equals("<init>")) {

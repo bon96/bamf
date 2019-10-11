@@ -20,7 +20,7 @@ public class Type {
     public static final Type DOUBLE = new Type("D");
     public static final Type OBJECT = new Type("Ljava/lang/Object;");
     public static final Type STRING = new Type("Ljava/lang/String;");
-    public static final Type CHARSQEUENCE = new Type("Ljava/lang/CharSequence;");
+    public static final Type CHARSEQUENCE = new Type("Ljava/lang/CharSequence;");
     public static final Type THROWABLE = new Type("Ljava/lang/Throwable;");
     public static final Type EXCEPTION = new Type("Ljava/lang/Exception;");
     public static final Type BIGINTEGER = new Type("Ljava/math/BigInteger;");
