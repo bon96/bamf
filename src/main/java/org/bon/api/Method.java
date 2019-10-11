@@ -2,6 +2,9 @@ package org.bon.api;
 
 import org.bon.api.util.MethodDescriptor;
 import org.bon.jvm.attributes.CodeAttribute;
+import org.bon.jvm.attributes.annotations.Annotation;
+import org.bon.jvm.attributes.annotations.RuntimeInvisibleAnnotationsAttribute;
+import org.bon.jvm.attributes.annotations.RuntimeVisibleAnnotationsAttribute;
 import org.bon.jvm.instructions.Instruction;
 
 import java.util.ArrayList;
@@ -33,6 +36,19 @@ public class Method {
         } else {
             return getJVM().getAttributes().ofType(CodeAttribute.class).getInstructions();
         }
+    }
+
+    public List<Annotation> getAnnotations() {
+        List<Annotation> annotations = new ArrayList<>();
+        if (getJVM().getAttributes().hasType(RuntimeVisibleAnnotationsAttribute.class)) {
+            annotations.addAll(getJVM().getAttributes().ofType(RuntimeVisibleAnnotationsAttribute.class).getAnnotations());
+        }
+
+        if (getJVM().getAttributes().hasType(RuntimeInvisibleAnnotationsAttribute.class)) {
+            annotations.addAll(getJVM().getAttributes().ofType(RuntimeVisibleAnnotationsAttribute.class).getAnnotations());
+        }
+
+        return annotations;
     }
 
     public int getAccessFlags() {

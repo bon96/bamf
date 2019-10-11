@@ -2,6 +2,9 @@ package org.bon.jvm.attributes;
 
 import org.bon.Cast;
 import org.bon.jvm.Method;
+import org.bon.jvm.attributes.annotations.AnnotationDefaultAttribute;
+import org.bon.jvm.attributes.annotations.RuntimeInvisibleAnnotationsAttribute;
+import org.bon.jvm.attributes.annotations.RuntimeVisibleAnnotationsAttribute;
 import org.bon.jvm.attributes.stackmap.StackMapTableAttribute;
 import org.bon.jvm.constantpool.ConstPool;
 
@@ -91,12 +94,18 @@ public abstract class Attribute implements Cast {
             case "MethodParameters": //52 8
                 return MethodParametersAttribute.from(in, constPool, nameIndex, length);
 
+            case "AnnotationDefault": //49.0 5.0
+                return AnnotationDefaultAttribute.from(in, constPool, nameIndex, length);
+
+            case "RuntimeVisibleAnnotations": //49.0 5.0
+                return RuntimeVisibleAnnotationsAttribute.from(in, constPool, nameIndex, length);
+
+            case "RuntimeInvisibleAnnotations"://49 5.0
+                return RuntimeInvisibleAnnotationsAttribute.from(in, constPool, nameIndex, length);
+
                 /* TODO
-                    RuntimeVisibleAnnotations	            49.0	5.0	§4.7.16
-                    RuntimeInvisibleAnnotations	            49.0	5.0	§4.7.17
                     RuntimeVisibleParameterAnnotations	    49.0	5.0	§4.7.18
                     RuntimeInvisibleParameterAnnotations	49.0	5.0	§4.7.19
-                    AnnotationDefault	                    49.0	5.0	§4.7.22
                     RuntimeVisibleTypeAnnotations	        52.0	8	§4.7.20
                     RuntimeInvisibleTypeAnnotations	        52.0	8	§4.7.21
                     Module                                  53.0	9	§4.7.25

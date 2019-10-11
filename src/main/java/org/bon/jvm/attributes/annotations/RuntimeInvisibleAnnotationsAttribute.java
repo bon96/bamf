@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.7.16
+ * Tommi
+ * Date: 11/10/2019
+ * Time: 21.20
  */
 
-public class RuntimeVisibleAnnotationsAttribute extends Attribute {
+public class RuntimeInvisibleAnnotationsAttribute extends Attribute {
 
     private List<Annotation> annotations;
 
@@ -26,8 +28,8 @@ public class RuntimeVisibleAnnotationsAttribute extends Attribute {
         return annotations;
     }
 
-    public static RuntimeVisibleAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        RuntimeVisibleAnnotationsAttribute a = new RuntimeVisibleAnnotationsAttribute();
+    public static RuntimeInvisibleAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+        RuntimeInvisibleAnnotationsAttribute a = new RuntimeInvisibleAnnotationsAttribute();
         a.constPool = constPool;
         a.nameIndex = nameIndex;
         a.length = length;

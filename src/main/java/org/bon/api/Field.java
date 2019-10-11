@@ -1,6 +1,12 @@
 package org.bon.api;
 
 import org.bon.api.util.Type;
+import org.bon.jvm.attributes.annotations.Annotation;
+import org.bon.jvm.attributes.annotations.RuntimeInvisibleAnnotationsAttribute;
+import org.bon.jvm.attributes.annotations.RuntimeVisibleAnnotationsAttribute;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Tommi
@@ -16,6 +22,19 @@ public class Field {
     public Field(Class aClass, org.bon.jvm.Field field) {
         this.aClass = aClass;
         this.field = field;
+    }
+
+    public List<Annotation> getAnnotations() {
+        List<Annotation> annotations = new ArrayList<>();
+        if (getJVM().getAttributes().hasType(RuntimeVisibleAnnotationsAttribute.class)) {
+            annotations.addAll(getJVM().getAttributes().ofType(RuntimeVisibleAnnotationsAttribute.class).getAnnotations());
+        }
+
+        if (getJVM().getAttributes().hasType(RuntimeInvisibleAnnotationsAttribute.class)) {
+            annotations.addAll(getJVM().getAttributes().ofType(RuntimeVisibleAnnotationsAttribute.class).getAnnotations());
+        }
+
+        return annotations;
     }
 
     public Class getOwner() {
