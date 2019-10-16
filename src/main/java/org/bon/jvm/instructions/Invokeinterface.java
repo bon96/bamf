@@ -58,7 +58,7 @@ public class Invokeinterface extends Instruction implements InvokeInstruction {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Invokespecial invoke = (Invokespecial) o;
+        Invokeinterface invoke = (Invokeinterface) o;
         return Objects.equals(getTargetClass(), invoke.getTargetClass()) &&
                 Objects.equals(getTarget(), invoke.getTarget())
                 && Objects.equals(getTargetDescriptor(), invoke.getTargetDescriptor());
