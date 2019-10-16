@@ -74,8 +74,8 @@ public class Class {
     }
 
     public Method getStaticConstructor() {
-        for(Method method: getMethods()) {
-            if(method.getName().equals("<clinit>")) {
+        for (Method method : getMethods()) {
+            if (method.getName().equals("<clinit>")) {
                 return method;
             }
         }
@@ -83,8 +83,8 @@ public class Class {
     }
 
     public Method getConstructor() {
-        for(Method method: getMethods()) {
-            if(method.getName().equals("<init>")) {
+        for (Method method : getMethods()) {
+            if (method.getName().equals("<init>")) {
                 return method;
             }
         }

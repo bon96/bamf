@@ -1,5 +1,6 @@
 package org.bon.jvm.instructions;
 
+import org.bon.api.Method;
 import org.bon.api.util.MethodDescriptor;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.MethodRefConstant;
@@ -17,16 +18,20 @@ import java.util.Objects;
 
 public class Invokestatic extends Instruction implements InvokeInstruction {
 
-    private ConstPool constPool;
-    private int index;
+    private String target;
+    private String targetClass;
+    private MethodDescriptor targetDescriptor;
 
-    public Invokestatic(int index) {
-        this.index = index;
+    public Invokestatic(Method method) {
+        target = method.getName();
+        targetClass = method.getOwner().getName();
+        targetDescriptor = method.getDescriptor();
     }
 
-    public Invokestatic(ConstPool constPool, int index) {
-        this.constPool = constPool;
-        this.index = index;
+    public Invokestatic(MethodRefConstant methodRef) {
+        target = methodRef.getNameAndType().getName();
+        targetClass = methodRef.getConstClass().getName();
+        targetDescriptor = new MethodDescriptor(methodRef.getNameAndType().getDescriptor());
     }
 
     @Override
@@ -35,34 +40,25 @@ public class Invokestatic extends Instruction implements InvokeInstruction {
     }
 
     @Override
-    public int getMethodRefIndex() {
-        return index;
-    }
-
-    @Override
     public String getTargetClass() {
-        return getMethodRef().getConstClass().getName();
+        return targetClass;
     }
 
     @Override
     public String getTarget() {
-        return getMethodRef().getNameAndType().getName();
+        return target;
     }
 
     @Override
     public MethodDescriptor getTargetDescriptor() {
-        return new MethodDescriptor(getMethodRef().getNameAndType().getDescriptor());
-    }
-
-    private MethodRefConstant getMethodRef() {
-        return constPool.get(getMethodRefIndex()).cast();
+        return targetDescriptor;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Invokestatic invoke = (Invokestatic) o;
+        Invokespecial invoke = (Invokespecial) o;
         return Objects.equals(getTargetClass(), invoke.getTargetClass()) &&
                 Objects.equals(getTarget(), invoke.getTarget())
                 && Objects.equals(getTargetDescriptor(), invoke.getTargetDescriptor());
@@ -79,6 +75,7 @@ public class Invokestatic extends Instruction implements InvokeInstruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        return new Invokestatic(constPool, in.readUnsignedShort());
+        MethodRefConstant methodRef = constPool.get(in.readUnsignedShort()).cast();
+        return new Invokestatic(methodRef);
     }
 }

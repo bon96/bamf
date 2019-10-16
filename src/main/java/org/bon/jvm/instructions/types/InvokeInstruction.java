@@ -10,8 +10,6 @@ import org.bon.api.util.MethodDescriptor;
 
 public interface InvokeInstruction {
 
-    int getMethodRefIndex();
-
     String getTargetClass();
 
     String getTarget();

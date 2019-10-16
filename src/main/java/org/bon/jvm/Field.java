@@ -95,7 +95,6 @@ public class Field {
         for (int i = 0; i < attributesCount; i++) {
             field.attributes.add(Attribute.from(in, constPool));
         }
-
         return field;
     }
 }
