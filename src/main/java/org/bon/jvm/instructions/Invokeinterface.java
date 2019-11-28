@@ -3,7 +3,7 @@ package org.bon.jvm.instructions;
 import org.bon.api.Method;
 import org.bon.api.util.MethodDescriptor;
 import org.bon.jvm.constantpool.ConstPool;
-import org.bon.jvm.constantpool.constants.InterfaceMethodRefConstant;
+import org.bon.jvm.constantpool.constants.MethodConstant;
 import org.bon.jvm.instructions.types.InvokeInstruction;
 
 import java.io.DataInputStream;
@@ -28,10 +28,10 @@ public class Invokeinterface extends Instruction implements InvokeInstruction {
         targetDescriptor = method.getDescriptor();
     }
 
-    public Invokeinterface(InterfaceMethodRefConstant methodRef) {
-        target = methodRef.getNameAndType().getName();
-        targetClass = methodRef.getConstClass().getName();
-        targetDescriptor = new MethodDescriptor(methodRef.getNameAndType().getDescriptor());
+    public Invokeinterface(MethodConstant constant) {
+        target = constant.getNameAndType().getName();
+        targetClass = constant.getConstClass().getName();
+        targetDescriptor = new MethodDescriptor(constant.getNameAndType().getDescriptor());
     }
 
     @Override
@@ -77,7 +77,7 @@ public class Invokeinterface extends Instruction implements InvokeInstruction {
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
         int index = in.readUnsignedShort();
         in.skipBytes(1); //invokeinterface always has one extra zero byte
-        InterfaceMethodRefConstant methodRef = constPool.get(index).cast();
-        return new Invokeinterface(methodRef);
+        MethodConstant constant = constPool.get(index).cast();
+        return new Invokeinterface(constant);
     }
 }

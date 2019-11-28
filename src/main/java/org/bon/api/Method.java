@@ -111,12 +111,30 @@ public class Method {
         return getJVM().isAccSynthetic();
     }
 
-    @Override
-    public String toString() {
-        return getName();
-    }
-
     public org.bon.jvm.Method getJVM() {
         return method;
+    }
+
+    @Override
+    public String toString() {
+        return getOwner().getName() + "." + getName() + " " + getDescriptor();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null) {
+            return false;
+        }
+
+        if (!(o instanceof Method)) {
+            return false;
+        }
+        Method that = (Method) o;
+        return getOwner().getName().equals(that.getOwner().getName()) && getName().equals(that.getName())
+                && getDescriptor().equals(that.getDescriptor());
     }
 }

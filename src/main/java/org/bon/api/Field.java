@@ -88,4 +88,28 @@ public class Field {
     public org.bon.jvm.Field getJVM() {
         return field;
     }
+
+    @Override
+    public String toString() {
+        return getOwner().getName() + "." + getName() + " " + getType();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null) {
+            return false;
+        }
+
+        if (!(o instanceof Field)) {
+            return false;
+        }
+        Field that = (Field) o;
+        return getOwner().getName().equals(that.getOwner().getName()) && getName().equals(that.getName())
+                && getType().equals(that.getType());
+    }
+
 }

@@ -36,19 +36,19 @@ public class StackMapFrame {
         return locals;
     }
 
+    public List<StackMapType> getStackItems() {
+        return stackItems;
+    }
+
         /*
             SAME_FRAME 0-63
             SAME_LOCALS_1_STACK_ITEM_FRAME 64-127
             SAME_LOCALS_1_STACK_ITEM_EXTENDED 247
             CHOP_FRAME 248-250
-            SAME_FRAME_EXTENDED = 251
+            SAME_FRAME_EXTENDED 251
             APPEND_FRAME 252-254
             FULL_FRAME 255
          */
-
-    public List<StackMapType> getStackItems() {
-        return stackItems;
-    }
 
     public static StackMapFrame from(DataInputStream in) throws IOException {
         int b = in.readUnsignedByte();

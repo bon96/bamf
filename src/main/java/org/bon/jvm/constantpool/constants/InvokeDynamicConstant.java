@@ -10,11 +10,17 @@ import java.io.IOException;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4.10
  */
 
-public class InvokeDynamicConstant extends Constant {
+public class InvokeDynamicConstant extends Constant implements MethodConstant {
     private ConstPool constPool;
     private int bootstrapMethodAttrIndex;
     private int nameAndTypeIndex;
 
+    @Override
+    public ClassConstant getConstClass() {
+        throw new UnsupportedOperationException("InvokeDynamic class retrieval is not yet supported");
+    }
+
+    @Override
     public NameAndTypeConstant getNameAndType() {
         return constPool.get(nameAndTypeIndex).cast();
     }

@@ -3,7 +3,7 @@ package org.bon.jvm.instructions;
 import org.bon.api.Method;
 import org.bon.api.util.MethodDescriptor;
 import org.bon.jvm.constantpool.ConstPool;
-import org.bon.jvm.constantpool.constants.MethodRefConstant;
+import org.bon.jvm.constantpool.constants.MethodConstant;
 import org.bon.jvm.instructions.types.InvokeInstruction;
 
 import java.io.DataInputStream;
@@ -28,10 +28,10 @@ public class Invokevirtual extends Instruction implements InvokeInstruction {
         targetDescriptor = method.getDescriptor();
     }
 
-    public Invokevirtual(MethodRefConstant methodRef) {
-        target = methodRef.getNameAndType().getName();
-        targetClass = methodRef.getConstClass().getName();
-        targetDescriptor = new MethodDescriptor(methodRef.getNameAndType().getDescriptor());
+    public Invokevirtual(MethodConstant constant) {
+        target = constant.getNameAndType().getName();
+        targetClass = constant.getConstClass().getName();
+        targetDescriptor = new MethodDescriptor(constant.getNameAndType().getDescriptor());
     }
 
     @Override
@@ -75,7 +75,7 @@ public class Invokevirtual extends Instruction implements InvokeInstruction {
     }
 
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
-        MethodRefConstant methodRef = constPool.get(in.readUnsignedShort()).cast();
-        return new Invokevirtual(methodRef);
+        MethodConstant constant = constPool.get(in.readUnsignedShort()).cast();
+        return new Invokevirtual(constant);
     }
 }

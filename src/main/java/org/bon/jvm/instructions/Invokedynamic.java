@@ -3,7 +3,7 @@ package org.bon.jvm.instructions;
 import org.bon.api.Method;
 import org.bon.api.util.MethodDescriptor;
 import org.bon.jvm.constantpool.ConstPool;
-import org.bon.jvm.constantpool.constants.MethodRefConstant;
+import org.bon.jvm.constantpool.constants.MethodConstant;
 import org.bon.jvm.instructions.types.InvokeInstruction;
 
 import java.io.DataInputStream;
@@ -22,16 +22,17 @@ public class Invokedynamic extends Instruction implements InvokeInstruction {
     private String targetClass;
     private MethodDescriptor targetDescriptor;
 
+    //TODO get bootstrap method
+
     public Invokedynamic(Method method) {
         target = method.getName();
         targetClass = method.getOwner().getName();
         targetDescriptor = method.getDescriptor();
     }
 
-    public Invokedynamic(MethodRefConstant methodRef) {
-        target = methodRef.getNameAndType().getName();
-        targetClass = methodRef.getConstClass().getName();
-        targetDescriptor = new MethodDescriptor(methodRef.getNameAndType().getDescriptor());
+    public Invokedynamic(MethodConstant constant) {
+        target = constant.getNameAndType().getName();
+        targetDescriptor = new MethodDescriptor(constant.getNameAndType().getDescriptor());
     }
 
     @Override
@@ -77,7 +78,7 @@ public class Invokedynamic extends Instruction implements InvokeInstruction {
     public static Instruction from(DataInputStream in, ConstPool constPool) throws IOException {
         int index = in.readUnsignedShort();
         in.skipBytes(2); //invokedynamic always has two extra zero bytes
-        MethodRefConstant methodRef = constPool.get(index).cast();
-        return new Invokedynamic(methodRef);
+        MethodConstant constant = constPool.get(index).cast();
+        return new Invokedynamic(constant);
     }
 }
