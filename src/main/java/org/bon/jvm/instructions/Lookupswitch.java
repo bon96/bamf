@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.SwitchInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -13,7 +14,7 @@ import java.io.IOException;
 
 
 //TODO figure this shit out
-public class Lookupswitch extends Instruction {
+public class Lookupswitch extends Instruction implements SwitchInstruction {
 
     @Override
     public String getName() {

@@ -1,7 +1,8 @@
 package org.bon.api.containers;
 
 import org.bon.api.Class;
-import org.bon.util.ModSafeList;
+
+import java.util.ArrayList;
 
 /**
  * Tommi
@@ -9,15 +10,7 @@ import org.bon.util.ModSafeList;
  * Time: 1.39
  */
 
-public class Classes extends ModSafeList<Class> {
+public class Classes extends ArrayList<Class> {
 
-    @Override
-    public void onAdd(Class aClass) {
 
-    }
-
-    @Override
-    public void onRemove(Class aClass) {
-
-    }
 }

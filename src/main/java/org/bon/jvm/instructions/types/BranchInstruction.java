@@ -6,12 +6,6 @@ package org.bon.jvm.instructions.types;
  * Time: 17.36
  */
 
-public interface BranchInstruction {
-    int getJumpOffset();
+public interface BranchInstruction extends JumpInstruction {
 
-    int getJumpTarget();
-
-    void setJumpTarget(int target);
-
-    int getOffset();
 }

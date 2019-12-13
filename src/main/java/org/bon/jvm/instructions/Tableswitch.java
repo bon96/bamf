@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.SwitchInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -12,7 +13,7 @@ import java.io.IOException;
  */
 
 //TODO idk what the fuck is going on here
-public class Tableswitch extends Instruction {
+public class Tableswitch extends Instruction implements SwitchInstruction {
 
     @Override
     public String getName() {

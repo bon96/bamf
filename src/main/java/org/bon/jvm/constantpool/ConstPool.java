@@ -12,10 +12,9 @@ import java.util.List;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.4
  */
 
-
 public class ConstPool {
 
-    //TODO figure out what should we do about longs and doubles taking two spots in the list.
+    //TODO is there a better way to handle doubles and longs taking 2 spots than adding a null?
     private List<Constant> constants = new ArrayList<>();
 
     /**

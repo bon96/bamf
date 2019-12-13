@@ -3,7 +3,7 @@ package org.bon.jvm.instructions;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.Constant;
 import org.bon.jvm.constantpool.constants.ValueConstant;
-import org.bon.jvm.instructions.types.ConstInstruction;
+import org.bon.jvm.instructions.types.LdcInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.util.Objects;
  * Time: 20.00
  */
 
-public class Ldc2_w extends Instruction implements ConstInstruction {
+public class Ldc2_w extends Instruction implements LdcInstruction {
 
     private Object object;
 

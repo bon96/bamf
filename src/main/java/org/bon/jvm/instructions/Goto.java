@@ -1,6 +1,7 @@
 package org.bon.jvm.instructions;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.instructions.types.JumpInstruction;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.io.IOException;
  * Time: 20.00
  */
 
-public class Goto extends Instruction {
+public class Goto extends Instruction implements JumpInstruction {
 
     private int jumpOffset;
     private int jumpTarget;
@@ -20,7 +21,7 @@ public class Goto extends Instruction {
         this.jumpOffset = jumpOffset;
     }
 
-    int getJumpOffset() {
+    public int getJumpOffset() {
         return jumpOffset;
     }
 
@@ -28,7 +29,7 @@ public class Goto extends Instruction {
         return jumpTarget;
     }
 
-    void setJumpTarget(int targetOffset) {
+    public void setJumpTarget(int targetOffset) {
         this.jumpTarget = targetOffset;
     }
 

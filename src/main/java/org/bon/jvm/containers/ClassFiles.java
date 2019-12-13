@@ -1,7 +1,8 @@
 package org.bon.jvm.containers;
 
 import org.bon.jvm.ClassFile;
-import org.bon.util.ModSafeList;
+
+import java.util.ArrayList;
 
 /**
  * Tommi
@@ -9,15 +10,6 @@ import org.bon.util.ModSafeList;
  * Time: 16.05
  */
 
-public class ClassFiles extends ModSafeList<ClassFile> {
+public class ClassFiles extends ArrayList<ClassFile> {
 
-    @Override
-    public void onAdd(ClassFile classFile) {
-
-    }
-
-    @Override
-    public void onRemove(ClassFile classFile) {
-
-    }
 }

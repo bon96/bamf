@@ -15,6 +15,10 @@ import java.util.List;
  * Time: 21.20
  */
 
+/**
+ * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.7.17
+ */
+
 public class RuntimeInvisibleAnnotationsAttribute extends Attribute {
 
     private List<Annotation> annotations;
