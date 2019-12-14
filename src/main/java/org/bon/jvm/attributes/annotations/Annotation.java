@@ -28,7 +28,7 @@ public class Annotation {
 
         int elementCount = in.readUnsignedShort();
         for (int i = 0; i < elementCount; i++) {
-            a.elements.add(Element.from(in, constPool));
+            a.elements.add(Element.from(in, constPool, true));
         }
         return a;
     }
@@ -52,8 +52,13 @@ public class Annotation {
             return value;
         }
 
-        public static Element from(DataInputStream in, ConstPool constPool) throws IOException {
-            String name = constPool.get(in.readUnsignedShort()).toString();
+        public static Element from(DataInputStream in, ConstPool constPool, boolean isValuePair) throws IOException {
+            String name = null;
+
+            if (isValuePair) {
+                name = constPool.get(in.readUnsignedShort()).toString();
+            }
+
             int tag = in.readUnsignedByte();
 
             switch (tag) {
@@ -90,7 +95,7 @@ public class Annotation {
                     int size = in.readUnsignedShort();
                     List<Element> elements = new ArrayList<>();
                     for (int i = 0; i < size; i++) {
-                        elements.add(Element.from(in, constPool));
+                        elements.add(Element.from(in, constPool, false));
                     }
                     return new Element<>(name, elements);
                 default:

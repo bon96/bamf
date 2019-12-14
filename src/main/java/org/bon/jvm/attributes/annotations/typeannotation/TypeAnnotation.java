@@ -46,7 +46,7 @@ public class TypeAnnotation {
 
         int elementCount = in.readUnsignedShort();
         for (int i = 0; i < elementCount; i++) {
-            a.elements.add(Annotation.Element.from(in, constPool));
+            a.elements.add(Annotation.Element.from(in, constPool, true));
         }
         return a;
     }

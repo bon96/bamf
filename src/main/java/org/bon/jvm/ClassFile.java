@@ -205,12 +205,10 @@ public class ClassFile {
         ClassFile classFile = new ClassFile();
 
         classFile.magic = in.readInt();
-
         classFile.minorVersion = in.readUnsignedShort();
         classFile.majorVersion = in.readUnsignedShort();
 
         int constPoolSize = in.readUnsignedShort();
-
         classFile.constPool = ConstPool.from(in, constPoolSize);
 
         classFile.accessFlags = in.readUnsignedShort();

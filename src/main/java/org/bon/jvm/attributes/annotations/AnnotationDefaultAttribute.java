@@ -32,7 +32,7 @@ public class AnnotationDefaultAttribute<T> extends Attribute {
         a.nameIndex = nameIndex;
         a.length = length;
 
-        a.element = Annotation.Element.from(in, constPool);
+        a.element = Annotation.Element.from(in, constPool, false);
         return a;
     }
 }

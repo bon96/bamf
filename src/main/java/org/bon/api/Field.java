@@ -31,7 +31,7 @@ public class Field {
         }
 
         if (getJVM().getAttributes().hasType(RuntimeInvisibleAnnotationsAttribute.class)) {
-            annotations.addAll(getJVM().getAttributes().ofType(RuntimeVisibleAnnotationsAttribute.class).getAnnotations());
+            annotations.addAll(getJVM().getAttributes().ofType(RuntimeInvisibleAnnotationsAttribute.class).getAnnotations());
         }
 
         return annotations;
