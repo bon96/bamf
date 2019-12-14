@@ -5,6 +5,7 @@ import org.bon.jvm.ClassFile;
 import org.bon.jvm.containers.ClassFiles;
 
 import java.io.DataInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
@@ -38,18 +39,28 @@ public class ClassGroup {
         return null;
     }
 
-    public static ClassGroup from(JarFile jarFile) throws IOException {
-        ClassGroup classGroup = new ClassGroup();
-        Enumeration<JarEntry> enr = jarFile.entries();
+    public static ClassGroup from(String path) throws IOException {
+        return from(new JarFile(path));
+    }
 
-        while (enr.hasMoreElements()) {
-            JarEntry entry = enr.nextElement();
-            if (entry.getName().endsWith(".class")) {
-                ClassFile cf = ClassFile.from(new DataInputStream(jarFile.getInputStream(entry)));
-                classGroup.getClassFiles().add(cf);
-                classGroup.getClasses().add(new Class(classGroup, cf));
+    public static ClassGroup from(File file) throws IOException {
+        return from(new JarFile(file));
+    }
+
+    public static ClassGroup from(JarFile jarFile) throws IOException {
+        try (jarFile) {
+            ClassGroup classGroup = new ClassGroup();
+            Enumeration<JarEntry> enr = jarFile.entries();
+
+            while (enr.hasMoreElements()) {
+                JarEntry entry = enr.nextElement();
+                if (entry.getName().endsWith(".class")) {
+                    ClassFile cf = ClassFile.from(new DataInputStream(jarFile.getInputStream(entry)));
+                    classGroup.getClassFiles().add(cf);
+                    classGroup.getClasses().add(new Class(classGroup, cf));
+                }
             }
+            return classGroup;
         }
-        return classGroup;
     }
 }

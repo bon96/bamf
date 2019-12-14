@@ -12,7 +12,7 @@ import java.util.List;
 public class Annotation {
 
     private String type;
-    private List<Element> elements;
+    private List<Element> elements = new ArrayList<>();
 
     public String getType() {
         return type;
@@ -26,12 +26,10 @@ public class Annotation {
         Annotation a = new Annotation();
         a.type = constPool.get(in.readUnsignedShort()).toString();
 
-        List<Element> elements = new ArrayList<>();
         int elementCount = in.readUnsignedShort();
         for (int i = 0; i < elementCount; i++) {
-            elements.add(Element.from(in, constPool));
+            a.elements.add(Element.from(in, constPool));
         }
-        a.elements = elements;
         return a;
     }
 

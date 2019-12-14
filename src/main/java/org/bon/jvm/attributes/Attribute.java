@@ -2,9 +2,7 @@ package org.bon.jvm.attributes;
 
 import org.bon.Cast;
 import org.bon.jvm.Method;
-import org.bon.jvm.attributes.annotations.AnnotationDefaultAttribute;
-import org.bon.jvm.attributes.annotations.RuntimeInvisibleAnnotationsAttribute;
-import org.bon.jvm.attributes.annotations.RuntimeVisibleAnnotationsAttribute;
+import org.bon.jvm.attributes.annotations.*;
 import org.bon.jvm.attributes.stackmap.StackMapTableAttribute;
 import org.bon.jvm.constantpool.ConstPool;
 
@@ -100,20 +98,35 @@ public abstract class Attribute implements Cast {
             case "RuntimeVisibleAnnotations": //49.0 5.0
                 return RuntimeVisibleAnnotationsAttribute.from(in, constPool, nameIndex, length);
 
-            case "RuntimeInvisibleAnnotations"://49 5.0
+            case "RuntimeInvisibleAnnotations": //49 5.0
                 return RuntimeInvisibleAnnotationsAttribute.from(in, constPool, nameIndex, length);
 
-                /* TODO
-                    RuntimeVisibleParameterAnnotations	    49.0	5.0	§4.7.18
-                    RuntimeInvisibleParameterAnnotations	49.0	5.0	§4.7.19
-                    RuntimeVisibleTypeAnnotations	        52.0	8	§4.7.20
-                    RuntimeInvisibleTypeAnnotations	        52.0	8	§4.7.21
-                    Module                                  53.0	9	§4.7.25
-                    ModulePackages                          53.0	9	§4.7.26
-                    ModuleMainClass                         53.0	9	§4.7.27
-                    NestHost                                55.0	11	§4.7.28
-                    NestMembers                             55.0	11	§4.7.29
-                 */
+            case "RuntimeVisibleParameterAnnotations": //49.0 5.0
+                return RuntimeVisibleParameterAnnotationsAttribute.from(in, constPool, nameIndex, length);
+
+            case "RuntimeInvisibleParameterAnnotations": //49.0 5.0
+                return RuntimeInvisibleParameterAnnotationsAttribute.from(in, constPool, nameIndex, length);
+
+            case "RuntimeVisibleTypeAnnotations": //52.0 8
+                return RuntimeVisibleTypeAnnotationsAttribute.from(in, constPool, nameIndex, length);
+
+            case "RuntimeInvisibleTypeAnnotations": //52.0 8
+                return RuntimeInvisibleTypeAnnotationsAttribute.from(in, constPool, nameIndex, length);
+
+            case "Module": //53.0 9
+                return ModuleAttribute.from(in, constPool, nameIndex, length);
+
+            case "ModulePackages": //53.0 9
+                return ModulePackagesAttribute.from(in, constPool, nameIndex, length);
+
+            case "ModuleMainClass": //53.0 9
+                return ModuleMainClassAttribute.from(in, constPool, nameIndex, length);
+
+            case "NestHost": //55.0 11
+                return NestHostAttribute.from(in, constPool, nameIndex, length);
+
+            case "NestMembers": //55.0 11
+                return NestMembersAttribute.from(in, constPool, nameIndex, length);
 
             default:
                 return new SkipAttribute(in, constPool, nameIndex, length);

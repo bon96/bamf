@@ -23,13 +23,13 @@ public class RuntimeInvisibleAnnotationsAttribute extends Attribute {
 
     private List<Annotation> annotations;
 
+    public List<Annotation> getAnnotations() {
+        return annotations;
+    }
+
     @Override
     public void writeTo(DataOutputStream out) throws IOException {
 
-    }
-
-    public List<Annotation> getAnnotations() {
-        return annotations;
     }
 
     public static RuntimeInvisibleAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {

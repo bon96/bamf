@@ -16,7 +16,7 @@ public class SkipAttribute extends Attribute {
         this.constPool = constPool;
         this.nameIndex = nameIndex;
         this.length = length;
-        //System.out.println("Skipping " + getName() + " " + getLength());
+        System.err.println("Skipping unknown attribute " + getName() + " " + getLength());
         in.skipBytes(length);
     }
 

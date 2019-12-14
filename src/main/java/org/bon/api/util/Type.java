@@ -124,8 +124,7 @@ public class Type {
             return false;
         }
 
-        Type type1 = (Type) o;
-        return Objects.equals(toString(), type1.toString());
+        return Objects.equals(toString(), o.toString());
     }
 
     @Override

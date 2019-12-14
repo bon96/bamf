@@ -52,9 +52,16 @@ public class MethodDescriptor {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
         MethodDescriptor methodDescriptor = (MethodDescriptor) o;
+
         return Objects.equals(arguments, methodDescriptor.arguments) &&
                 Objects.equals(returnValue, methodDescriptor.returnValue);
     }
@@ -62,6 +69,7 @@ public class MethodDescriptor {
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder("(");
+
         for (Type type : getArguments()) {
             s.append(type.toString());
         }
