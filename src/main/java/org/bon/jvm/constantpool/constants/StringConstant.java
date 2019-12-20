@@ -25,7 +25,7 @@ public class StringConstant extends Constant implements ValueConstant<String> {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.STRING);
         out.writeShort(stringIndex);
     }

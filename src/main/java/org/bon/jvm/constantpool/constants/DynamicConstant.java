@@ -1,6 +1,8 @@
 package org.bon.jvm.constantpool.constants;
 
+import org.bon.jvm.attributes.BootstrapMethodsAttribute;
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.util.MethodDescriptor;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -16,11 +18,21 @@ public class DynamicConstant extends Constant {
     private int bootstrapMethodAttrIndex;
     private int nameAndTypeIndex;
 
+    public BootstrapMethodsAttribute.BootstrapMethod getBootstrapMethod() {
+        return constPool.getClassFile().getAttributes().ofType(BootstrapMethodsAttribute.class).getMethods().get(bootstrapMethodAttrIndex);
+    }
+
+    public String getName() {
+        return getNameAndType().getName();
+    }
+
+    public MethodDescriptor getDescriptor() {
+        return new MethodDescriptor(getNameAndType().getDescriptor());
+    }
+
     public NameAndTypeConstant getNameAndType() {
         return constPool.get(nameAndTypeIndex).cast();
     }
-
-    //TODO finish bootstrapMethod array retrieval from constant pool
 
     public int getBootstrapMethodAttrIndex() {
         return bootstrapMethodAttrIndex;
@@ -31,7 +43,7 @@ public class DynamicConstant extends Constant {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.DYNAMIC);
         out.writeShort(bootstrapMethodAttrIndex);
         out.writeShort(nameAndTypeIndex);

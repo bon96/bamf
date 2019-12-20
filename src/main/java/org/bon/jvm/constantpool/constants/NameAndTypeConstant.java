@@ -33,7 +33,7 @@ public class NameAndTypeConstant extends Constant {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.NAME_AND_TYPE);
         out.writeShort(nameIndex);
         out.writeShort(descriptorIndex);

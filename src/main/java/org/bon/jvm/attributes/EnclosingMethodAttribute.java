@@ -1,6 +1,8 @@
 package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.constantpool.constants.ClassConstant;
+import org.bon.jvm.constantpool.constants.NameAndTypeConstant;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -11,30 +13,50 @@ import java.io.IOException;
  */
 
 public class EnclosingMethodAttribute extends Attribute {
-    private int classIndex;
-    private int methodIndex;
 
-    public int getClassIndex() {
-        return classIndex;
+    private ClassConstant classConstant;
+    private NameAndTypeConstant nameAndTypeConstant;
+
+    public EnclosingMethodAttribute(ClassConstant classConstant) {
+        this.classConstant = classConstant;
     }
 
-    public int getMethodIndex() {
-        return methodIndex;
+    public EnclosingMethodAttribute(ClassConstant classConstant, NameAndTypeConstant nameAndTypeConstant) {
+        this.classConstant = classConstant;
+        this.nameAndTypeConstant = nameAndTypeConstant;
+    }
+
+    public ClassConstant getClassConstant() {
+        return classConstant;
+    }
+
+    public void setClassConstant(ClassConstant classConstant) {
+        this.classConstant = classConstant;
+    }
+
+    public NameAndTypeConstant getNameAndTypeConstant() {
+        return nameAndTypeConstant;
+    }
+
+    public void setNameAndTypeConstant(NameAndTypeConstant nameAndTypeConstant) {
+        this.nameAndTypeConstant = nameAndTypeConstant;
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
     //TODO finish getters
-    public static EnclosingMethodAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        EnclosingMethodAttribute a = new EnclosingMethodAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
-        a.classIndex = in.readUnsignedShort();
-        a.methodIndex = in.readUnsignedShort();
-        return a;
+    public static EnclosingMethodAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
+        int classIndex = in.readUnsignedShort();
+        int methodIndex = in.readUnsignedShort();
+
+        if (methodIndex != 0) {
+            return new EnclosingMethodAttribute(constPool.get(classIndex).cast(),
+                    constPool.get(methodIndex).cast());
+        } else {
+            return new EnclosingMethodAttribute(constPool.get(classIndex).cast());
+        }
     }
 }

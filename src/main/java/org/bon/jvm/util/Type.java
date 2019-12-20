@@ -1,4 +1,4 @@
-package org.bon.api.util;
+package org.bon.jvm.util;
 
 import java.util.Objects;
 

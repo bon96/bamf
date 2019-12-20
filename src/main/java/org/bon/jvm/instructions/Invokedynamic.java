@@ -1,10 +1,10 @@
 package org.bon.jvm.instructions;
 
 import org.bon.api.Method;
-import org.bon.api.util.MethodDescriptor;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.MethodConstant;
 import org.bon.jvm.instructions.types.InvokeInstruction;
+import org.bon.jvm.util.MethodDescriptor;
 
 import java.io.DataInputStream;
 import java.io.IOException;

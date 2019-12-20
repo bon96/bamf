@@ -1,6 +1,7 @@
 package org.bon.jvm.constantpool.constants;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.util.MethodDescriptor;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -15,8 +16,8 @@ public class MethodTypeConstant extends Constant {
     private ConstPool constPool;
     private int descriptorIndex;
 
-    public String getDescriptor() {
-        return constPool.get(descriptorIndex).toString();
+    public MethodDescriptor getDescriptor() {
+        return new MethodDescriptor(constPool.get(descriptorIndex).toString());
     }
 
     public int getDescriptorIndex() {
@@ -24,7 +25,7 @@ public class MethodTypeConstant extends Constant {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.METHOD_TYPE);
         out.writeShort(descriptorIndex);
     }

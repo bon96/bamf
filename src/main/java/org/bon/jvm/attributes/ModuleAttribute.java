@@ -40,41 +40,73 @@ public class ModuleAttribute extends Attribute {
         return moduleName;
     }
 
+    public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
+    }
+
     public int getFlags() {
         return flags;
+    }
+
+    public void setFlags(int flags) {
+        this.flags = flags;
     }
 
     public String getVersion() {
         return version;
     }
 
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
     public List<Requires> getRequires() {
         return requires;
+    }
+
+    public void setRequires(List<Requires> requires) {
+        this.requires = requires;
     }
 
     public List<Exports> getExports() {
         return exports;
     }
 
+    public void setExports(List<Exports> exports) {
+        this.exports = exports;
+    }
+
     public List<Opens> getOpens() {
         return opens;
+    }
+
+    public void setOpens(List<Opens> opens) {
+        this.opens = opens;
     }
 
     public List<ClassConstant> getUses() {
         return uses;
     }
 
+    public void setUses(List<ClassConstant> uses) {
+        this.uses = uses;
+    }
+
     public List<Provides> getProvides() {
         return provides;
     }
 
+    public void setProvides(List<Provides> provides) {
+        this.provides = provides;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
 
-    public static ModuleAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static ModuleAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         ModuleAttribute a = new ModuleAttribute();
 
         a.moduleName = constPool.get(in.readUnsignedShort()).toString();
@@ -127,12 +159,24 @@ public class ModuleAttribute extends Attribute {
             return module;
         }
 
+        public void setModule(ModuleConstant module) {
+            this.module = module;
+        }
+
         public int getFlags() {
             return flags;
         }
 
+        public void setFlags(int flags) {
+            this.flags = flags;
+        }
+
         public String getVersion() {
             return version;
+        }
+
+        public void setVersion(String version) {
+            this.version = version;
         }
 
         public static Requires from(DataInputStream in, ConstPool constPool) throws IOException {
@@ -157,12 +201,24 @@ public class ModuleAttribute extends Attribute {
             return packageEx;
         }
 
+        public void setPackageEx(PackageConstant packageEx) {
+            this.packageEx = packageEx;
+        }
+
         public int getFlags() {
             return flags;
         }
 
+        public void setFlags(int flags) {
+            this.flags = flags;
+        }
+
         public List<ModuleConstant> getExportsTo() {
             return exportsTo;
+        }
+
+        public void setExportsTo(List<ModuleConstant> exportsTo) {
+            this.exportsTo = exportsTo;
         }
 
         public static Exports from(DataInputStream in, ConstPool constPool) throws IOException {
@@ -191,12 +247,24 @@ public class ModuleAttribute extends Attribute {
             return packageOp;
         }
 
+        public void setPackageOp(PackageConstant packageOp) {
+            this.packageOp = packageOp;
+        }
+
         public int getFlags() {
             return flags;
         }
 
+        public void setFlags(int flags) {
+            this.flags = flags;
+        }
+
         public List<ModuleConstant> getOpensTo() {
             return opensTo;
+        }
+
+        public void setOpensTo(List<ModuleConstant> opensTo) {
+            this.opensTo = opensTo;
         }
 
         public static Opens from(DataInputStream in, ConstPool constPool) throws IOException {
@@ -222,8 +290,16 @@ public class ModuleAttribute extends Attribute {
             return provides;
         }
 
+        public void setProvides(ClassConstant provides) {
+            this.provides = provides;
+        }
+
         public List<ClassConstant> getProvidesWith() {
             return providesWith;
+        }
+
+        public void setProvidesWith(List<ClassConstant> providesWith) {
+            this.providesWith = providesWith;
         }
 
         public static Provides from(DataInputStream in, ConstPool constPool) throws IOException {

@@ -21,22 +21,32 @@ import java.util.List;
 
 public class NestMembersAttribute extends Attribute {
 
-    private List<ClassConstant> classes = new ArrayList<>();
+    private List<ClassConstant> classes;
+
+    public NestMembersAttribute() {
+        classes = new ArrayList<>();
+    }
+
+    public NestMembersAttribute(List<ClassConstant> classes) {
+        this.classes = classes;
+    }
+
 
     public List<ClassConstant> getClasses() {
         return classes;
     }
 
+    public void setClasses(List<ClassConstant> classes) {
+        this.classes = classes;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static NestMembersAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static NestMembersAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         NestMembersAttribute a = new NestMembersAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         int classesCount = in.readUnsignedShort();
         for (int i = 0; i < classesCount; i++) {

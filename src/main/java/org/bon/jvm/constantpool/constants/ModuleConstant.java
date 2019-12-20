@@ -24,7 +24,7 @@ public class ModuleConstant extends Constant {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.MODULE);
         out.writeShort(nameIndex);
     }

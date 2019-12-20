@@ -13,10 +13,22 @@ import java.util.List;
 
 public class TypePath {
 
-    private List<Entry> path = new ArrayList<>();
+    private List<Entry> path;
+
+    public TypePath() {
+        path = new ArrayList<>();
+    }
+
+    public TypePath(List<Entry> path) {
+        this.path = path;
+    }
 
     public List<Entry> getPath() {
         return path;
+    }
+
+    public void setPath(List<Entry> path) {
+        this.path = path;
     }
 
     public static TypePath from(DataInputStream in) throws IOException {
@@ -34,20 +46,29 @@ public class TypePath {
         private int kind;
         private int index;
 
+        public Entry(int kind, int index) {
+            this.kind = kind;
+            this.index = index;
+        }
+
         public int getKind() {
             return kind;
+        }
+
+        public void setKind(int kind) {
+            this.kind = kind;
         }
 
         public int getIndex() {
             return index;
         }
 
-        public static Entry from(DataInputStream in) throws IOException {
-            Entry entry = new Entry();
+        public void setIndex(int index) {
+            this.index = index;
+        }
 
-            entry.kind = in.readUnsignedByte();
-            entry.index = in.readUnsignedByte();
-            return entry;
+        public static Entry from(DataInputStream in) throws IOException {
+            return new Entry(in.readUnsignedByte(), in.readUnsignedByte());
         }
     }
 

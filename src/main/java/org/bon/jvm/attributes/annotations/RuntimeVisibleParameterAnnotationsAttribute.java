@@ -19,22 +19,33 @@ import java.util.List;
  * https://docs.oracle.com/javase/specs/jvms/se11/html/jvms-4.html#jvms-4.7.18
  */
 
-//TODO finish RuntimeVisibleParameterAnnotationsAttribute
 public class RuntimeVisibleParameterAnnotationsAttribute extends Attribute {
 
+    private List<List<Annotation>> parameters;
 
-    private List<List<Annotation>> parameters = new ArrayList<>();
+    public RuntimeVisibleParameterAnnotationsAttribute() {
+        parameters = new ArrayList<>();
+    }
+
+    public RuntimeVisibleParameterAnnotationsAttribute(List<List<Annotation>> parameters) {
+        this.parameters = parameters;
+    }
+
+    public List<List<Annotation>> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<List<Annotation>> parameters) {
+        this.parameters = parameters;
+    }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static RuntimeVisibleParameterAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static RuntimeVisibleParameterAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         RuntimeVisibleParameterAnnotationsAttribute a = new RuntimeVisibleParameterAnnotationsAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         int parametersCount = in.readUnsignedByte();
         for (int i = 0; i < parametersCount; i++) {

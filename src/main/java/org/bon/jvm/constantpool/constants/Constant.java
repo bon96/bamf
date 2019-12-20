@@ -1,6 +1,7 @@
 package org.bon.jvm.constantpool.constants;
 
 import org.bon.Cast;
+import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -25,6 +26,6 @@ public abstract class Constant implements Cast {
     public static final int MODULE = 19;                  // 53.0 9
     public static final int PACKAGE = 20;                 // 53.0 9
 
-    public abstract void writeTo(DataOutputStream out) throws IOException;
+    public abstract void writeTo(DataOutputStream out, ConstPool constPool) throws IOException;
 
 }

@@ -1,6 +1,6 @@
 package org.bon.jvm.instructions.types;
 
-import org.bon.api.util.MethodDescriptor;
+import org.bon.jvm.util.MethodDescriptor;
 
 /**
  * Tommi

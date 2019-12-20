@@ -21,9 +21,6 @@ public class ModuleMainClassAttribute extends Attribute {
 
     private ClassConstant mainClass;
 
-    private ModuleMainClassAttribute() {
-    }
-
     public ModuleMainClassAttribute(ClassConstant mainClass) {
         this.mainClass = mainClass;
     }
@@ -37,18 +34,12 @@ public class ModuleMainClassAttribute extends Attribute {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static ModuleMainClassAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        ModuleMainClassAttribute a = new ModuleMainClassAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
-
-        a.mainClass = (ClassConstant) constPool.get(in.readUnsignedShort());
-        return a;
+    public static ModuleMainClassAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
+        return new ModuleMainClassAttribute((ClassConstant) constPool.get(in.readUnsignedShort()));
     }
 
 }

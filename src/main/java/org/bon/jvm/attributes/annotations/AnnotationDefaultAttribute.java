@@ -17,22 +17,24 @@ public class AnnotationDefaultAttribute<T> extends Attribute {
 
     private Annotation.Element<T> element;
 
+    public AnnotationDefaultAttribute(Annotation.Element<T> element) {
+        this.element = element;
+    }
+
     public Annotation.Element<T> getElement() {
         return element;
     }
 
+    public void setElement(Annotation.Element<T> element) {
+        this.element = element;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static AnnotationDefaultAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        AnnotationDefaultAttribute a = new AnnotationDefaultAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
-
-        a.element = Annotation.Element.from(in, constPool, false);
-        return a;
+    public static AnnotationDefaultAttribute<?> from(DataInputStream in, ConstPool constPool, int length) throws IOException {
+        return new AnnotationDefaultAttribute<>(Annotation.Element.from(in, constPool, false));
     }
 }

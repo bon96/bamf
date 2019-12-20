@@ -11,6 +11,22 @@ import java.io.IOException;
  */
 
 public class MethodHandleConstant extends Constant {
+    //FieldRef
+    public static final int KIND_REF_GETFIELD = 1;
+    public static final int KIND_REF_GETSTATIC = 2;
+    public static final int KIND_REF_PUTFIELD = 3;
+    public static final int KIND_REF_PUTSTATIC = 4;
+
+    //MethodRef
+    public static final int KIND_REF_INVOKEVIRTUAL = 5;
+    public static final int KIND_REF_NEWINVOKESPECIAL = 8;
+
+    //if class file version is less than 52.0 MethodRef else InterfaceMethodRef
+    public static final int KIND_REF_INVOKESTATIC = 6;
+    public static final int KIND_REF_INVOKESPECIAL = 7;
+
+    //InterfaceMethodRef
+    public static final int KIND_REF_INVOKEINTERFACE = 9;
 
     private ConstPool constPool;
     private int referenceKind;
@@ -29,7 +45,7 @@ public class MethodHandleConstant extends Constant {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.METHOD_HANDLE);
         out.writeShort(referenceKind);
         out.writeShort(referenceIndex);

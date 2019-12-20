@@ -12,27 +12,26 @@ import java.io.IOException;
 
 public class SignatureAttribute extends Attribute {
 
-    private int signatureIndex;
+    private String signature;
 
-    public String getSignature() {
-        return constPool.get(signatureIndex).toString();
+    public SignatureAttribute(String signature) {
+        this.signature = signature;
     }
 
-    public int getSignatureIndex() {
-        return signatureIndex;
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static SignatureAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        SignatureAttribute a = new SignatureAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
-        a.signatureIndex = in.readUnsignedShort();
-        return a;
+    public static SignatureAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
+        return new SignatureAttribute(constPool.get(in.readUnsignedShort()).toString());
     }
 }

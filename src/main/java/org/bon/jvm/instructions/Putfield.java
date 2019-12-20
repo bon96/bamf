@@ -1,8 +1,8 @@
 package org.bon.jvm.instructions;
 
-import org.bon.api.util.Type;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.FieldRefConstant;
+import org.bon.jvm.util.Type;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class Putfield extends Instruction {
     }
 
     public String getTargetClass() {
-        return getFieldRef().getConstClass().getName();
+        return getFieldRef().getClassConstant().getName();
     }
 
     public String getTarget() {

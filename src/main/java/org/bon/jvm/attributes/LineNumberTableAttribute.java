@@ -14,22 +14,31 @@ import java.util.List;
 
 public class LineNumberTableAttribute extends Attribute {
 
-    private List<LineNumber> lineNumbers = new ArrayList<>();
+    private List<LineNumber> lineNumbers;
+
+    public LineNumberTableAttribute() {
+        lineNumbers = new ArrayList<>();
+    }
+
+    public LineNumberTableAttribute(List<LineNumber> lineNumbers) {
+        this.lineNumbers = lineNumbers;
+    }
 
     public List<LineNumber> getLineNumbers() {
         return lineNumbers;
     }
 
+    public void setLineNumbers(List<LineNumber> lineNumbers) {
+        this.lineNumbers = lineNumbers;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static LineNumberTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static LineNumberTableAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         LineNumberTableAttribute a = new LineNumberTableAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         int tableLength = in.readUnsignedShort();
         for (int i = 0; i < tableLength; i++) {

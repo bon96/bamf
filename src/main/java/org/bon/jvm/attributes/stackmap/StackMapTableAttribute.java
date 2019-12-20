@@ -15,18 +15,30 @@ import java.util.List;
 
 public class StackMapTableAttribute extends Attribute {
 
-    private List<StackMapFrame> frames = new ArrayList<>();
+    private List<StackMapFrame> frames;
+
+    public StackMapTableAttribute() {
+        frames = new ArrayList<>();
+    }
+
+    public StackMapTableAttribute(List<StackMapFrame> frames) {
+        this.frames = frames;
+    }
 
     public List<StackMapFrame> getFrames() {
         return frames;
     }
 
+    public void setFrames(List<StackMapFrame> frames) {
+        this.frames = frames;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static StackMapTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static StackMapTableAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         StackMapTableAttribute a = new StackMapTableAttribute();
         int entries = in.readUnsignedShort();
         for (int i = 0; i < entries; i++) {

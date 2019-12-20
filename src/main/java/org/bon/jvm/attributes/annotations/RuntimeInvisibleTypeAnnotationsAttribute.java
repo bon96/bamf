@@ -23,21 +23,31 @@ import java.util.List;
 
 public class RuntimeInvisibleTypeAnnotationsAttribute extends Attribute {
 
-    private List<TypeAnnotation> annotations = new ArrayList<>();
+    private List<TypeAnnotation> annotations;
+
+    public RuntimeInvisibleTypeAnnotationsAttribute() {
+        annotations = new ArrayList<>();
+    }
+
+    public RuntimeInvisibleTypeAnnotationsAttribute(List<TypeAnnotation> annotations) {
+        this.annotations = annotations;
+    }
 
     public List<TypeAnnotation> getAnnotations() {
         return annotations;
     }
 
+    public void setAnnotations(List<TypeAnnotation> annotations) {
+        this.annotations = annotations;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static RuntimeInvisibleTypeAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static RuntimeInvisibleTypeAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         RuntimeInvisibleTypeAnnotationsAttribute a = new RuntimeInvisibleTypeAnnotationsAttribute();
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         int annotationsCount = in.readUnsignedShort();
         for (int i = 0; i < annotationsCount; i++) {

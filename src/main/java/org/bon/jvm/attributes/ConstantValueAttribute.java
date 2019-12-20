@@ -1,7 +1,7 @@
 package org.bon.jvm.attributes;
 
 import org.bon.jvm.constantpool.ConstPool;
-import org.bon.jvm.constantpool.constants.Constant;
+import org.bon.jvm.constantpool.constants.ValueConstant;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -13,28 +13,26 @@ import java.io.IOException;
 
 public class ConstantValueAttribute extends Attribute {
 
-    private int constantValueIndex;
+    private ValueConstant valueConstant;
 
-    public Constant getConst() {
-        return constPool.get(constantValueIndex);
+    public ConstantValueAttribute(ValueConstant valueConstant) {
+        this.valueConstant = valueConstant;
     }
 
-    public int getConstantValueIndex() {
-        return constantValueIndex;
+    public ValueConstant getValueConstant() {
+        return valueConstant;
+    }
+
+    public void setValueConstant(ValueConstant valueConstant) {
+        this.valueConstant = valueConstant;
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static ConstantValueAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        ConstantValueAttribute a = new ConstantValueAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
-
-        a.constantValueIndex = in.readUnsignedShort();
-        return a;
+    public static ConstantValueAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
+        return new ConstantValueAttribute(constPool.get(in.readUnsignedShort()).cast());
     }
 }

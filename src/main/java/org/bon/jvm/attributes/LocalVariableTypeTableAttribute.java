@@ -14,18 +14,31 @@ import java.util.List;
 
 public class LocalVariableTypeTableAttribute extends Attribute {
 
-    private List<LocalVariableType> localVariableTypes = new ArrayList<>();
+    private List<LocalVariableType> localVariableTypes;
+
+    public LocalVariableTypeTableAttribute() {
+        localVariableTypes = new ArrayList<>();
+    }
+
+    public LocalVariableTypeTableAttribute(List<LocalVariableType> localVariableTypes) {
+        this.localVariableTypes = localVariableTypes;
+    }
+
+    public List<LocalVariableType> getLocalVariableTypes() {
+        return localVariableTypes;
+    }
+
+    public void setLocalVariableTypes(List<LocalVariableType> localVariableTypes) {
+        this.localVariableTypes = localVariableTypes;
+    }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static LocalVariableTypeTableAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static LocalVariableTypeTableAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         LocalVariableTypeTableAttribute a = new LocalVariableTypeTableAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         int tableLength = in.readUnsignedShort();
         for (int i = 0; i < tableLength; i++) {
@@ -36,41 +49,58 @@ public class LocalVariableTypeTableAttribute extends Attribute {
 
     public static class LocalVariableType {
 
-        private ConstPool constPool;
         private int startPc;
         private int length;
-        private int nameIndex;
-        private int signatureIndex;
+        private String name;
+        private String signature;
         private int index;
 
         public int getStartPc() {
             return startPc;
         }
 
+        public void setStartPc(int startPc) {
+            this.startPc = startPc;
+        }
+
         public int getLength() {
             return length;
         }
 
-        public int getNameIndex() {
-            return nameIndex;
+        public void setLength(int length) {
+            this.length = length;
         }
 
-        public int getSignatureIndex() {
-            return signatureIndex;
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getSignature() {
+            return signature;
+        }
+
+        public void setSignature(String signature) {
+            this.signature = signature;
         }
 
         public int getIndex() {
             return index;
         }
 
-        //TODO finish getters
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
         public static LocalVariableType from(DataInputStream in, ConstPool constPool) throws IOException {
             LocalVariableType lv = new LocalVariableType();
-            lv.constPool = constPool;
             lv.startPc = in.readUnsignedShort();
             lv.length = in.readUnsignedShort();
-            lv.nameIndex = in.readUnsignedShort();
-            lv.signatureIndex = in.readUnsignedShort();
+            lv.name = constPool.get(in.readUnsignedShort()).toString();
+            lv.signature = constPool.get(in.readUnsignedShort()).toString();
             lv.index = in.readUnsignedShort();
             return lv;
         }

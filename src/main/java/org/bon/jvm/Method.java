@@ -83,14 +83,14 @@ public class Method {
         return (accessFlags & 0x1000) != 0;
     }
 
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeShort(accessFlags);
         out.writeShort(nameIndex);
         out.writeShort(descriptorIndex);
 
         out.writeShort(attributes.size());
         for (Attribute attr : attributes) {
-            attr.writeTo(out);
+            attr.writeTo(out, constPool);
         }
     }
 

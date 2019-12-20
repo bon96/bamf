@@ -25,16 +25,32 @@ public class TypeAnnotation {
         return targetInfo;
     }
 
+    public void setTargetInfo(TargetType targetInfo) {
+        this.targetInfo = targetInfo;
+    }
+
     public TypePath getTargetPath() {
         return targetPath;
+    }
+
+    public void setTargetPath(TypePath targetPath) {
+        this.targetPath = targetPath;
     }
 
     public String getType() {
         return type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public List<Annotation.Element> getElements() {
         return elements;
+    }
+
+    public void setElements(List<Annotation.Element> elements) {
+        this.elements = elements;
     }
 
     public static TypeAnnotation from(DataInputStream in, ConstPool constPool) throws IOException {

@@ -23,21 +23,32 @@ import java.util.List;
 
 public class RuntimeVisibleTypeAnnotationsAttribute extends Attribute {
 
-    private List<TypeAnnotation> annotations = new ArrayList<>();
+    private List<TypeAnnotation> annotations;
+
+    public RuntimeVisibleTypeAnnotationsAttribute() {
+        annotations = new ArrayList<>();
+    }
+
+
+    public RuntimeVisibleTypeAnnotationsAttribute(List<TypeAnnotation> annotations) {
+        this.annotations = annotations;
+    }
 
     public List<TypeAnnotation> getAnnotations() {
         return annotations;
     }
 
+    public void setAnnotations(List<TypeAnnotation> annotations) {
+        this.annotations = annotations;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static RuntimeVisibleTypeAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static RuntimeVisibleTypeAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         RuntimeVisibleTypeAnnotationsAttribute a = new RuntimeVisibleTypeAnnotationsAttribute();
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         int annotationsCount = in.readUnsignedShort();
         for (int i = 0; i < annotationsCount; i++) {

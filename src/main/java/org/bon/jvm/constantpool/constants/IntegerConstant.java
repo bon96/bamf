@@ -1,5 +1,7 @@
 package org.bon.jvm.constantpool.constants;
 
+import org.bon.jvm.constantpool.ConstPool;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -18,7 +20,7 @@ public class IntegerConstant extends Constant implements ValueConstant<Integer> 
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.INTEGER);
         out.writeInt(value);
     }

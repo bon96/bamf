@@ -15,22 +15,31 @@ import java.util.List;
 
 public class ExceptionsAttribute extends Attribute {
 
-    private List<ClassConstant> exceptions = new ArrayList<>();
+    private List<ClassConstant> exceptions;
+
+    public ExceptionsAttribute() {
+        exceptions = new ArrayList<>();
+    }
+
+    public ExceptionsAttribute(List<ClassConstant> exceptions) {
+        this.exceptions = exceptions;
+    }
 
     public List<ClassConstant> getExceptions() {
         return exceptions;
     }
 
+    public void setExceptions(List<ClassConstant> exceptions) {
+        this.exceptions = exceptions;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static ExceptionsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static ExceptionsAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         ExceptionsAttribute a = new ExceptionsAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         int exceptionsCount = in.readUnsignedShort();
         for (int i = 0; i < exceptionsCount; i++) {

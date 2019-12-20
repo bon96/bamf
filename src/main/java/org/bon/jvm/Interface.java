@@ -20,7 +20,7 @@ public class Interface {
         return constPool.get(classConstantIndex).cast();
     }
 
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeShort(classConstantIndex);
     }
 

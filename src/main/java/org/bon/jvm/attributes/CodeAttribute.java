@@ -28,32 +28,49 @@ public class CodeAttribute extends Attribute {
         return maxStack;
     }
 
+    public void setMaxStack(int maxStack) {
+        this.maxStack = maxStack;
+    }
+
     public int getMaxLocals() {
         return maxLocals;
+    }
+
+    public void setMaxLocals(int maxLocals) {
+        this.maxLocals = maxLocals;
     }
 
     public List<Instruction> getInstructions() {
         return instructions;
     }
 
+    public void setInstructions(List<Instruction> instructions) {
+        this.instructions = instructions;
+    }
+
     public List<Exception> getExceptions() {
         return exceptions;
+    }
+
+    public void setExceptions(List<Exception> exceptions) {
+        this.exceptions = exceptions;
     }
 
     public List<Attribute> getAttributes() {
         return attributes;
     }
 
+    public void setAttributes(List<Attribute> attributes) {
+        this.attributes = attributes;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static CodeAttribute from(DataInputStream in, ConstPool constPool, Method method, int nameIndex, int length) throws IOException {
+    public static CodeAttribute from(DataInputStream in, ConstPool constPool, Method method, int length) throws IOException {
         CodeAttribute a = new CodeAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         a.maxStack = in.readUnsignedShort();
         a.maxLocals = in.readUnsignedShort();
@@ -83,16 +100,32 @@ public class CodeAttribute extends Attribute {
             return start;
         }
 
+        public void setStart(int start) {
+            this.start = start;
+        }
+
         public int getEnd() {
             return end;
+        }
+
+        public void setEnd(int end) {
+            this.end = end;
         }
 
         public int getHandler() {
             return handler;
         }
 
+        public void setHandler(int handler) {
+            this.handler = handler;
+        }
+
         public int getCatchType() {
             return catchType;
+        }
+
+        public void setCatchType(int catchType) {
+            this.catchType = catchType;
         }
 
         public static Exception from(DataInputStream in) throws IOException {

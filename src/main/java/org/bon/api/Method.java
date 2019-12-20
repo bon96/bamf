@@ -1,11 +1,11 @@
 package org.bon.api;
 
-import org.bon.api.util.MethodDescriptor;
 import org.bon.jvm.attributes.CodeAttribute;
 import org.bon.jvm.attributes.annotations.Annotation;
 import org.bon.jvm.attributes.annotations.RuntimeInvisibleAnnotationsAttribute;
 import org.bon.jvm.attributes.annotations.RuntimeVisibleAnnotationsAttribute;
 import org.bon.jvm.instructions.Instruction;
+import org.bon.jvm.util.MethodDescriptor;
 
 import java.util.ArrayList;
 import java.util.List;

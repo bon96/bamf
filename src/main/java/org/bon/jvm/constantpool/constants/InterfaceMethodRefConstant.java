@@ -1,6 +1,7 @@
 package org.bon.jvm.constantpool.constants;
 
 import org.bon.jvm.constantpool.ConstPool;
+import org.bon.jvm.util.MethodDescriptor;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -17,8 +18,19 @@ public class InterfaceMethodRefConstant extends Constant implements MethodConsta
     private int nameAndTypeIndex;
 
     @Override
-    public ClassConstant getConstClass() {
+    public ClassConstant getClassConstant() {
         return constPool.get(classIndex).cast();
+    }
+
+    @Override
+    public String getName() {
+        return getNameAndType().getName();
+    }
+
+    @Override
+
+    public MethodDescriptor getDescriptor() {
+        return new MethodDescriptor(getNameAndType().getDescriptor());
     }
 
     @Override
@@ -35,7 +47,7 @@ public class InterfaceMethodRefConstant extends Constant implements MethodConsta
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.INTERFACE_METHOD_REF);
         out.writeShort(classIndex);
         out.writeShort(nameAndTypeIndex);

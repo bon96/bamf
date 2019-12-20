@@ -23,27 +23,34 @@ public class RuntimeInvisibleAnnotationsAttribute extends Attribute {
 
     private List<Annotation> annotations;
 
+    public RuntimeInvisibleAnnotationsAttribute() {
+        annotations = new ArrayList<>();
+    }
+
+    public RuntimeInvisibleAnnotationsAttribute(List<Annotation> annotations) {
+        this.annotations = annotations;
+    }
+
     public List<Annotation> getAnnotations() {
         return annotations;
     }
 
+    public void setAnnotations(List<Annotation> annotations) {
+        this.annotations = annotations;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static RuntimeInvisibleAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static RuntimeInvisibleAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         RuntimeInvisibleAnnotationsAttribute a = new RuntimeInvisibleAnnotationsAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
-        List<Annotation> annotations = new ArrayList<>();
         int annotationsCount = in.readUnsignedShort();
         for (int i = 0; i < annotationsCount; i++) {
-            annotations.add(Annotation.from(in, constPool));
+            a.annotations.add(Annotation.from(in, constPool));
         }
-        a.annotations = annotations;
         return a;
     }
 }

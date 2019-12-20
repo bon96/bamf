@@ -62,14 +62,20 @@ public class TargetType {
 
         private int index;
 
+        public TypeParameter(int index) {
+            this.index = index;
+        }
+
         public int getIndex() {
             return index;
         }
 
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
         public static TypeParameter from(DataInputStream in) throws IOException {
-            TypeParameter target = new TypeParameter();
-            target.index = in.readUnsignedByte();
-            return target;
+            return new TypeParameter(in.readUnsignedByte());
         }
     }
 
@@ -77,14 +83,20 @@ public class TargetType {
 
         private int index;
 
+        public SuperType(int index) {
+            this.index = index;
+        }
+
         public int getIndex() {
             return index;
         }
 
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
         public static SuperType from(DataInputStream in) throws IOException {
-            SuperType target = new SuperType();
-            target.index = in.readUnsignedShort();
-            return target;
+            return new SuperType(in.readUnsignedShort());
         }
     }
 
@@ -93,20 +105,29 @@ public class TargetType {
         private int index;
         private int boundIndex;
 
+        public TypeParameterBound(int index, int boundIndex) {
+            this.index = index;
+            this.boundIndex = boundIndex;
+        }
+
         public int getIndex() {
             return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
         }
 
         public int getBoundIndex() {
             return boundIndex;
         }
 
-        public static TypeParameterBound from(DataInputStream in) throws IOException {
-            TypeParameterBound target = new TypeParameterBound();
+        public void setBoundIndex(int boundIndex) {
+            this.boundIndex = boundIndex;
+        }
 
-            target.index = in.readUnsignedByte();
-            target.boundIndex = in.readUnsignedByte();
-            return target;
+        public static TypeParameterBound from(DataInputStream in) throws IOException {
+            return new TypeParameterBound(in.readUnsignedByte(), in.readUnsignedByte());
         }
     }
 
@@ -120,14 +141,20 @@ public class TargetType {
 
         private int index;
 
+        public FormalParameter(int index) {
+            this.index = index;
+        }
+
         public int getIndex() {
             return index;
         }
 
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
         public static FormalParameter from(DataInputStream in) throws IOException {
-            FormalParameter target = new FormalParameter();
-            target.index = in.readUnsignedByte();
-            return target;
+            return new FormalParameter(in.readUnsignedByte());
         }
     }
 
@@ -135,23 +162,41 @@ public class TargetType {
 
         private int index;
 
+        public Throws(int index) {
+            this.index = index;
+        }
+
         public int getIndex() {
             return index;
         }
 
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
         public static Throws from(DataInputStream in) throws IOException {
-            Throws target = new Throws();
-            target.index = in.readUnsignedShort();
-            return target;
+            return new Throws(in.readUnsignedShort());
         }
     }
 
     public static class Localvar extends TargetType {
 
-        private List<Entry> entries = new ArrayList<>();
+        private List<Entry> entries;
+
+        public Localvar() {
+            entries = new ArrayList<>();
+        }
+
+        public Localvar(List<Entry> entries) {
+            this.entries = entries;
+        }
 
         public List<Entry> getEntries() {
             return entries;
+        }
+
+        public void setEntries(List<Entry> entries) {
+            this.entries = entries;
         }
 
         public static Localvar from(DataInputStream in) throws IOException {
@@ -170,25 +215,38 @@ public class TargetType {
             private int length;
             private int index;
 
+            public Entry(int startPc, int length, int index) {
+                this.startPc = startPc;
+                this.length = length;
+                this.index = index;
+            }
+
             public int getStartPc() {
                 return startPc;
+            }
+
+            public void setStartPc(int startPc) {
+                this.startPc = startPc;
             }
 
             public int getLength() {
                 return length;
             }
 
+            public void setLength(int length) {
+                this.length = length;
+            }
+
             public int getIndex() {
                 return index;
             }
 
-            public static Entry from(DataInputStream in) throws IOException {
-                Entry entry = new Entry();
+            public void setIndex(int index) {
+                this.index = index;
+            }
 
-                entry.startPc = in.readUnsignedShort();
-                entry.length = in.readUnsignedShort();
-                entry.index = in.readUnsignedShort();
-                return entry;
+            public static Entry from(DataInputStream in) throws IOException {
+                return new Entry(in.readUnsignedShort(), in.readUnsignedShort(), in.readUnsignedShort());
             }
         }
     }
@@ -197,14 +255,20 @@ public class TargetType {
 
         private int index;
 
+        public Catch(int index) {
+            this.index = index;
+        }
+
         public int getIndex() {
             return index;
         }
 
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
         public static Catch from(DataInputStream in) throws IOException {
-            Catch target = new Catch();
-            target.index = in.readUnsignedShort();
-            return target;
+            return new Catch(in.readUnsignedShort());
         }
     }
 
@@ -212,14 +276,20 @@ public class TargetType {
 
         private int offset;
 
+        public Offset(int offset) {
+            this.offset = offset;
+        }
+
         public int getOffset() {
             return offset;
         }
 
+        public void setOffset(int offset) {
+            this.offset = offset;
+        }
+
         public static Offset from(DataInputStream in) throws IOException {
-            Offset target = new Offset();
-            target.offset = in.readUnsignedShort();
-            return target;
+            return new Offset(in.readUnsignedShort());
         }
     }
 
@@ -228,20 +298,29 @@ public class TargetType {
         private int offset;
         private int index;
 
+        public TypeArgument(int offset, int index) {
+            this.offset = offset;
+            this.index = index;
+        }
+
         public int getOffset() {
             return offset;
+        }
+
+        public void setOffset(int offset) {
+            this.offset = offset;
         }
 
         public int getIndex() {
             return index;
         }
 
-        public static TypeArgument from(DataInputStream in) throws IOException {
-            TypeArgument target = new TypeArgument();
+        public void setIndex(int index) {
+            this.index = index;
+        }
 
-            target.offset = in.readUnsignedShort();
-            target.index = in.readUnsignedByte();
-            return target;
+        public static TypeArgument from(DataInputStream in) throws IOException {
+            return new TypeArgument(in.readUnsignedShort(), in.readUnsignedByte());
         }
     }
 

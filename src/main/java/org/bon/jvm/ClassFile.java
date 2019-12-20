@@ -164,7 +164,7 @@ public class ClassFile {
         return (accessFlags & 0x1000) != 0;
     }
 
-    public byte[] writeToBytes() throws IOException {
+    public byte[] build() throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         DataOutputStream out = new DataOutputStream(bos);
 
@@ -172,7 +172,7 @@ public class ClassFile {
         out.writeShort(minorVersion);
         out.writeShort(majorVersion);
 
-        constPool.writeTo(out);
+        ConstPool constPool = this.constPool.writeTo(out);
 
         out.writeShort(accessFlags);
         out.writeShort(thisClassIndex);
@@ -180,22 +180,22 @@ public class ClassFile {
 
         out.writeShort(interfaces.size());
         for (Interface i : interfaces) {
-            i.writeTo(out);
+            i.writeTo(out, constPool);
         }
 
         out.writeShort(fields.size());
         for (Field f : fields) {
-            f.writeTo(out);
+            f.writeTo(out, constPool);
         }
 
         out.writeShort(methods.size());
         for (Method m : methods) {
-            m.writeTo(out);
+            m.writeTo(out, constPool);
         }
 
         out.writeShort(attributes.size());
         for (Attribute a : attributes) {
-            a.writeTo(out);
+            a.writeTo(out, constPool);
         }
 
         return bos.toByteArray();
@@ -209,7 +209,7 @@ public class ClassFile {
         classFile.majorVersion = in.readUnsignedShort();
 
         int constPoolSize = in.readUnsignedShort();
-        classFile.constPool = ConstPool.from(in, constPoolSize);
+        classFile.constPool = ConstPool.from(in, constPoolSize, classFile);
 
         classFile.accessFlags = in.readUnsignedShort();
         classFile.thisClassIndex = in.readUnsignedShort();

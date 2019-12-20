@@ -24,7 +24,7 @@ public class PackageConstant extends Constant {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.PACKAGE);
         out.writeShort(nameIndex);
     }

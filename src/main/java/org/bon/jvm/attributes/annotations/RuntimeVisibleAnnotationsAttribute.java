@@ -17,20 +17,29 @@ public class RuntimeVisibleAnnotationsAttribute extends Attribute {
 
     private List<Annotation> annotations;
 
-    @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public RuntimeVisibleAnnotationsAttribute() {
+        annotations = new ArrayList<>();
+    }
 
+    public RuntimeVisibleAnnotationsAttribute(List<Annotation> annotations) {
+        this.annotations = annotations;
     }
 
     public List<Annotation> getAnnotations() {
         return annotations;
     }
 
-    public static RuntimeVisibleAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public void setAnnotations(List<Annotation> annotations) {
+        this.annotations = annotations;
+    }
+
+    @Override
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
+
+    }
+
+    public static RuntimeVisibleAnnotationsAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         RuntimeVisibleAnnotationsAttribute a = new RuntimeVisibleAnnotationsAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         List<Annotation> annotations = new ArrayList<>();
         int annotationsCount = in.readUnsignedShort();

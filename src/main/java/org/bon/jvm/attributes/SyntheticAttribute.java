@@ -13,15 +13,11 @@ import java.io.IOException;
 public class SyntheticAttribute extends Attribute {
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static SyntheticAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) {
-        SyntheticAttribute a = new SyntheticAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
-        return a;
+    public static SyntheticAttribute from(DataInputStream in, ConstPool constPool, int length) {
+        return new SyntheticAttribute();
     }
 }

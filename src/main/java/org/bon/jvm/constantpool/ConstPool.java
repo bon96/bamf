@@ -1,5 +1,6 @@
 package org.bon.jvm.constantpool;
 
+import org.bon.jvm.ClassFile;
 import org.bon.jvm.constantpool.constants.*;
 
 import java.io.DataInputStream;
@@ -14,8 +15,24 @@ import java.util.List;
 
 public class ConstPool {
 
+    private ClassFile classFile;
+
     //TODO is there a better way to handle doubles and longs taking 2 spots than adding a null?
     private List<Constant> constants = new ArrayList<>();
+
+    public ConstPool(ClassFile classFile) {
+        this.classFile = classFile;
+    }
+
+
+    public void add(Constant constant) {
+        constants.add(constant);
+
+        //doubles and longs take 2 spots in the constant pool
+        if (constant instanceof DoubleConstant || constant instanceof LongConstant) {
+            constants.add(null);
+        }
+    }
 
     /**
      * @param index of constant in the constant pool
@@ -23,28 +40,42 @@ public class ConstPool {
      */
 
     public Constant get(int index) {
-        return getAll().get(index - 1);
+        return getConstants().get(index - 1);
     }
 
-    public List<Constant> getAll() {
+    public <T extends Constant> T get(int index, Class<T> castTo) {
+        return get(index).cast();
+    }
+
+    public List<Constant> getConstants() {
         return constants;
+    }
+
+    public ClassFile getClassFile() {
+        return classFile;
     }
 
     public int size() {
         return constants.size();
     }
 
-    public void writeTo(DataOutputStream out) throws IOException {
+    public ConstPool writeTo(DataOutputStream out) throws IOException {
         out.writeShort(size());
-        for (Constant constant : getAll()) {
+
+        //rebuild constant pool from modified constants
+        ConstPool constPool = new ConstPool(classFile);
+
+        for (Constant constant : getConstants()) {
             if (constant != null) {
-                constant.writeTo(out);
+                constant.writeTo(out, constPool);
             }
         }
+
+        return constPool;
     }
 
-    public static ConstPool from(DataInputStream in, int size) throws IOException {
-        ConstPool constPool = new ConstPool();
+    public static ConstPool from(DataInputStream in, int size, ClassFile classFile) throws IOException {
+        ConstPool constPool = new ConstPool(classFile);
 
         for (int i = 0; i < size - 1; i++) {
             int tag = in.readByte();

@@ -14,18 +14,31 @@ import java.util.List;
 
 public class InnerClassesAttribute extends Attribute {
 
-    private List<InnerClass> innerClasses = new ArrayList<>();
+    private List<InnerClass> innerClasses;
+
+    public InnerClassesAttribute() {
+        innerClasses = new ArrayList<>();
+    }
+
+    public InnerClassesAttribute(List<InnerClass> innerClasses) {
+        this.innerClasses = innerClasses;
+    }
+
+    public List<InnerClass> getInnerClasses() {
+        return innerClasses;
+    }
+
+    public void setInnerClasses(List<InnerClass> innerClasses) {
+        this.innerClasses = innerClasses;
+    }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static InnerClassesAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static InnerClassesAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         InnerClassesAttribute a = new InnerClassesAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         int classCount = in.readUnsignedShort();
         for (int i = 0; i < classCount; i++) {
@@ -35,7 +48,7 @@ public class InnerClassesAttribute extends Attribute {
     }
 
     public static class InnerClass {
-        private ConstPool constPool;
+
         private int innerClassInfoIndex;
         private int outerClassInfoIndex;
         private int innerNameIndex;
@@ -57,10 +70,9 @@ public class InnerClassesAttribute extends Attribute {
             return innerClassAccessFlags;
         }
 
-        //TODO finish getters
+        //TODO edit to use Constants
         public static InnerClass from(DataInputStream in, ConstPool constPool) throws IOException {
             InnerClass c = new InnerClass();
-            c.constPool = constPool;
             c.innerClassInfoIndex = in.readUnsignedShort();
             c.outerClassInfoIndex = in.readUnsignedShort();
             c.innerNameIndex = in.readUnsignedShort();

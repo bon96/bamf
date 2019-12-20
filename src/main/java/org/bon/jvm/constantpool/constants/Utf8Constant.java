@@ -1,6 +1,8 @@
 package org.bon.jvm.constantpool.constants;
 
 
+import org.bon.jvm.constantpool.ConstPool;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -19,7 +21,7 @@ public class Utf8Constant extends Constant implements ValueConstant<String> {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
         out.writeByte(Constant.UTF8);
         out.writeUTF(string);
     }

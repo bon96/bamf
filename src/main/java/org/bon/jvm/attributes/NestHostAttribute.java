@@ -21,9 +21,6 @@ public class NestHostAttribute extends Attribute {
 
     private ClassConstant hostClass;
 
-    private NestHostAttribute() {
-    }
-
     public NestHostAttribute(ClassConstant hostClass) {
         this.hostClass = hostClass;
     }
@@ -37,17 +34,11 @@ public class NestHostAttribute extends Attribute {
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static NestHostAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        NestHostAttribute a = new NestHostAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
-
-        a.hostClass = (ClassConstant) constPool.get(in.readUnsignedShort());
-        return a;
+    public static NestHostAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
+        return new NestHostAttribute((ClassConstant) constPool.get(in.readUnsignedShort()));
     }
 }

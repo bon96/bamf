@@ -18,8 +18,16 @@ public class Annotation {
         return type;
     }
 
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public List<Element> getElements() {
         return elements;
+    }
+
+    public void setElements(List<Element> elements) {
+        this.elements = elements;
     }
 
     public static Annotation from(DataInputStream in, ConstPool constPool) throws IOException {
@@ -48,11 +56,19 @@ public class Annotation {
             return name;
         }
 
+        public void setName(String name) {
+            this.name = name;
+        }
+
         public T getValue() {
             return value;
         }
 
-        public static Element from(DataInputStream in, ConstPool constPool, boolean isValuePair) throws IOException {
+        public void setValue(T value) {
+            this.value = value;
+        }
+
+        public static Element<?> from(DataInputStream in, ConstPool constPool, boolean isValuePair) throws IOException {
             String name = null;
 
             if (isValuePair) {
@@ -63,23 +79,19 @@ public class Annotation {
 
             switch (tag) {
                 case 'S':
-                    IntegerConstant s = constPool.get(in.readUnsignedShort()).cast();
-                    return new Element<>(name, s.getValue().shortValue());
-                case 'Z':
-                    IntegerConstant z = constPool.get(in.readUnsignedShort()).cast();
-                    return new Element<>(name, z.getValue() != 0);
                 case 'B':
-                    IntegerConstant b = constPool.get(in.readUnsignedShort()).cast();
-                    return new Element<>(name, b.getValue().byteValue());
-                case 'C':
-                    IntegerConstant c = constPool.get(in.readUnsignedShort()).cast();
-                    return new Element<>(name, (char) (int) c.getValue());
                 case 'D':
                 case 'F':
                 case 'I':
                 case 'J':
-                    ValueConstant v = constPool.get(in.readUnsignedShort()).cast();
-                    return new Element<>(name, v.getValue());
+                    ValueConstant s = constPool.get(in.readUnsignedShort()).cast();
+                    return new Element<>(name, s.getValue());
+                case 'Z':
+                    IntegerConstant z = constPool.get(in.readUnsignedShort()).cast();
+                    return new Element<>(name, z.getValue() != 0);
+                case 'C':
+                    IntegerConstant c = constPool.get(in.readUnsignedShort()).cast();
+                    return new Element<>(name, (char) (int) c.getValue());
                 case 's':
                     return new Element<>(name, constPool.get(in.readUnsignedShort()).toString());
                 case 'e':
@@ -116,12 +128,21 @@ public class Annotation {
                 return type;
             }
 
+            public void setType(String type) {
+                this.type = type;
+            }
+
             public String getName() {
                 return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
             }
         }
 
         public static class ClassDescriptor {
+
             private String descriptor;
 
             public ClassDescriptor(String descriptor) {
@@ -130,6 +151,10 @@ public class Annotation {
 
             public String getDescriptor() {
                 return descriptor;
+            }
+
+            public void setDescriptor(String descriptor) {
+                this.descriptor = descriptor;
             }
         }
     }

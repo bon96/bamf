@@ -1,10 +1,10 @@
 package org.bon.api;
 
-import org.bon.api.util.Type;
 import org.bon.jvm.ClassFile;
 import org.bon.jvm.attributes.annotations.Annotation;
 import org.bon.jvm.attributes.annotations.RuntimeInvisibleAnnotationsAttribute;
 import org.bon.jvm.attributes.annotations.RuntimeVisibleAnnotationsAttribute;
+import org.bon.jvm.util.Type;
 
 import java.util.ArrayList;
 import java.util.List;

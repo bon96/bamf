@@ -21,22 +21,31 @@ import java.util.List;
 
 public class ModulePackagesAttribute extends Attribute {
 
-    private List<PackageConstant> packages = new ArrayList<>();
+    private List<PackageConstant> packages;
+
+    public ModulePackagesAttribute() {
+        packages = new ArrayList<>();
+    }
+
+    public ModulePackagesAttribute(List<PackageConstant> packages) {
+        this.packages = packages;
+    }
 
     public List<PackageConstant> getPackages() {
         return packages;
     }
 
+    public void setPackages(List<PackageConstant> packages) {
+        this.packages = packages;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static ModulePackagesAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
+    public static ModulePackagesAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
         ModulePackagesAttribute a = new ModulePackagesAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
 
         int packageCount = in.readUnsignedShort();
         for (int i = 0; i < packageCount; i++) {

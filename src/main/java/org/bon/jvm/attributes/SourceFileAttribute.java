@@ -12,35 +12,26 @@ import java.io.IOException;
 
 public class SourceFileAttribute extends Attribute {
 
-    private int sourceFileIndex;
+    private String sourceFile;
 
-    /**
-     * The string referenced by the sourcefile_index item will be interpreted
-     * as indicating the name of the source file from which this class file was compiled.
-     * It will not be interpreted as indicating the name of a directory containing the file or an absolute path
-     * name for the file; such platform-specific additional information must be supplied by the run-time
-     * interpreter or development tool at the time the file name is actually used.
-     */
-
-    public String getSourceFileName() {
-        return constPool.get(sourceFileIndex).toString();
+    public SourceFileAttribute(String sourceFile) {
+        this.sourceFile = sourceFile;
     }
 
-    public int getSourceFileIndex() {
-        return sourceFileIndex;
+    public String getSourceFile() {
+        return sourceFile;
+    }
+
+    public void setSourceFile(String sourceFile) {
+        this.sourceFile = sourceFile;
     }
 
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static SourceFileAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        SourceFileAttribute a = new SourceFileAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
-        a.sourceFileIndex = in.readUnsignedShort();
-        return a;
+    public static SourceFileAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
+        return new SourceFileAttribute(constPool.get(in.readUnsignedShort()).toString());
     }
 }

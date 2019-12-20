@@ -14,24 +14,27 @@ public class SourceDebugExtensionAttribute extends Attribute {
 
     private String debugInfo;
 
+    public SourceDebugExtensionAttribute(String debugInfo) {
+        this.debugInfo = debugInfo;
+    }
+
     public String getDebugInfo() {
         return debugInfo;
     }
 
+    public void setDebugInfo(String debugInfo) {
+        this.debugInfo = debugInfo;
+    }
+
     @Override
-    public void writeTo(DataOutputStream out) throws IOException {
+    public void writeTo(DataOutputStream out, ConstPool constPool) throws IOException {
 
     }
 
-    public static SourceDebugExtensionAttribute from(DataInputStream in, ConstPool constPool, int nameIndex, int length) throws IOException {
-        SourceDebugExtensionAttribute a = new SourceDebugExtensionAttribute();
-        a.constPool = constPool;
-        a.nameIndex = nameIndex;
-        a.length = length;
+    public static SourceDebugExtensionAttribute from(DataInputStream in, ConstPool constPool, int length) throws IOException {
+        char[] chars = new char[length];
 
-        char[] chars = new char[a.getLength()];
-
-        for (int i = 0; i < a.getLength(); i++) {
+        for (int i = 0; i < length; i++) {
             int b = in.readUnsignedByte();
 
             if ((b & 0x80) == 0) {
@@ -42,7 +45,7 @@ public class SourceDebugExtensionAttribute extends Attribute {
                 chars[i] = (char) (((b & 0xF) << 12) + ((in.readUnsignedByte() & 0x3F) << 6) + (in.readUnsignedByte() & 0x3F));
             }
         }
-        a.debugInfo = new String(chars, 0, chars.length);
-        return a;
+
+        return new SourceDebugExtensionAttribute(new String(chars, 0, chars.length));
     }
 }
