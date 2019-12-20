@@ -13,7 +13,6 @@ import java.util.List;
  * Time: 3.08
  */
 
-//TODO meaningful methods for handling of types
 public class TargetType {
 
     public static TargetType from(DataInputStream in, ConstPool constPool) throws IOException {

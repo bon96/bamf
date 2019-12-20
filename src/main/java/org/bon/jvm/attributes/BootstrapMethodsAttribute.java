@@ -79,7 +79,6 @@ public class BootstrapMethodsAttribute extends Attribute {
 
         }
 
-        //TODO finish getters
         public static BootstrapMethod from(DataInputStream in, ConstPool constPool) throws IOException {
             BootstrapMethod b = new BootstrapMethod();
 

@@ -41,8 +41,6 @@ public class InvokeDynamicConstant extends Constant implements MethodConstant {
         return constPool.get(nameAndTypeIndex).cast();
     }
 
-    //TODO finish bootstrapMethod array retrieval from constant pool
-
     public int getBootstrapMethodAttrIndex() {
         return bootstrapMethodAttrIndex;
     }
