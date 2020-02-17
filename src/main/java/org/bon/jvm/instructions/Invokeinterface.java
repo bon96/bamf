@@ -1,6 +1,8 @@
 package org.bon.jvm.instructions;
 
 import org.bon.api.Method;
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.MethodConstant;
 import org.bon.jvm.instructions.types.InvokeInstruction;
@@ -32,6 +34,11 @@ public class Invokeinterface extends Instruction implements InvokeInstruction {
         target = constant.getNameAndType().getName();
         targetClass = constant.getClassConstant().getName();
         targetDescriptor = new MethodDescriptor(constant.getNameAndType().getDescriptor());
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

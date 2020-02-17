@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.instructions.types.ConstInstruction;
 
@@ -19,6 +21,11 @@ public class Sipush extends Instruction implements ConstInstruction<Short> {
 
     public Sipush(int value) {
         this.value = value;
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

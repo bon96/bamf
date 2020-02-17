@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.Constant;
 import org.bon.jvm.constantpool.constants.ValueConstant;
@@ -21,6 +23,11 @@ public class Ldc2_w extends Instruction implements LdcInstruction {
 
     public Ldc2_w(Object object) {
         this.object = object;
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

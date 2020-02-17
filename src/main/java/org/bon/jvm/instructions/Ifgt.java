@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.instructions.types.BranchInstruction;
 
@@ -19,6 +21,11 @@ public class Ifgt extends Instruction implements BranchInstruction {
 
     public Ifgt(int offset) {
         this.offset = offset;
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

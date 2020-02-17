@@ -1,6 +1,8 @@
 package org.bon.jvm.instructions;
 
 import org.bon.api.Method;
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.MethodConstant;
 import org.bon.jvm.instructions.types.InvokeInstruction;
@@ -33,6 +35,11 @@ public class Invokedynamic extends Instruction implements InvokeInstruction {
     public Invokedynamic(MethodConstant constant) {
         target = constant.getNameAndType().getName();
         targetDescriptor = new MethodDescriptor(constant.getNameAndType().getDescriptor());
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

@@ -1,5 +1,8 @@
 package org.bon.api;
 
+import org.bon.api.containers.Blocks;
+import org.bon.api.containers.Exceptions;
+import org.bon.api.containers.Instructions;
 import org.bon.jvm.attributes.CodeAttribute;
 import org.bon.jvm.attributes.annotations.Annotation;
 import org.bon.jvm.attributes.annotations.RuntimeInvisibleAnnotationsAttribute;
@@ -9,6 +12,7 @@ import org.bon.jvm.util.MethodDescriptor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Tommi
@@ -30,11 +34,40 @@ public class Method {
         return aClass;
     }
 
-    public List<Instruction> getInstructions() {
+    public Blocks getBlocks() {
+        Blocks blocks = new Blocks();
+
+        Block current = new Block(blocks);
+        for (Instruction instruction : getInstructions()) {
+            if (instruction.isJumpTarget()) {
+                if (!current.isEmpty()) {
+                    blocks.add(current);
+                }
+                current = new Block(blocks);
+            }
+            current.add(instruction);
+        }
+
+        if (!current.isEmpty()) {
+            blocks.add(current);
+        }
+        return blocks;
+    }
+
+    public Instructions getInstructions() {
         if (!getJVM().getAttributes().hasType(CodeAttribute.class)) {
-            return new ArrayList<>();
+            return new Instructions();
         } else {
-            return getJVM().getAttributes().ofType(CodeAttribute.class).getInstructions();
+            return new Instructions(getJVM().getAttributes().ofType(CodeAttribute.class).getInstructions());
+        }
+    }
+
+    public Exceptions getExceptions() {
+        if (!getJVM().getAttributes().hasType(CodeAttribute.class)) {
+            return new Exceptions();
+        } else {
+            return getJVM().getAttributes().ofType(CodeAttribute.class).getExceptions()
+                    .stream().map(e -> new Exception(e, this)).collect(Collectors.toCollection(Exceptions::new));
         }
     }
 

@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.FieldRefConstant;
 import org.bon.jvm.util.Type;
@@ -25,6 +27,11 @@ public class Getfield extends Instruction {
     public Getfield(ConstPool constPool, int index) {
         this.constPool = constPool;
         this.index = index;
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

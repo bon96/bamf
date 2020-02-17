@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.FieldRefConstant;
 import org.bon.jvm.util.Type;
@@ -41,6 +43,11 @@ public class Putstatic extends Instruction {
 
     public Type getType() {
         return new Type(getFieldRef().getNameAndType().getDescriptor());
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

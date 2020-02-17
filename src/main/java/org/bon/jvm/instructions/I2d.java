@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.instructions.types.ConversionInstruction;
 
@@ -13,6 +15,11 @@ import java.io.IOException;
  */
 
 public class I2d extends Instruction implements ConversionInstruction {
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
+    }
 
     @Override
     public String getName() {

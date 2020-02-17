@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
@@ -17,6 +19,11 @@ public class Ret extends Instruction {
 
     public Ret(int index) {
         this.index = index;
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

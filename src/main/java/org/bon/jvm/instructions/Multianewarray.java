@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
@@ -19,6 +21,11 @@ public class Multianewarray extends Instruction {
     public Multianewarray(int index, int dimensions) {
         this.index = index;
         this.dimensions = dimensions;
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
@@ -17,6 +19,11 @@ public class Jsr_w extends Instruction {
 
     public Jsr_w(int offset) {
         this.offset = offset;
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

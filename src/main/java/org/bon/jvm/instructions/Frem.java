@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 
 import java.io.DataInputStream;
@@ -12,6 +14,11 @@ import java.io.IOException;
  */
 
 public class Frem extends Instruction {
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
+    }
 
     @Override
     public String getName() {

@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.instructions.types.LoadInstruction;
 
@@ -22,13 +24,18 @@ public class Aload extends Instruction implements LoadInstruction {
     }
 
     @Override
-    public String getName() {
-        return "Aload";
+    public int getIndex() {
+        return index;
     }
 
     @Override
-    public int getIndex() {
-        return index;
+    public void execute(MethodContext context, Stack stack) {
+        stack.push(context.getLocal(index));
+    }
+
+    @Override
+    public String getName() {
+        return "Aload";
     }
 
     @Override

@@ -1,5 +1,7 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.instructions.types.JumpInstruction;
 
@@ -31,6 +33,11 @@ public class Goto_w extends Instruction implements JumpInstruction {
 
     public void setJumpTarget(int targetOffset) {
         this.jumpTarget = targetOffset;
+    }
+
+    @Override
+    public void execute(MethodContext context, Stack stack) {
+
     }
 
     @Override

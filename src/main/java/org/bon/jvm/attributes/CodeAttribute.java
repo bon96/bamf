@@ -3,7 +3,6 @@ package org.bon.jvm.attributes;
 import org.bon.jvm.Method;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.instructions.Instruction;
-import org.bon.jvm.instructions.Instructions;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -75,7 +74,7 @@ public class CodeAttribute extends Attribute {
         a.maxStack = in.readUnsignedShort();
         a.maxLocals = in.readUnsignedShort();
 
-        a.instructions = Instructions.from(in, constPool, method);
+        a.instructions = Instruction.instructionsFrom(in, constPool, method);
 
         int exceptionsCount = in.readUnsignedShort();
         for (int i = 0; i < exceptionsCount; i++) {
@@ -95,6 +94,13 @@ public class CodeAttribute extends Attribute {
         private int end;
         private int handler;
         private int catchType;
+
+        public Exception(int start, int end, int handler, int catchType) {
+            this.start = start;
+            this.end = end;
+            this.handler = handler;
+            this.catchType = catchType;
+        }
 
         public int getStart() {
             return start;
@@ -129,12 +135,8 @@ public class CodeAttribute extends Attribute {
         }
 
         public static Exception from(DataInputStream in) throws IOException {
-            Exception e = new Exception();
-            e.start = in.readUnsignedShort();
-            e.end = in.readUnsignedShort();
-            e.handler = in.readUnsignedShort();
-            e.catchType = in.readUnsignedShort();
-            return e;
+            return new Exception(in.readUnsignedShort(), in.readUnsignedShort(), in.readUnsignedShort(),
+                    in.readUnsignedShort());
         }
     }
 }

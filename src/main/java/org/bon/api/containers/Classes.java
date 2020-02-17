@@ -3,6 +3,7 @@ package org.bon.api.containers;
 import org.bon.api.Class;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Tommi
@@ -12,5 +13,10 @@ import java.util.ArrayList;
 
 public class Classes extends ArrayList<Class> {
 
+    public Classes() {
+    }
 
+    public Classes(Collection<? extends Class> c) {
+        super(c);
+    }
 }
