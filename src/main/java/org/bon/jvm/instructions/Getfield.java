@@ -1,9 +1,9 @@
 package org.bon.jvm.instructions;
 
-import org.bon.jvm.execution.MethodContext;
-import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.FieldRefConstant;
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.util.Type;
 
 import java.io.DataInputStream;

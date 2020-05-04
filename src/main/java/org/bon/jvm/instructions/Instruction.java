@@ -2,9 +2,9 @@ package org.bon.jvm.instructions;
 
 import org.bon.Cast;
 import org.bon.jvm.Method;
+import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.execution.MethodContext;
 import org.bon.jvm.execution.Stack;
-import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.instructions.types.JumpInstruction;
 
 import java.io.DataInputStream;
@@ -893,7 +893,8 @@ public abstract class Instruction implements Cast {
                         continue main;
                     }
                 }
-                throw new IOException("Invalid JumpInstruction jump offset " + branchIns.getJumpOffset());
+                throw new IOException("Invalid JumpInstruction jump offset " +
+                        (branchIns.getOffset() + branchIns.getJumpOffset()) + " / " + size);
             }
         }
 

@@ -1,10 +1,10 @@
 package org.bon.jvm.instructions;
 
-import org.bon.jvm.execution.MethodContext;
-import org.bon.jvm.execution.Stack;
 import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.constantpool.constants.Constant;
 import org.bon.jvm.constantpool.constants.ValueConstant;
+import org.bon.jvm.execution.MethodContext;
+import org.bon.jvm.execution.Stack;
 import org.bon.jvm.instructions.types.LdcInstruction;
 
 import java.io.DataInputStream;

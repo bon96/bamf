@@ -1,8 +1,8 @@
 package org.bon.jvm.instructions;
 
+import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.execution.MethodContext;
 import org.bon.jvm.execution.Stack;
-import org.bon.jvm.constantpool.ConstPool;
 import org.bon.jvm.instructions.types.SwitchInstruction;
 
 import java.io.DataInputStream;
@@ -46,13 +46,14 @@ public class Tableswitch extends Instruction implements SwitchInstruction {
         tableswitch.high = in.readInt();
         tableswitch.length = tableswitch.high - tableswitch.low + 1;
 
+        //TODO check is right
         for (int i = 0; i < tableswitch.length; i++) {
             int jumpIndex = in.readInt();
 
             if (jumpIndex < tableswitch.low || jumpIndex > tableswitch.high) {
                 tableswitch.jumpOffsets.add(tableswitch.defaultIndex + offset);
             }
-            tableswitch.jumpOffsets.add(in.readInt());
+            tableswitch.jumpOffsets.add(jumpIndex);
         }
 
         return new Tableswitch();

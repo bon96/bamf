@@ -203,7 +203,6 @@ public class ClassFile {
 
     public static ClassFile from(DataInputStream in) throws IOException {
         ClassFile classFile = new ClassFile();
-
         classFile.magic = in.readInt();
         classFile.minorVersion = in.readUnsignedShort();
         classFile.majorVersion = in.readUnsignedShort();
